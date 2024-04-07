@@ -10,7 +10,7 @@
         <nav class="mt-2">
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                 <li class="nav-item">
-                    <a href="#" class="nav-link">
+                    <a href="{{ route('dashboard') }}" class="nav-link">
                     <i class="nav-icon fas fa-tachometer-alt"></i>
                         <p>
                             Dashboard
@@ -18,7 +18,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="#" class="nav-link">
+                    <a href="{{ route('student') }}" class="nav-link">
                     <i class="nav-icon fas fa-users"></i>
                         <p>
                             Student
@@ -26,7 +26,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="#" class="nav-link">
+                    <a href="{{ route('grade') }}" class="nav-link">
                     <i class="nav-icon fas fa-tachometer-alt"></i>
                         <p>
                             Grade Level
@@ -34,7 +34,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="#" class="nav-link">
+                    <a href="{{ route('section') }}" class="nav-link">
                     <i class="nav-icon fas fa-tachometer-alt"></i>
                         <p>
                             Section
@@ -42,7 +42,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="#" class="nav-link">
+                    <a href="{{ route('subject') }}" class="nav-link">
                     <i class="nav-icon fas fa-tachometer-alt"></i>
                         <p>
                             Subject
@@ -50,7 +50,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="#" class="nav-link">
+                    <a href="{{ route('teacher') }}" class="nav-link">
                     <i class="nav-icon fas fa-tachometer-alt"></i>
                         <p>
                             Teacher
@@ -58,7 +58,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="#" class="nav-link">
+                    <a href="{{ route('class') }}" class="nav-link">
                     <i class="nav-icon fas fa-tachometer-alt"></i>
                         <p>
                             Class
@@ -66,7 +66,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="#" class="nav-link">
+                    <a href="{{ route('payments') }}" class="nav-link">
                     <i class="nav-icon fas fa-tachometer-alt"></i>
                         <p>
                             Payments
@@ -74,7 +74,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="#" class="nav-link">
+                    <a href="{{ route('settings') }}" class="nav-link">
                     <i class="nav-icon fas fa-tachometer-alt"></i>
                         <p>
                             Settings

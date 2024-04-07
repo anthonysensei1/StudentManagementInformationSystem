@@ -34,6 +34,23 @@
 <link rel="shortcut icon" href=""> 
 
 <style>
+
+  .students_img{
+    background: radial-gradient(circle at 18.7% 37.8%, rgb(250, 250, 250) 0%, rgb(225, 234, 238) 90%);
+    display: flex;
+    justify-content: space-around;
+    padding: 10px 5px 10px 5px;
+    margin-bottom: 5px;
+    border-radius: 3px;
+  }
+
+  .students_img img{
+    width: 200px;
+    height: 200px;
+    object-fit: cover; 
+    border-radius: 50%;
+  }
+
   .icons{
     font-size: 5em;
     text-align: center;
@@ -50,6 +67,186 @@
   .small-box:hover{
     cursor: pointer;
   }
+
+  .student_name{
+    color: #000;
+  }
+  .student_name:hover{
+    text-decoration: underline;
+  }
+
+  .g_label{
+    color: #212529;
+    font-weight: 900;
+  }
+
+  .radio-wrapper {
+    display: flex;
+    gap: 10px;
+
+  }
+
+  .radios input[type="radio"] {
+    width: 53px;
+    height: 22px;
+    border-radius: 50%;
+    margin-right: -8px;
+    vertical-align: middle;
+    border: 1px solid #ccc;
+    display: inline-flex;
+    cursor: pointer;
+  }
+
+  .radios label {
+    cursor: pointer;
+    display: inline-flex;
+    margin-left: 5px;
+  }
+
+  .radios input[type="radio"]:checked {
+      background-color: #007bff;
+      border-color: #007bff;
+  }
+
+  .students_info{
+    font-size: 20px;
+    font-weight: 900;
+    letter-spacing: 3px;
+    color: #6c757d;
+  }
+  .students_parents_info{
+    font-size: 20px;
+    font-weight: 900;
+    letter-spacing: 3px;
+    color: #6c757d;
+  }
+
+  .students_row{
+    box-sizing: border-box;
+    border: 1px solid #6c757d;
+    border-radius: 5px;
+    padding: 10px;
+  }
+
+  .students_parents_row{
+    box-sizing: border-box;
+    border: 1px solid #6c757d;
+    border-radius: 5px;
+    padding: 10px;
+  }
+
+  .optional{
+    color:#6c757d;
+  }
+
+
+  .gl_label{
+    color: #212529;
+    font-weight: 900;
+  }
+
+  .radio-wrapper-grade-level {
+    display: flex;
+    gap: 10px;
+  }
+
+  .radios_gl input[type="radio"] {
+    width: 53px;
+    height: 22px;
+    border-radius: 50%;
+    margin-right: -8px;
+    vertical-align: middle;
+    border: 1px solid #ccc;
+    display: inline-flex;
+    cursor: pointer;
+  }
+
+  .radios_gl label {
+      cursor: pointer;
+  }
+
+  .radios_gl input[type="radio"]:checked {
+      background-color: #007bff;
+      border-color: #007bff;
+  }
+
+  .section_label{
+    color: #212529;
+    font-weight: 900;
+  }
+
+  .radio-wrapper-section{
+    display: flex;
+    gap: 10px;
+  }
+
+  .radios_section input[type="radio"] {
+    width: 53px;
+    height: 22px;
+    border-radius: 50%;
+    margin-right: -8px;
+    vertical-align: middle;
+    border: 1px solid #ccc;
+    display: inline-flex;
+    cursor: pointer;
+  }
+
+  .radios_section label {
+      cursor: pointer;
+  }
+
+  .radios_section input[type="radio"]:checked {
+      background-color: #007bff;
+      border-color: #007bff;
+  }
+
+  .returns{
+    border:1px solid #6c757d;
+    border-radius: 1px;
+    display: flex;
+    justify-content: space-around;
+    font-size: 20px;
+    font-weight: 900;
+  }
+
+  .fullname{
+    font-size: 18px;
+    font-weight: 900;
+    letter-spacing: 2px;
+  }
+
+  .classes_label{
+    color: #212529;
+    font-weight: 900;
+  }
+
+  .radio-wrapper-classes{
+    display: flex;
+    gap: 10px;
+    flex-direction: column;
+    flex-wrap: wrap;
+  }
+
+  .radios_classes input[type="radio"] {
+    width: 53px;
+    height: 22px;
+    border-radius: 50%;
+    margin-right: -8px;
+    vertical-align: middle;
+    border: 1px solid #ccc;
+    display: inline-flex;
+    cursor: pointer;
+  }
+
+  .radios_classes label {
+      cursor: pointer;
+  }
+
+  .radios_classes input[type="radio"]:checked {
+      background-color: #007bff;
+      border-color: #007bff;
+  }
+
 </style>
 
 

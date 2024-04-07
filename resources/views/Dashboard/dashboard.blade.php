@@ -11,7 +11,7 @@
                <div class="small-box">
                   <div class="inner">
                      <div class="icons">
-                        <i class="fas fa-users"></i>
+                        <i class="fas fa-user"></i>
                      </div>
                      <div class="text"> Students </div>
                   </div>
@@ -24,7 +24,7 @@
                <div class="small-box">
                   <div class="inner">
                      <div class="icons">
-                        <i class="fas fa-user"></i>
+                        <i class="fas fa-book"></i>
                      </div>
                      <div class="text"> Grade </div>
                   </div>
@@ -37,7 +37,7 @@
                <div class="small-box">
                   <div class="inner">
                      <div class="icons">
-                        <i class="fas fa-user"></i>
+                        <i class="ion ion-clipboard"></i>
                      </div>
                      <div class="text"> Section </div>
                   </div>
@@ -50,7 +50,7 @@
                <div class="small-box">
                   <div class="inner">
                      <div class="icons">
-                        <i class="fas fa-user"></i>
+                     <i class="fas fa-file-alt"></i>
                      </div>
                      <div class="text"> Subject </div>
                   </div>
@@ -76,7 +76,7 @@
                <div class="small-box">
                   <div class="inner">
                      <div class="icons">
-                        <i class="fas fa-user"></i>
+                        <i class="fas fa-users"></i>
                      </div>
                      <div class="text"> Class </div>
                   </div>
@@ -89,7 +89,7 @@
                <div class="small-box">
                   <div class="inner">
                      <div class="icons">
-                        <i class="fas fa-user"></i>
+                        <i class="fas fa-dollar"></i>
                      </div>
                      <div class="text"> Payments </div>
                   </div>
@@ -102,7 +102,7 @@
                <div class="small-box">
                   <div class="inner">
                      <div class="icons">
-                        <i class="fas fa-user"></i>
+                        <i class="fas fa-cog"></i>
                      </div>
                      <div class="text"> Settings </div>
                   </div>
