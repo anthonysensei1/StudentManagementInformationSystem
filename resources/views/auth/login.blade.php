@@ -4,6 +4,25 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Student Management Inforation System</title>
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+
+    <!-- Theme style -->
+    <link rel="stylesheet" href="{{asset('dist/css/adminlte.min.css')}}">
+    <!-- SweetAlert2 -->
+    <link rel="stylesheet" href="{{asset('plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css')}}">
+    <!-- Toastr -->
+    <link rel="stylesheet" href="{{asset('plugins/toastr/toastr.min.css')}}">
+
+    
+    <!-- jQuery -->
+    <script src="{{asset('plugins/jquery/jquery.min.js')}}"></script>
+    <!-- jQuery UI 1.11.4 -->
+    <script src="{{asset('plugins/jquery-ui/jquery-ui.min.js')}}"></script>
+    <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
+    <!-- SweetAlert2 -->
+    <script src="{{asset('plugins/sweetalert2/sweetalert2.min.js')}}"></script>
+    <!-- Toastr -->
+    <script src="{{asset('plugins/toastr/toastr.min.js')}}"></script>
 </head>
 <body class="body"> 
     <div class="main_container">
@@ -13,31 +32,32 @@
                     Login Panel
                 </div>
             </div>
-            <form action="#">
+            <form action="{{ route('login_user') }}" class="formPost">
                 <div class="login_body">
                     <div class="user_inputs">
                         <div class="group">
                             <div class="username_label">
                                 Username
                             </div>
-                            <input type="text" class="form-control user" name="user" id="user" placeholder="username" required>
+                            <input type="text" class="form-control user" name="username" id="user" placeholder="username" required>
                         </div>
                         <div class="group">
                             <div class="username_label">
                                 Password
                             </div>
-                            <input type="password" class="form-control pass" name="pass" id="pass" placeholder="password" required>
+                            <input type="password" class="form-control pass" name="password" id="pass" placeholder="password" required>
                         </div>
                     </div>
                 </div>
                 <div class="btn_position">
-                    <div type="submit" class="button login-button">
+                    <button type="submit" class="button login-button">
                         login
-                    </div>
+                    </button>
                 </div>
             </form>
         </div>
     </div>
+    <script src="{{ asset('js/ajax.js') }}"></script>
 </body>
 </html>
 <style scope>

@@ -27,5 +27,8 @@
         </aside>
         <!-- /.control-sidebar -->
     </div>
+    
+    <script src="{{ asset('js/modify.js') }}"></script>
+    <script src="{{ asset('js/ajax.js') }}"></script>
 </body>
 </html>

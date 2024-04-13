@@ -23,24 +23,34 @@
                     <tr class="text-center">
                         <th>#</th>
                         <th>Grade</th>
+                        <th>status</th>
                         <th>Action</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr class="text-center">
-                        <td></td>
-                        <td></td>
-                        <td class="text-center">
-                        <button class="btn btn-outline-primary btn-md" data-toggle="modal" data-id="" data-target="#updateGrade">
-                                <i class="fas fa-pen"></i>
-                                update
-                        </button>
-                        <button class="btn btn-outline-danger btn-md" data-toggle="modal" data-id="" data-target="#deleteGrade">
-                                <i class="fas fa-trash"></i>
-                                delete
-                        </button>
-                        </td>
-                    </tr>
+                    @php
+                        $counter = 1;
+                    @endphp
+                    @foreach ($grade_levels as $grade_level)
+                        <tr class="text-center">
+                            <td>{{ $counter }}</td>
+                            <td>{{ $grade_level['grade'] }}</td>
+                            <td>{{ $grade_level['status'] }}</td>
+                            <td class="text-center">
+                            <button class="btn btn-outline-primary btn-md" data-toggle="modal" data-target="#updateGrade" onclick="edit('{{ $grade_level['id'] }}', { u_grade: '{{ $grade_level['grade'] }}' })">
+                                    <i class="fas fa-pen"></i>
+                                    update
+                            </button>
+                            <button class="btn btn-outline-danger btn-md" data-toggle="modal" data-target="#deleteGrade" onclick="edit('{{ $grade_level['id'] }}', { status: '{{ $grade_level['status'] }}' })">
+                                    <i class="fas fa-trash"></i>
+                                    delete
+                            </button>
+                            </td>
+                        </tr>
+                        @php
+                            $counter++;
+                        @endphp
+                    @endforeach
                 </tbody>
             </table>
             <!-- EndTable -->
@@ -62,7 +72,7 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form action="#" class="formPost">
+            <form action="{{ route('grade_store') }}" class="formPost">
             <div class="modal-body">
                 <div class="col-lg-12">
                     <label for="grade">Grade</label>
@@ -91,11 +101,12 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form action="#" class="formPost">
+            <form action="{{ route('grade_update') }}" class="formPost">
                 <div class="modal-body">
                     <div class="col-lg-12">
+                        <input type="text" class="form-control id" name="id" id="id" readonly hidden>
                         <label for="grade">Grade</label>
-                        <input type="text" class="form-control" name="u_grade" id="u_grade" required placeholder="grade">
+                        <input type="text" class="form-control" name="grade" id="u_grade" required placeholder="grade">
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -125,9 +136,10 @@
                 <span aria-hidden="true">&times;</span>
             </button>
          </div>
-         <form action="#" class="formPost">
+         <form action="{{ route('grade_destroy') }}" class="formPost">
             <div class="modal-body">
-               <input type="text" class="form-control u_id" name="d_id" id="d_id" readonly hidden>
+               <input type="text" class="form-control id" name="id" id="id" readonly hidden>
+               <input type="text" class="form-control status" name="status" id="status" readonly hidden>
                <h4>Are you certain you wish to proceed with the deletion?</h4>
             </div>
             <div class="modal-footer">
