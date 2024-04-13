@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
 {
@@ -37,4 +39,42 @@ class LoginController extends Controller
     {
         $this->middleware('guest')->except('logout');
     }
+
+    public function index() {
+        return redirect()->route('login');
+    }
+
+    public function login(Request $request)
+    {
+        $credentials = $request->only('username', 'password');
+
+        if (Auth::attempt($credentials)) {
+            $render_message = [
+                'response' => 1,
+                'message' => 'Login success!',
+                'path' => '/Dashboard/dashboard'
+            ];
+            return response()->json($render_message);
+        } else {
+            $render_message = [
+                'response' => 0,
+                'message' => 'Invalid credentials ',
+            ];
+            return response()->json($render_message);
+        }
+    }
+
+
+    public function logout()
+    {
+        Auth::logout();
+        $render_message = [
+            'response' => 1,
+            'message' => 'Logout success!',
+            'path' => '/'
+        ];
+        return response()->json($render_message);
+    }
+
+
 }
