@@ -13,10 +13,13 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/Dashboard/dashboard', function () {
-    return view('Dashboard/dashboard');
-});
+// Route::get('/Dashboard/dashboard', function () {
+//     return view('Dashboard/dashboard');
+// });
 
+Route::get('/', function () {
+    return redirect()->route('login');
+});
 
 
 // Dashboard
@@ -51,5 +54,9 @@ Route::get('/Class/class',['App\Http\Controllers\ClassController','index'])->nam
 Route::get('/Payments/payments',['App\Http\Controllers\PaymentsController','index'])->name('payments');
 
 
-// Settings
-Route::get('/Settings/settings',['App\Http\Controllers\SettingsController','index'])->name('settings');
+// Settings | Roles and Permissions
+Route::get('/RolesandPermissions/rolesandpermissions',['App\Http\Controllers\RolesAndPermissionsController','index'])->name('rolesandpermissions');
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

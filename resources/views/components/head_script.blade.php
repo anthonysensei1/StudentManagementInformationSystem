@@ -35,6 +35,21 @@
 
 <style>
 
+  .selected {
+      background-color: #6c757d;
+      border-top: .1px solid #fff;
+      color: #fff;
+  }
+
+  #permissionRole, #u_permissionRole {
+      padding: 20px;
+  }
+
+  .activated{
+    background-color: rgba(173, 255, 47, 0.7);
+    box-shadow: 0 0 10px rgba(192, 192, 192, 0.7);
+  }
+
   .students_img{
     background: radial-gradient(circle at 18.7% 37.8%, rgb(250, 250, 250) 0%, rgb(225, 234, 238) 90%);
     display: flex;
@@ -64,8 +79,15 @@
     letter-spacing: 2px;
   }
 
+  .small-box{
+    color: #000;
+    transition: transform .5s, box-shadow 0.5s, color 0.3s;
+  }
   .small-box:hover{
     cursor: pointer;
+    transform: scale(.85);
+    box-shadow: 0 0 20px rgba(173, 255, 47, 0.7);
+    color: rgba(0, 128, 0, 0.7);
   }
 
   .student_name{
@@ -247,6 +269,149 @@
       border-color: #007bff;
   }
 
+  .division{
+    display:flex;
+    justify-content: space-between;
+    border-bottom:3px solid #6c757d;
+    flex-direction: row-reverse
+  }
+  .lsf{
+    display:flex;
+    align-items: flex-end;
+  }
+
+  .lsf_label{
+    font-size: 25px;
+    font-weight: 900;
+    letter-spacing: 2px;
+  }
+  .btn_list{
+    display: flex;
+    justify-content: flex-end;
+    
+  }
+  .buttons{
+    margin: 10px;
+  }
+
+  .LSG{
+    font-size: 22px;
+    font-weight: 900;
+  }
+  .LSG .lsg{
+    font-size: 18px!important;
+    font-weight: 0!important;
+  }
+  .receipt_label{
+    font-size: 22px;
+    font-weight: 900;
+    margin-top: 50px;
+  }
+  .fta{
+    display:flex;
+    justify-content: space-between;
+  }
+
+  .da{
+    display:flex;
+    justify-content: space-between;
+  }
+
+  .top_division{
+    margin-top: 25px;
+  }
+
+  .result_division{
+    margin-top: 10px;
+  }
+
+  .rda{
+    border-top:2px solid #dee2e6;
+  }
+
+  .gotoMainTable{
+    color: #000;
+    font-size: 20px;
+    font-weight:bold;
+  }
+  .gotoMainTable:hover{
+    text-decoration: underline;
+  }
+  .gotoMainTable{
+    display:flex;
+    align-items: center;
+  }
+  .FeeEntryMainDiv{
+    display:flex;
+    justify-content: space-between;
+  }
+  .details{
+    border: 1px solid #000;
+    border-radius: 2px;
+    width: 100%;
+    padding: 15px;
+  }
+  .feeDetails{
+    border: 1px solid #000;
+    border-radius: 2px;
+    width: 100%;
+    padding: 15px;
+  }
+  .dfd{
+    margin-bottom: 15px;
+  }
+  .nfe_div{
+    border:1px solid #000;
+    margin-top:10px;
+  }
+  .addToList{
+    display:flex;
+    justify-content: center;
+    margin-top: 10px;
+  }
+  .totalDiv{
+    display:flex;
+    justify-content: space-evenly;
+    font-size: 20px;
+    font-weight:bold;
+  }
+
+  .totalResult{
+    color: #dc3545;
+  }
+  .prpMonth{
+    display:flex;
+    justify-content: flex-end;
+    align-items: center;
+  }
+  .lblMonth{
+    margin-right: 10px;
+    font-size: 18px;
+    font-weight: 900;
+    letter-spacing: 2px;
+    width: 100%;
+  }
+
+  .small-box{
+    background-image:url('{{asset ('../../dist/img/green.png')}}');
+    background-position:center;
+    background-repeat: no-repeat;
+  }
+
+  .schoolyear{
+    letter-spacing:2px;
+    font-size: 20px;
+    font-weight: 900;
+  }
+
+  .editable-cell{
+    width: 100px;
+  }
+
+  .save_grade{
+    display: flex;
+    justify-content: flex-end;
+  }
 </style>
 
 

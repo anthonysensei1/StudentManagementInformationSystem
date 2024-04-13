@@ -64,6 +64,9 @@
       <div class="modal-content">
          <div class="modal-header bg-gradient-secondary">
             <h4 class="modal-title">Add New Subject</h4>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
          </div>
          <form action="#" class="formPost">
             <div class="modal-body">
@@ -85,13 +88,10 @@
                   </select>
                </div>
                <div class="col-lg-12">
-                  <label for="schedule">Schedule</label>
+                  <label>Schedule</label>
                   <div class="row">
                      <div class="col-lg-6">
-                        <input type="text" class="form-control" name="schedule_am" id="schedule_am" required placeholder="00:00 AM">
-                     </div>
-                     <div class="col-lg-6">
-                        <input type="text" class="form-control" name="schedule_pm" id="schedule_pm" required placeholder="00:00 PM">
+                        <input type="time" class="form-control" name="schedule_am" id="schedule_am" required placeholder="00:00 AM">
                      </div>
                   </div>
                </div>
@@ -114,19 +114,22 @@
       <div class="modal-content">
          <div class="modal-header bg-gradient-secondary">
             <h4 class="modal-title">Update Grade</h4>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
          </div>
          <form action="#" class="formPost">
             <div class="modal-body">
                <div class="col-lg-12">
-                  <label for="u_subject_name">Subject Name</label>
+                  <label>Subject Name</label>
                   <input type="text" class="form-control" name="u_subject_name" id="u_subject_name" required placeholder="subject">
                </div>
                <div class="col-lg-12">
-                  <label for="u_subject_code">Subject Code</label>
+                  <label>Subject Code</label>
                   <input type="text" class="form-control" name="u_subject_code" id="u_subject_code" required placeholder="subject code">
                </div>
                <div class="col-lg-12">
-                  <label for="u_grade">Grade</label>
+                  <label>Grade</label>
                   <select class="form-control" name="u_grade" id="u_grade" required>
                      <option value="" disabled selected>Select Grade</option>
                      <option value="Grade 1">Grade 1</option>
@@ -136,13 +139,10 @@
                   </select>
                </div>
                <div class="col-lg-12">
-                  <label for="u_schedule">Schedule</label>
+                  <label>Schedule</label>
                   <div class="row">
                      <div class="col-lg-6">
-                        <input type="text" class="form-control" name="u_schedule_am" id="u_schedule_am" required placeholder="00:00 AM">
-                     </div>
-                     <div class="col-lg-6">
-                        <input type="text" class="form-control" name="u_schedule_pm" id="u_schedule_pm" required placeholder="00:00 PM">
+                        <input type="time" class="form-control" name="u_schedule_am" id="u_schedule_am" required placeholder="00:00 AM">
                      </div>
                   </div>
                </div>
@@ -166,6 +166,9 @@
       <div class="modal-content">
          <div class="modal-header bg-gradient-secondary">
             <h4 class="modal-title">Confirmation</h4>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
          </div>
          <form action="#" class="formPost">
             <div class="modal-body">
@@ -187,4 +190,12 @@
    </div> <!-- /.modal-dialog -->
 </div><!-- /.modal -->
 <!-- End of Delete Dialog -->
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        document.querySelectorAll('.sub').forEach(function(element) {
+            element.classList.add('activated');
+        });
+    });
+</script>
 @endsection

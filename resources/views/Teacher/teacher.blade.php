@@ -40,12 +40,12 @@
                         <td></td>
                         <td class="text-center">
                         <button class="btn btn-outline-primary btn-md" data-toggle="modal" data-id="" data-target="#updateTeacher">
-                                <i class="fas fa-pen"></i>
-                                update
+                              <i class="fas fa-pen"></i>
+                              update
                         </button>
                         <button class="btn btn-outline-danger btn-md" data-toggle="modal" data-id="" data-target="#deleteTeacher">
-                                <i class="fas fa-trash"></i>
-                                delete
+                              <i class="fas fa-trash"></i>
+                              delete
                         </button>
                         </td>
                     </tr>
@@ -60,59 +60,62 @@
 <!-- MODALS/DIALOGS -->
 
 
-<!-- StudentsInfo Dialog -->
+<!-- TeachersInfo Dialog -->
 <div class="modal fade" id="popStudentsInfo" data-backdrop="static">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header bg-gradient-secondary">
-            <h4 class="modal-title">Teachers Information</h4>
+               <h4 class="modal-title">Teachers Information</h4>
+               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+               </button>
             </div>
             <form action="#" class="formPost">
             <div class="modal-body">
-                <div class="form-group">
-                    <div class="students_img">
+               <div class="form-group">
+                  <div class="students_img">
                         <img src="{{asset ('dist/img/nopp.png')}}">
-                    </div>
-                    <div class="fullname text-center">Bless S. Muring</div>
-                </div>
-                <table class="table">
-                    <tbody>
-                        <tr>
-                            <td>Employee ID</td>
-                            <td>12345</td>
-                        </tr>
-                        <tr>
-                            <td>Username</td>
-                            <td>bless</td>
-                        </tr>
-                        <tr>
-                            <td>Address</td>
-                            <td>Trinidad, Bohol</td>
-                        </tr>
-                        <tr>
-                            <td>Date of Birth</td>
-                            <td>12/25/2001</td>
-                        </tr>
-                        <tr>
-                            <td>Gender</td>
-                            <td>Female</td>
-                        </tr>
-                        <tr>
-                            <td>Email Address</td>
-                            <td>sample@gmail.com</td>
-                        </tr>
-                        <tr>
-                            <td>Contact No.</td>
-                            <td>09123456789</td>
-                        </tr>
-                        <tr>
-                            <td>Date Created</td>
-                            <td>10/10/2024</td>
-                        </tr>
-                    </tbody>
-                </table>
-                <!-- TableArea -->
-                <table class="table table-bordered table-striped mt-2">
+                  </div>
+                  <div class="fullname text-center">Bless S. Muring</div>
+               </div>
+               <table class="table">
+                  <tbody>
+                     <tr>
+                           <td>Employee ID :</td>
+                           <td>12345</td>
+                     </tr>
+                     <tr>
+                           <td>Username :</td>
+                           <td>bless</td>
+                     </tr>
+                     <tr>
+                           <td>Address :</td>
+                           <td>Trinidad, Bohol</td>
+                     </tr>
+                     <tr>
+                           <td>Date of Birth :</td>
+                           <td>12/25/2001</td>
+                     </tr>
+                     <tr>
+                           <td>Gender :</td>
+                           <td>Female</td>
+                     </tr>
+                     <tr>
+                           <td>Email Address :</td>
+                           <td>sample@gmail.com </td>
+                     </tr>
+                     <tr>
+                           <td>Contact No. :</td>
+                           <td>09123456789</td>
+                     </tr>
+                     <tr>
+                           <td>Date Created :</td>
+                           <td>10/10/2024</td>
+                     </tr>
+                  </tbody>
+               </table>
+               <!-- TableArea -->
+               <table class="table table-bordered table-striped mt-2">
                   <thead>
                      <tr class="text-center">
                         <th>Subject</th>
@@ -140,7 +143,7 @@
         </div><!-- /.modal-content -->
     </div> <!-- /.modal-dialog -->
 </div><!-- /.modal -->
-<!-- End of StudentsInfo Dialog -->
+<!-- End of TeachersInfo Dialog -->
 
 
 <!-- Add Dialog -->
@@ -149,6 +152,9 @@
       <div class="modal-content">
          <div class="modal-header bg-gradient-secondary">
             <h4 class="modal-title">Add New Teacher</h4>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>      
          </div>
          <form action="#" class="formPost">
             <div class="modal-body">
@@ -165,7 +171,7 @@
                      </div>
                      <div class="row">
                         <div class="col-lg-12">
-                           <label for="employee_id">Employee ID</label>
+                           <label for="employee_id">Employee ID :</label>
                            <input type="text" class="form-control" name="employee_id" id="employee_id" required placeholder="employee ID">
                         </div>
                         <div class="col-lg-4">
@@ -293,6 +299,9 @@
       <div class="modal-content">
          <div class="modal-header bg-gradient-secondary">
             <h4 class="modal-title">Update Teacher</h4>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>      
          </div>
          <form action="#" class="formPost">
             <div class="modal-body">
@@ -437,6 +446,9 @@
       <div class="modal-content">
          <div class="modal-header bg-gradient-secondary">
             <h4 class="modal-title">Confirmation</h4>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>      
          </div>
          <form action="#" class="formPost">
             <div class="modal-body">
@@ -458,7 +470,6 @@
    </div> <!-- /.modal-dialog -->
 </div><!-- /.modal -->
 <!-- End of Delete Dialog -->
-@endsection
 
 
 <script>
@@ -469,3 +480,12 @@
         });
     });
 </script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        document.querySelectorAll('.tea').forEach(function(element) {
+            element.classList.add('activated');
+        });
+    });
+</script>
+@endsection

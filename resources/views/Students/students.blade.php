@@ -63,7 +63,10 @@
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header bg-gradient-secondary">
-            <h4 class="modal-title">Students Information</h4>
+                <h4 class="modal-title">Students Information</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
             </div>
             <form action="#" class="formPost">
             <div class="modal-body">
@@ -136,7 +139,10 @@
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header bg-gradient-secondary">
-            <h4 class="modal-title">Add New Student</h4>
+                <h4 class="modal-title">Add New Student</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
             </div>
             <form action="#" class="formPost">
             <div class="modal-body">
@@ -277,8 +283,11 @@
 <div class="modal fade" id="updateStudent" data-backdrop="static">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
-            <div class="modal-header bg-gradient-primary">
-            <h4 class="modal-title">Update Student</h4>
+            <div class="modal-header bg-gradient-secondary">
+                <h4 class="modal-title">Update Student</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
             </div>
             <form action="#" class="formPost">
             <div class="modal-body">
@@ -424,6 +433,9 @@
       <div class="modal-content">
          <div class="modal-header bg-gradient-secondary">
             <h4 class="modal-title">Confirmation</h4>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
          </div>
          <form action="#" class="formPost">
             <div class="modal-body">
@@ -445,7 +457,6 @@
    </div> <!-- /.modal-dialog -->
 </div><!-- /.modal -->
 <!-- End of Delete Dialog -->
-@endsection
 
 
 <script>
@@ -456,3 +467,12 @@
         });
     });
 </script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        document.querySelectorAll('.stu').forEach(function(element) {
+            element.classList.add('activated');
+        });
+    });
+</script>
+
+@endsection

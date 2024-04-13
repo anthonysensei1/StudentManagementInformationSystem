@@ -57,7 +57,10 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header bg-gradient-secondary">
-            <h4 class="modal-title">Add New Section</h4>
+                <h4 class="modal-title">Add New Section</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
             </div>
             <form action="#" class="formPost">
             <div class="modal-body">
@@ -83,7 +86,10 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header bg-gradient-secondary">
-            <h4 class="modal-title">Update Section</h4>
+                <h4 class="modal-title">Update Section</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
             </div>
             <form action="#" class="formPost">
                 <div class="modal-body">
@@ -115,6 +121,9 @@
       <div class="modal-content">
          <div class="modal-header bg-gradient-secondary">
             <h4 class="modal-title">Confirmation</h4>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
          </div>
          <form action="#" class="formPost">
             <div class="modal-body">
@@ -136,4 +145,13 @@
    </div> <!-- /.modal-dialog -->
 </div><!-- /.modal -->
 <!-- End of Delete Dialog -->
+
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        document.querySelectorAll('.sec').forEach(function(element) {
+            element.classList.add('activated');
+        });
+    });
+</script>
 @endsection
