@@ -18,7 +18,7 @@
             </form>
             <!-- EndSearch -->
             <!-- TableArea -->
-            <table class="table table-bordered table-striped mt-2">
+            <table id="example1" class="table table-bordered table-striped mt-2">
                 <thead>
                     <tr class="text-center">
                         <th>#</th>
@@ -33,28 +33,34 @@
                   @php
                       $counter = 1;
                   @endphp
-                  @foreach ($subjects as $subject)
-                     <tr class="text-center">
-                           <td>{{ $counter }}</td>
-                           <td>{{ $subject['subject_name'] }}</td>
-                           <td>{{ $subject['subject_code'] }}</td>
-                           <td>{{ $subject['grade_level_id'] }}</td>
-                           <td>{{ $subject['schedule_time'] }}</td>
-                           <td class="text-center">
-                           <button class="btn btn-outline-primary btn-md" data-toggle="modal" data-id="" data-target="#updateGrade">
-                                 <i class="fas fa-pen"></i>
-                                 update
-                           </button>
-                           <button class="btn btn-outline-danger btn-md" data-toggle="modal" data-id="" data-target="#deleteGrade" onclick="edit('{{ $subject['id'] }}')">
-                                 <i class="fas fa-trash"></i>
-                                 delete
-                           </button>
-                           </td>
-                     </tr>
-                     @php
-                           $counter++;
-                     @endphp
-                  @endforeach
+                  @if (count($subjects) > 0)
+                     @foreach ($subjects as $subject)
+                        <tr class="text-center">
+                              <td>{{ $counter }}</td>
+                              <td>{{ $subject['subject_name'] }}</td>
+                              <td>{{ $subject['subject_code'] }}</td>
+                              <td>{{ $subject['grade_level_id'] }}</td>
+                              <td>{{ $subject['schedule_time'] }}</td>
+                              <td class="text-center">
+                              <button class="btn btn-outline-primary btn-md" data-toggle="modal" data-id="" data-target="#updateGrade">
+                                    <i class="fas fa-pen"></i>
+                                    update
+                              </button>
+                                 <button class="btn btn-outline-danger btn-md" data-toggle="modal" data-id="" data-target="#deleteGrade" onclick="edit('{{ $subject['id'] }}')">
+                                       <i class="fas fa-trash"></i>
+                                       delete
+                                 </button>
+                              </td>
+                           </tr>
+                           @php
+                                 $counter++;
+                           @endphp
+                        @endforeach
+                     @else
+                        <tr>
+                            <td colspan="6" class="text-center">No data is displayed!</td>
+                        </tr>
+                     @endif
                 </tbody>
             </table>
             <!-- EndTable -->
@@ -99,7 +105,10 @@
                   <label>Schedule</label>
                   <div class="row">
                      <div class="col-lg-6">
-                        <input type="time" class="form-control" name="schedule_time" id="schedule_time" required placeholder="00:00 AM">
+                        <input type="time" class="form-control" name="schedule_time" id="schedule_time" required>
+                     </div>
+                     <div class="col-lg-6">
+                        <input type="time" class="form-control" name="schedule_time_end" id="schedule_time_end" required>
                      </div>
                   </div>
                </div>
@@ -150,7 +159,10 @@
                   <label>Schedule</label>
                   <div class="row">
                      <div class="col-lg-6">
-                        <input type="time" class="form-control" name="u_schedule_am" id="u_schedule_am" required placeholder="00:00 AM">
+                        <input type="time" class="form-control" name="u_schedule_am" id="u_schedule_am" required>
+                     </div>
+                     <div class="col-lg-6">
+                        <input type="time" class="form-control" name="u_schedule_time_end" id="u_schedule_time_end" required>
                      </div>
                   </div>
                </div>

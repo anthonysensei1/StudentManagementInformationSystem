@@ -18,7 +18,7 @@
          </form>
          <!-- EndSearch -->
          <!-- TableArea -->
-         <table class="table table-bordered table-striped mt-2">
+         <table id="example1" class="table table-bordered table-striped mt-2">
             <thead>
                <tr class="text-center">
                   <th>#</th>
@@ -48,7 +48,7 @@
          
          <!-- This table will be shown only if the status of the user logged in is TEACHER -->
          <!-- TableArea -->
-         <!-- <table class="table table-bordered table-striped">
+         <!-- <table id="example1" class="table table-bordered table-striped">
             <thead>
                <tr class="text-center">
                   <th>#</th>

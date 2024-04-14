@@ -9,7 +9,7 @@
                 Create Roles and Permissions
             </button>
             <!-- TableArea -->
-            <table class="table table-bordered table-striped mt-2">
+            <table id="example1" class="table table-bordered table-striped mt-2">
                 <thead>
                     <tr class="text-center">
                         <th>Roles</th>

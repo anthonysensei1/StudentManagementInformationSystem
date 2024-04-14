@@ -4,59 +4,35 @@
 <div class="content-wrapper">
     <section class="content">
         <div class="container-fluid">
-            <button class="btn btn-outline-success btn-md mt-2 mb-2" data-toggle="modal" data-target="#addGrade">Add New Grade</button>
-            <!-- SearchArea -->
-            <form action="#">
-                <div class="input-group">
-                    <input type="search" class="form-control form-control-md" name="searcharea" id="searcharea" placeholder="Search . . .">
-                    <div class="input-group-append">
-                        <button type="submit" class="btn btn-md btn-default">
-                            <i class="fa fa-search"></i>
-                        </button>
-                    </div>
-                </div>
-            </form>
-            <!-- EndSearch -->
+            <button class="btn btn-outline-success btn-md mt-2 mb-2" data-toggle="modal" data-target="#addMessage">Add New SMS</button>
             <!-- TableArea -->
             <table id="example1" class="table table-bordered table-striped mt-2">
                 <thead>
                     <tr class="text-center">
                         <th>#</th>
-                        <th>Grade</th>
-                        <th>Status</th>
+                        <th>Messages</th>
                         <th>Action</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @php
-                        $counter = 1;
-                    @endphp
-                    @if (count($grade_levels) > 0)
-                        @foreach ($grade_levels as $grade_level)
-                            <tr class="text-center">
-                                <td>{{ $counter }}</td>
-                                <td>{{ $grade_level['grade'] }}</td>
-                                <td>{{ $grade_level['status'] }}</td>
-                                <td class="text-center">
-                                <button class="btn btn-outline-primary btn-md" data-toggle="modal" data-target="#updateGrade" onclick="edit('{{ $grade_level['id'] }}', { u_grade: '{{ $grade_level['grade'] }}' })">
-                                        <i class="fas fa-pen"></i>
-                                        update
-                                </button>
-                                <button class="btn btn-outline-danger btn-md" data-toggle="modal" data-target="#deleteGrade" onclick="edit('{{ $grade_level['id'] }}', { status: '{{ $grade_level['status'] }}' })">
-                                        <i class="icon fas fa-ban"></i>
-                                        disable
-                                </button>
-                                </td>
-                            </tr>
-                            @php
-                                $counter++;
-                            @endphp
-                        @endforeach
-                    @else
-                        <tr>
-                            <td colspan="4" class="text-center">No data is displayed!</td>
-                        </tr>
-                    @endif
+                    <tr class="text-center">
+                        <td></td>
+                        <td></td>
+                        <td class="text-center" width="500">
+                            <button class="btn btn-outline-success btn-md" onclick="">
+                                    <i class="fas fa-envelope"></i>
+                                    send SMS
+                            </button>
+                            <button class="btn btn-outline-primary btn-md" data-toggle="modal" data-target="#updateMessage" onclick="">
+                                    <i class="fas fa-pen"></i>
+                                    update
+                            </button>
+                            <button class="btn btn-outline-danger btn-md" data-toggle="modal" data-target="#deleteMessage" onclick="">
+                                    <i class="fas fa-trash"></i>
+                                    delete
+                            </button>
+                        </td>
+                    </tr>
                 </tbody>
             </table>
             <!-- EndTable -->
@@ -69,20 +45,20 @@
 
 
 <!-- Add Dialog -->
-<div class="modal fade" id="addGrade" data-backdrop="static">
+<div class="modal fade" id="addMessage" data-backdrop="static">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header bg-gradient-secondary">
-                <h4 class="modal-title">Add New Grade</h4>
+                <h4 class="modal-title">Add New Message</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form action="{{ route('grade_store') }}" class="formPost">
+            <form action="#" class="formPost">
             <div class="modal-body">
                 <div class="col-lg-12">
-                    <label for="grade">Grade</label>
-                    <input type="text" class="form-control" name="grade" id="grade" required placeholder="grade">
+                    <label>Message</label>
+                    <textarea  class="form-control" name="message" id="message" required placeholder=". . ." rows="3"></textarea>
                 </div>
             </div>
             <div class="modal-footer">
@@ -98,7 +74,7 @@
 <!-- End of Add Dialog -->
 
 <!-- Update Dialog -->
-<div class="modal fade" id="updateGrade" data-backdrop="static">
+<div class="modal fade" id="updateMessage" data-backdrop="static">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header bg-gradient-secondary">
@@ -107,12 +83,11 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form action="{{ route('grade_update') }}" class="formPost">
+            <form action="#" class="formPost">
                 <div class="modal-body">
                     <div class="col-lg-12">
-                        <input type="text" class="form-control id" name="id" id="id" readonly hidden>
-                        <label for="grade">Grade</label>
-                        <input type="text" class="form-control" name="grade" id="u_grade" required placeholder="grade">
+                        <label>Message</label>
+                        <textarea  class="form-control" name="u_message" id="u_message" required placeholder=". . ." rows="3"></textarea>
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -133,7 +108,7 @@
 
 
 <!-- Delete Dialog -->
-<div class="modal fade" id="deleteGrade" data-backdrop="static">
+<div class="modal fade" id="deleteMessage" data-backdrop="static">
    <div class="modal-dialog">
       <div class="modal-content">
          <div class="modal-header bg-gradient-secondary">
@@ -142,7 +117,7 @@
                 <span aria-hidden="true">&times;</span>
             </button>
          </div>
-         <form action="{{ route('grade_destroy') }}" class="formPost">
+         <form action="#" class="formPost">
             <div class="modal-body">
                <input type="text" class="form-control id" name="id" id="id" readonly hidden>
                <input type="text" class="form-control status" name="status" id="status" readonly hidden>
@@ -167,7 +142,7 @@
 
 <script>
     document.addEventListener('DOMContentLoaded', function() {
-        document.querySelectorAll('.gra').forEach(function(element) {
+        document.querySelectorAll('.sms').forEach(function(element) {
             element.classList.add('activated');
         });
     });

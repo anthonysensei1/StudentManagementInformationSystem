@@ -81,6 +81,14 @@
                         </p>
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a href="{{ route('sms') }}" class="nav-link sms">
+                    <i class="nav-icon nav-icon far fa-envelope"></i>
+                        <p>
+                            SMS Management
+                        </p>
+                    </a>
+                </li>
             </ul>
         </nav>
     <!-- /.sidebar-menu -->

@@ -18,7 +18,7 @@
             </form>
             <!-- EndSearch -->
             <!-- TableArea -->
-            <table class="table table-bordered table-striped mt-2">
+            <table id="example1" class="table table-bordered table-striped mt-2">
                 <thead>
                     <tr class="text-center">
                         <th>#</th>
@@ -31,26 +31,32 @@
                     @php
                         $counter = 1;
                     @endphp
-                    @foreach ($sections as $section)
-                        <tr class="text-center">
-                            <td>{{ $counter }}</td>
-                            <td>{{ $section['section'] }}</td>
-                            <td>{{ $section['status'] }}</td>
-                            <td class="text-center">
-                            <button class="btn btn-outline-primary btn-md" data-toggle="modal" data-target="#updateSection" onclick="edit('{{ $section['id'] }}', { u_section: '{{ $section['section'] }}' })">
-                                    <i class="fas fa-pen"></i>
-                                    update
-                            </button>
-                            <button class="btn btn-outline-danger btn-md" data-toggle="modal" data-target="#deleteSection" onclick="edit('{{ $section['id'] }}', { status: '{{ $section['status'] }}' })">
-                                    <i class="fas fa-trash"></i>
-                                    delete
-                            </button>
-                            </td>
+                    @if (count($sections) > 0)
+                        @foreach ($sections as $section)
+                            <tr class="text-center">
+                                <td>{{ $counter }}</td>
+                                <td>{{ $section['section'] }}</td>
+                                <td>{{ $section['status'] }}</td>
+                                <td class="text-center">
+                                    <button class="btn btn-outline-primary btn-md" data-toggle="modal" data-target="#updateSection" onclick="edit('{{ $section['id'] }}', { u_section: '{{ $section['section'] }}' })">
+                                            <i class="fas fa-pen"></i>
+                                            update
+                                    </button>
+                                    <button class="btn btn-outline-danger btn-md" data-toggle="modal" data-target="#deleteSection" onclick="edit('{{ $section['id'] }}', { status: '{{ $section['status'] }}' })">
+                                            <i class="icon fas fa-ban"></i>
+                                            disable
+                                    </button>
+                                </td>
+                            </tr>
+                            @php
+                                $counter++;
+                            @endphp
+                        @endforeach
+                    @else
+                        <tr>
+                            <td colspan="4" class="text-center">No data is displayed!</td>
                         </tr>
-                    @php
-                        $counter++;
-                    @endphp
-                @endforeach
+                    @endif
                 </tbody>
             </table>
             <!-- EndTable -->
@@ -74,6 +80,15 @@
             </div>
             <form action="{{ route('section_store') }}" class="formPost">
             <div class="modal-body">
+                <div class="col-lg-12">
+                    <label>Grade</label>
+                    <select class="form-control" name="s_grade" id="s_grade" required>
+                        <option value="" disabled selected>Select Grade</option>
+                        <option value="Grade 1">Grade 1</option>
+                        <option value="Grade 2">Grade 2</option>
+                        <option value="Grade 3">Grade 3</option>
+                    </select>
+                </div>
                 <div class="col-lg-12">
                     <label for="section">Section</label>
                     <input type="text" class="form-control" name="section" id="section" required placeholder="section">
@@ -103,6 +118,15 @@
             </div>
             <form action="{{ route('section_update') }}" class="formPost">
                 <div class="modal-body">
+                    <div class="col-lg-12">
+                        <label>Grade</label>
+                        <select class="form-control" name="u_s_grade" id="u_s_grade" required>
+                            <option value="" disabled selected>Select Grade</option>
+                            <option value="Grade 1">Grade 1</option>
+                            <option value="Grade 2">Grade 2</option>
+                            <option value="Grade 3">Grade 3</option>
+                        </select>
+                    </div>
                     <div class="col-lg-12">
                         <input type="text" class="form-control id" name="id" id="id" readonly hidden>
                         <label for="section">Section</label>

@@ -87,6 +87,10 @@ Route::middleware(['auth'])->group(function () {
     // Settings | Roles and Permissions
     Route::get('/RolesandPermissions/rolesandpermissions', [App\Http\Controllers\RolesAndPermissionsController::class,'index'])->name('rolesandpermissions');
 
+
+    //SMS
+    Route::get('/SMS/sms',[App\Http\Controllers\SMSController::class,'index'])->name('sms');
+
 });
 
 

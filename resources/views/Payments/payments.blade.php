@@ -27,7 +27,7 @@
                </div>
             </div>
             <!-- MainTableArea -->
-            <table class="table table-bordered table-striped mt-2" id="mainTable">
+            <table id="example1" class="table table-bordered table-striped mt-2" id="mainTable">
                 <thead>
                     <tr class="text-center">
                         <th>#</th>
