@@ -19,9 +19,17 @@ $("#searcharea").on("input", function () {
     const searchQuery = $(this).val().toLowerCase();
 
     $(".table tbody tr").each(function () {
-        const grade = $(this).find("td:nth-child(2)").text().toLowerCase();
+        var found = false;
 
-        if (grade.includes(searchQuery)) {
+        $(this).find('td').each(function() {
+            var cellText = $(this).text().toLowerCase();
+            if (cellText.includes(searchQuery)) {
+                found = true;
+                return false; // Break the loop if found in this row
+            }
+        });
+
+        if (found) {
             $(this).show();
         } else {
             $(this).hide();

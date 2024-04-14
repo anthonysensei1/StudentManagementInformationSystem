@@ -23,7 +23,7 @@
                     <tr class="text-center">
                         <th>#</th>
                         <th>Grade</th>
-                        <th>status</th>
+                        <th>Status</th>
                         <th>Action</th>
                     </tr>
                 </thead>

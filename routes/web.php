@@ -54,10 +54,22 @@ Route::middleware(['auth'])->group(function () {
 
     // Section
     Route::get('/Section/section', [App\Http\Controllers\SectionController::class,'index'])->name('section');
+    // Section Store
+    Route::post('/Section/section/section_store', [App\Http\Controllers\SectionController::class,'store'])->name('section_store');
+    // Section Update
+    Route::post('/Section/section/section_update', [App\Http\Controllers\SectionController::class,'update'])->name('section_update');
+    // Section Destroy
+    Route::post('/Section/section/section_destroy', [App\Http\Controllers\SectionController::class,'destroy'])->name('section_destroy');
 
 
     // Subject
     Route::get('/Subject/subject', [App\Http\Controllers\SubjectController::class,'index'])->name('subject');
+    // Subject Store
+    Route::post('/Subject/subject/subject_store', [App\Http\Controllers\SubjectController::class,'store'])->name('subject_store');
+    // Subject Update
+    Route::post('/Subject/subject/subject_update', [App\Http\Controllers\SubjectController::class,'update'])->name('subject_update');
+    // Subject Destroy
+    Route::post('/Subject/subject/subject_destroy', [App\Http\Controllers\SubjectController::class,'destroy'])->name('subject_destroy');
 
 
     // Teacher

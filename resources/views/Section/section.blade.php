@@ -23,24 +23,34 @@
                     <tr class="text-center">
                         <th>#</th>
                         <th>Section</th>
+                        <th>Status</th>
                         <th>Action</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr class="text-center">
-                        <td></td>
-                        <td></td>
-                        <td class="text-center">
-                        <button class="btn btn-outline-primary btn-md" data-toggle="modal" data-id="" data-target="#updateSection">
-                                <i class="fas fa-pen"></i>
-                                update
-                        </button>
-                        <button class="btn btn-outline-danger btn-md" data-toggle="modal" data-id="" data-target="#deleteSection">
-                                <i class="fas fa-trash"></i>
-                                delete
-                        </button>
-                        </td>
-                    </tr>
+                    @php
+                        $counter = 1;
+                    @endphp
+                    @foreach ($sections as $section)
+                        <tr class="text-center">
+                            <td>{{ $counter }}</td>
+                            <td>{{ $section['section'] }}</td>
+                            <td>{{ $section['status'] }}</td>
+                            <td class="text-center">
+                            <button class="btn btn-outline-primary btn-md" data-toggle="modal" data-target="#updateSection" onclick="edit('{{ $section['id'] }}', { u_section: '{{ $section['section'] }}' })">
+                                    <i class="fas fa-pen"></i>
+                                    update
+                            </button>
+                            <button class="btn btn-outline-danger btn-md" data-toggle="modal" data-target="#deleteSection" onclick="edit('{{ $section['id'] }}', { status: '{{ $section['status'] }}' })">
+                                    <i class="fas fa-trash"></i>
+                                    delete
+                            </button>
+                            </td>
+                        </tr>
+                    @php
+                        $counter++;
+                    @endphp
+                @endforeach
                 </tbody>
             </table>
             <!-- EndTable -->
@@ -62,7 +72,7 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form action="#" class="formPost">
+            <form action="{{ route('section_store') }}" class="formPost">
             <div class="modal-body">
                 <div class="col-lg-12">
                     <label for="section">Section</label>
@@ -91,11 +101,12 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form action="#" class="formPost">
+            <form action="{{ route('section_update') }}" class="formPost">
                 <div class="modal-body">
                     <div class="col-lg-12">
+                        <input type="text" class="form-control id" name="id" id="id" readonly hidden>
                         <label for="section">Section</label>
-                        <input type="text" class="form-control" name="u_section" id="u_section" required placeholder="section">
+                        <input type="text" class="form-control" name="section" id="u_section" required placeholder="section">
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -125,9 +136,10 @@
                 <span aria-hidden="true">&times;</span>
             </button>
          </div>
-         <form action="#" class="formPost">
+         <form action="{{ route('section_destroy') }}" class="formPost">
             <div class="modal-body">
-               <input type="text" class="form-control u_id" name="d_id" id="d_id" readonly hidden>
+                <input type="text" class="form-control id" name="id" id="id" readonly hidden>
+                <input type="text" class="form-control status" name="status" id="status" readonly hidden>
                <h4>Are you certain you wish to proceed with the deletion?</h4>
             </div>
             <div class="modal-footer">
