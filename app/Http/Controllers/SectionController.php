@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Section;
 use Illuminate\Http\Request;
 
 class SectionController extends Controller
@@ -13,7 +14,11 @@ class SectionController extends Controller
      */
     public function index()
     {
-        return view('Section/section');
+        $render_data = [
+            'sections' => Section::all(),
+        ];
+
+        return view('Section/section', $render_data);
     }
 
     /**
@@ -34,7 +39,32 @@ class SectionController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+        $section = Section::where('section', $request->section)->first();
+
+        if ($section) {
+            $render_message = [
+                'response' => 0,
+                'message' => 'Section is invalid!',
+                'path' => '/Section/section'
+            ];
+
+            return response()->json($render_message); 
+        }
+        
+        $form_data = [
+            'section' => ucfirst($request->section),
+        ];
+
+        Section::create($form_data);
+
+        $render_message = [
+            'response' => 1,
+            'message' => 'Adding section sucess',
+            'path' => '/Section/section'
+        ];
+
+        return response()->json($render_message);
     }
 
     /**
@@ -66,9 +96,34 @@ class SectionController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        //
+
+        $section = Section::where('section', $request->section)->where('id', '!=', $request->id)->first();
+
+        if ($section) {
+            $render_message = [
+                'response' => 0,
+                'message' => 'Section is already exist!',
+                'path' => '/Section/section'
+            ];
+
+            return response()->json($render_message); 
+        }
+
+        $form_data = [
+            'section' => ucfirst($request->section),
+        ];
+
+        Section::where('id', '=', $request->id)->update($form_data);
+
+        $render_message = [
+            'response' => 1,
+            'message' => 'Updating section sucess',
+            'path' => '/Section/section'
+        ];
+
+        return response()->json($render_message);
     }
 
     /**
@@ -77,8 +132,22 @@ class SectionController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request)
     {
-        //
+        $request->status == 1 ? $request->status = 0 : $request->status = 1;
+
+        $form_data = [
+            'status' => $request->status,
+        ];
+
+        Section::where('id', '=', $request->id)->update($form_data);
+
+        $render_message = [
+            'response' => 1,
+            'message' => 'Updating status success!',
+            'path' => '/Section/section'
+        ];
+
+        return response()->json($render_message);
     }
 }
