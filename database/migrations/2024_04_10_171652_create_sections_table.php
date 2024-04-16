@@ -15,6 +15,7 @@ class CreateSectionsTable extends Migration
     {
         Schema::create('sections', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('grade_level_id');
             $table->string('section');
             $table->integer('status')->default(1);
             $table->timestamps();

@@ -19,6 +19,7 @@ class CreateSubjectsTable extends Migration
             $table->string('subject_code');
             $table->foreignId('grade_level_id');
             $table->string('schedule_time');
+            $table->string('schedule_time_end');
             $table->timestamps();
         });
     }

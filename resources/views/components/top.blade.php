@@ -10,7 +10,7 @@
     <ul class="navbar-nav ml-auto">
         <div class="nav-item dropdown btn-group profile-image ml-2">
             <a data-toggle="dropdown" href="#">
-                <img src="{{ asset('/images/ohana.png') }}" class="rounded-circle" style="width: 40px; height: 40px;">
+                <img src="{{ asset('dist/img/nopp.png') }}" class="rounded-circle" style="width: 40px; height: 40px;">
             </a>
             <div class="dropdown-menu dropdown-menu-right">
             @auth

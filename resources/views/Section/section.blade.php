@@ -22,6 +22,7 @@
                 <thead>
                     <tr class="text-center">
                         <th>#</th>
+                        <th>Grade</th>
                         <th>Section</th>
                         <th>Status</th>
                         <th>Action</th>
@@ -35,10 +36,11 @@
                         @foreach ($sections as $section)
                             <tr class="text-center">
                                 <td>{{ $counter }}</td>
+                                <td>{{ $section['grade'] }}</td>
                                 <td>{{ $section['section'] }}</td>
                                 <td>{{ $section['status'] }}</td>
                                 <td class="text-center">
-                                    <button class="btn btn-outline-primary btn-md" data-toggle="modal" data-target="#updateSection" onclick="edit('{{ $section['id'] }}', { u_section: '{{ $section['section'] }}' })">
+                                    <button class="btn btn-outline-primary btn-md" data-toggle="modal" data-target="#updateSection" onclick="edit('{{ $section['id'] }}', { u_section: '{{ $section['section'] }}', u_s_grade: '{{ $section['grade_level_id'] }}' })">
                                             <i class="fas fa-pen"></i>
                                             update
                                     </button>
@@ -84,9 +86,9 @@
                     <label>Grade</label>
                     <select class="form-control" name="s_grade" id="s_grade" required>
                         <option value="" disabled selected>Select Grade</option>
-                        <option value="Grade 1">Grade 1</option>
-                        <option value="Grade 2">Grade 2</option>
-                        <option value="Grade 3">Grade 3</option>
+                        @foreach ($grades as $grade)
+                            <option value="{{ $grade['id'] }}">{{ $grade['grade'] }}</option>
+                        @endforeach
                     </select>
                 </div>
                 <div class="col-lg-12">
@@ -120,11 +122,11 @@
                 <div class="modal-body">
                     <div class="col-lg-12">
                         <label>Grade</label>
-                        <select class="form-control" name="u_s_grade" id="u_s_grade" required>
+                        <select class="form-control" name="s_grade" id="u_s_grade" required>
                             <option value="" disabled selected>Select Grade</option>
-                            <option value="Grade 1">Grade 1</option>
-                            <option value="Grade 2">Grade 2</option>
-                            <option value="Grade 3">Grade 3</option>
+                            @foreach ($grades as $grade)
+                                <option value="{{ $grade['id'] }}">{{ $grade['grade'] }}</option>
+                            @endforeach
                         </select>
                     </div>
                     <div class="col-lg-12">

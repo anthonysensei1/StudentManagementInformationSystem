@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\GradeLevel;
 use App\Models\Section;
 use Illuminate\Http\Request;
 
@@ -15,7 +16,8 @@ class SectionController extends Controller
     public function index()
     {
         $render_data = [
-            'sections' => Section::all(),
+            'sections' => Section::join('grade_levels', 'sections.grade_level_id', '=', 'grade_levels.id')->select('sections.*', 'grade_levels.grade')->orderBy('grade_levels.grade', 'asc')->get(),
+            'grades' => GradeLevel::all(),
         ];
 
         return view('Section/section', $render_data);
@@ -40,7 +42,7 @@ class SectionController extends Controller
     public function store(Request $request)
     {
 
-        $section = Section::where('section', $request->section)->first();
+        $section = Section::where('section', $request->section)->where('grade_level_id', $request->s_grade)->first();
 
         if ($section) {
             $render_message = [
@@ -53,6 +55,7 @@ class SectionController extends Controller
         }
         
         $form_data = [
+            'grade_level_id' => $request->s_grade,
             'section' => ucfirst($request->section),
         ];
 
@@ -99,7 +102,7 @@ class SectionController extends Controller
     public function update(Request $request)
     {
 
-        $section = Section::where('section', $request->section)->where('id', '!=', $request->id)->first();
+        $section = Section::where('section', $request->section)->where('id', '!=', $request->id)->where('grade_level_id', $request->s_grade)->first();
 
         if ($section) {
             $render_message = [
@@ -112,6 +115,7 @@ class SectionController extends Controller
         }
 
         $form_data = [
+            'grade_level_id' => $request->s_grade,
             'section' => ucfirst($request->section),
         ];
 
