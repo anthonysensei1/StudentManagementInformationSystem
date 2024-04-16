@@ -488,8 +488,6 @@ $('.uploadImage').on('change', function() {
     const file = $(this)[0].files[0];
     const formData = new FormData();
 
-    console.log(file);
-
     const Toast = Swal.mixin({
         toast: true,
         position: 'top-end',
