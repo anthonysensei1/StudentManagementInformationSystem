@@ -87,6 +87,12 @@ Route::middleware(['auth'])->group(function () {
 
     // Class
     Route::get('/Class/class', [App\Http\Controllers\ClassController::class,'index'])->name('class');
+    // Class Store
+    Route::post('/Class/clas/class_store', [App\Http\Controllers\ClassController::class,'store'])->name('class_store');
+    // Class Update
+    Route::post('/Class/clas/class_update', [App\Http\Controllers\ClassController::class,'update'])->name('class_update');
+    // Class Destroy
+    Route::post('/Class/clas/class_destroy', [App\Http\Controllers\ClassController::class,'destroy'])->name('class_destroy');
 
 
     // Payments

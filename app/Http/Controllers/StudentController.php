@@ -101,7 +101,7 @@ class StudentController extends Controller
 
         $render_message = [
             'response' => 1,
-            'message' => 'Adding students sucess',
+            'message' => 'Adding students success',
             'path' => '/Students/students'
         ];
 
@@ -200,7 +200,7 @@ class StudentController extends Controller
 
         $render_message = [
             'response' => 1,
-            'message' => 'Update students sucess',
+            'message' => 'Update students success',
             'path' => '/Students/students'
         ];
 

@@ -60,7 +60,7 @@ class GradeLevelController extends Controller
 
         $render_message = [
             'response' => 1,
-            'message' => 'Adding grade sucess',
+            'message' => 'Adding grade success',
             'path' => '/GradeLevel/grade'
         ];
 
@@ -119,7 +119,7 @@ class GradeLevelController extends Controller
 
         $render_message = [
             'response' => 1,
-            'message' => 'Updating grade sucess',
+            'message' => 'Updating grade success',
             'path' => '/GradeLevel/grade'
         ];
 
