@@ -63,7 +63,7 @@ class SectionController extends Controller
 
         $render_message = [
             'response' => 1,
-            'message' => 'Adding section sucess',
+            'message' => 'Adding section success',
             'path' => '/Section/section'
         ];
 
@@ -123,7 +123,7 @@ class SectionController extends Controller
 
         $render_message = [
             'response' => 1,
-            'message' => 'Updating section sucess',
+            'message' => 'Updating section success',
             'path' => '/Section/section'
         ];
 

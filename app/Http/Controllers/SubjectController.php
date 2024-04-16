@@ -93,7 +93,7 @@ class SubjectController extends Controller
 
         $render_message = [
             'response' => 1,
-            'message' => 'Adding subject sucess',
+            'message' => 'Adding subject success',
             'path' => '/Subject/subject'
         ];
 
@@ -187,7 +187,7 @@ class SubjectController extends Controller
 
         $render_message = [
             'response' => 1,
-            'message' => 'Updating subject sucess',
+            'message' => 'Updating subject success',
             'path' => '/Subject/subject'
         ];
 

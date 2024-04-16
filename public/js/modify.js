@@ -25,7 +25,7 @@ function edit(id, data) {
                 .padStart(2, "0")}`;
             $(`#${key}`).val(formattedTime);
         } else if (key === "upload_image_name") {
-            $(`#${key}`).attr("src", getBaseUrl()+"images/" + value);
+            $(`#${key}`).attr("src", getBaseUrl() + "images/" + value);
         } else if (key.startsWith("u_grade_level_")) {
             let gradeLevelId = value;
             $(`input[name='u_grade_level_[]'][value='${gradeLevelId}']`).prop(
@@ -49,10 +49,27 @@ function edit(id, data) {
                 "checked",
                 true
             );
+        } else if (key.startsWith("u_c_section")) {
+            var selectedGrade = data['u_c_grade'];
+            if (selectedGrade) {
+                $(".c_section").parent().removeAttr("hidden");
+            } else {
+                $(".c_section").parent().attr("hidden", "hidden");
+            }
+
+            $(".c_section option").each(function () {
+                var sectionGrade = $(this).data("grade-level");
+                if (sectionGrade == selectedGrade) {
+                    $(this).show();
+                    $('#u_c_section').val(data['u_c_section']);
+                } else {
+                    $(this).hide();
+                }
+            });
         } else if (key === "u_upload_image_name") {
             $(`#${key}`).val(value);
-            $('#u_image').attr("src", getBaseUrl()+"images/" + value);
-            $('.uploadImageLabel').text(value);
+            $("#u_image").attr("src", getBaseUrl() + "images/" + value);
+            $(".uploadImageLabel").text(value);
         } else {
             $(`#${key}`).val(value);
         }
@@ -66,10 +83,7 @@ function view(id, data) {
 
     for (let key in data) {
         if (key === "upload_image_name") {
-            $(`#${key}`).attr(
-                "src",
-                getBaseUrl()+"images/" + data[key]
-            );
+            $(`#${key}`).attr("src", getBaseUrl() + "images/" + data[key]);
         } else {
             $(`#${key}`).text(data[key]);
         }
@@ -87,9 +101,10 @@ $(".close").on("click", function () {
     $(".modal label[for='customFile']").text("Upload Image");
     $(".modal img[class='image']").attr(
         "src",
-        getBaseUrl()+"dist/img/nopp.png"
+        getBaseUrl() + "dist/img/nopp.png"
     );
     $(".modal .radios_section").prop("hidden", true);
+    $(".modal .c_section_div").prop("hidden", true);
 });
 
 $("#searcharea").on("input", function () {
@@ -138,6 +153,26 @@ $("input[type=radio][name='u_grade_level[]']").change(function () {
         })
         .removeAttr("hidden")
         .show();
+});
+
+$(".c_grade").change(function () {
+    var selectedGrade = $(this).val();
+    if (selectedGrade) {
+        $(".c_section").parent().removeAttr("hidden");
+    } else {
+        $(".c_section").parent().attr("hidden", "hidden");
+    }
+
+    $(".c_section option").each(function () {
+        var sectionGrade = $(this).data("grade-level");
+        if (sectionGrade == selectedGrade) {
+            $(this).show();
+        } else {
+            $(this).hide();
+        }
+    });
+    $(".c_section").val("");
+    $(".c_section option:first").show();
 });
 
 function getBaseUrl() {

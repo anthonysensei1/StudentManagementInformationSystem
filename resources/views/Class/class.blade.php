@@ -27,20 +27,34 @@
                </tr>
             </thead>
             <tbody>
+               @php
+                   $counter = 1;
+               @endphp
+               @if (count($classes) > 0)
+                  @foreach ($classes as $class)
                <tr class="text-center">
-                  <td></td>
-                  <td></td>
+                  <td>{{ $counter }}</td>
+                  <td>{{ $class['grade'] }} {{ $class['section_name'] }}</td>
                   <td class="text-center">
-                  <button class="btn btn-outline-primary btn-md" data-toggle="modal" data-id="" data-target="#updateClass">
+                  <button class="btn btn-outline-primary btn-md" data-toggle="modal" data-target="#updateClass" onclick="edit('{{ $class['id'] }}', { u_c_grade: '{{ $class['grade_level'] }}', u_c_section: '{{ $class['section'] }}', section_id: '{{ $class['id'] }}' })">
                      <i class="fas fa-pen"></i>
                      update
                   </button>
-                  <button class="btn btn-outline-danger btn-md" data-toggle="modal" data-id="" data-target="#deleteSection">
+                  <button class="btn btn-outline-danger btn-md" data-toggle="modal" data-target="#deleteSection" onclick="edit('{{ $class['id'] }}')">
                      <i class="fas fa-trash"></i>
                      delete
                   </button>
                   </td>
                </tr>
+               @php
+                     $counter++;
+               @endphp
+            @endforeach
+            @else
+               <tr>
+                   <td colspan="6" class="text-center">No data is displayed!</td>
+               </tr>
+            @endif
             </tbody>
          </table>
          <!-- EndTable -->
@@ -222,24 +236,24 @@
                 <span aria-hidden="true">&times;</span>
             </button>
          </div>
-         <form action="#" class="formPost">
+         <form action="{{ route('class_store') }}" class="formPost">
             <div class="modal-body">
                <div class="col-lg-12">
                   <label for="c_grade">Grade</label>
-                  <select class="form-control" name="c_grade" id="c_grade" required>
+                  <select class="form-control c_grade" name="c_grade" id="c_grade" required>
                      <option value="" disabled selected>Select Grade</option>
-                     <option value="Grade 1">Grade 1</option>
-                     <option value="Grade 2">Grade 2</option>
-                     <option value="Grade 3">Grade 3</option>>
+                     @foreach ($grades as $grade)
+                        <option value="{{ $grade['id'] }}">{{ $grade['grade'] }}</option>
+                     @endforeach
                   </select>
                </div>
-               <div class="col-lg-12">
+               <div class="col-lg-12 c_section_div" hidden>
                   <label for="c_section">Section</label>
-                  <select class="form-control" name="c_section" id="c_section" required>
+                  <select class="form-control c_section" name="c_section" id="c_section" required>
                      <option value="" disabled selected>Select Section</option>
-                     <option value="A">A</option>
-                     <option value="B">B</option>
-                     <option value="C">C</option>
+                     @foreach ($sections as $section)
+                        <option value="{{ $section['id'] }}" data-grade-level="{{ $section['grade_level_id'] }}">{{ $section['section'] }}</option>
+                     @endforeach
                   </select>
                </div>
             </div>
@@ -266,24 +280,25 @@
                 <span aria-hidden="true">&times;</span>
             </button>
          </div>
-         <form action="#" class="formPost">
+         <form action="{{ route('class_update') }}" class="formPost">
             <div class="modal-body">
+               <input type="text" class="form-control id" name="id" id="id" readonly hidden>
                <div class="col-lg-12">
                   <label for="u_c_grade">Grade</label>
-                  <select class="form-control" name="u_c_grade" id="u_c_grade" required>
+                  <select class="form-control c_grade" name="c_grade" id="u_c_grade" required>
                      <option value="" disabled selected>Select Grade</option>
-                     <option value="Grade 1">Grade 1</option>
-                     <option value="Grade 2">Grade 2</option>
-                     <option value="Grade 3">Grade 3</option>>
+                     @foreach ($grades as $grade)
+                        <option value="{{ $grade['id'] }}">{{ $grade['grade'] }}</option>
+                     @endforeach
                   </select>
                </div>
-               <div class="col-lg-12">
+               <div class="col-lg-12 u_c_section_div" hidden>
                   <label for="u_c_section">Section</label>
-                  <select class="form-control" name="u_c_section" id="u_c_section" required>
+                  <select class="form-control c_section" name="c_section" id="u_c_section" required>
                      <option value="" disabled selected>Select Section</option>
-                     <option value="A">A</option>
-                     <option value="B">B</option>
-                     <option value="C">C</option>
+                     @foreach ($sections as $section)
+                        <option value="{{ $section['id'] }}" data-grade-level="{{ $section['grade_level_id'] }}">{{ $section['section'] }}</option>
+                     @endforeach
                   </select>
                </div>
             </div>
@@ -314,9 +329,9 @@
                 <span aria-hidden="true">&times;</span>
             </button>
          </div>
-         <form action="#" class="formPost">
+         <form action="{{ route('class_destroy') }}" class="formPost">
             <div class="modal-body">
-               <input type="text" class="form-control u_id" name="d_id" id="d_id" readonly hidden>
+               <input type="text" class="form-control id" name="id" id="id" readonly hidden>
                <h4>Are you certain you wish to proceed with the deletion?</h4>
             </div>
             <div class="modal-footer">
