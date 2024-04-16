@@ -40,6 +40,15 @@ Route::middleware(['auth'])->group(function () {
 
     // Student
     Route::get('/Students/students', [App\Http\Controllers\StudentController::class,'index'])->name('student');
+    // Student Store
+    Route::post('/Students/students/students_store', [App\Http\Controllers\StudentController::class,'store'])->name('students_store');
+    // Student Update
+    Route::post('/Students/students/students_update', [App\Http\Controllers\StudentController::class,'update'])->name('students_update');
+    // Student Destroy
+    Route::post('/Students/students/students_destroy', [App\Http\Controllers\StudentController::class,'destroy'])->name('students_destroy');
+    // Student Image Upload
+    Route::post('/Students/students/students_upload', [App\Http\Controllers\StudentController::class,'upload'])->name('students_upload');
+
 
 
     // Grade

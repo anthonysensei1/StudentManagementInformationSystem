@@ -39,14 +39,14 @@
                               <td>{{ $counter }}</td>
                               <td>{{ $subject['subject_name'] }}</td>
                               <td>{{ $subject['subject_code'] }}</td>
-                              <td>{{ $subject['grade_level_id'] }}</td>
-                              <td>{{ $subject['schedule_time'] }}</td>
+                              <td>{{ $subject['grade'] }}</td>
+                              <td>{{ $subject['schedule_time'] }} - {{ $subject['schedule_time_end'] }}</td>
                               <td class="text-center">
-                              <button class="btn btn-outline-primary btn-md" data-toggle="modal" data-id="" data-target="#updateGrade">
+                              <button class="btn btn-outline-primary btn-md" data-toggle="modal" data-target="#updateGrade" onclick="edit('{{ $subject['id'] }}', { u_subject_name: '{{ $subject['subject_name'] }}', u_subject_code: '{{ $subject['subject_code'] }}', u_grade: '{{ $subject['grade_level_id'] }}', u_schedule_time: '{{ $subject['schedule_time'] }}', u_schedule_time_end: '{{ $subject['schedule_time_end'] }}' })">
                                     <i class="fas fa-pen"></i>
                                     update
                               </button>
-                                 <button class="btn btn-outline-danger btn-md" data-toggle="modal" data-id="" data-target="#deleteGrade" onclick="edit('{{ $subject['id'] }}')">
+                                 <button class="btn btn-outline-danger btn-md" data-toggle="modal" data-target="#deleteGrade" onclick="edit('{{ $subject['id'] }}')">
                                        <i class="fas fa-trash"></i>
                                        delete
                                  </button>
@@ -135,23 +135,24 @@
                 <span aria-hidden="true">&times;</span>
             </button>
          </div>
-         <form action="#" class="formPost">
+         <form action="{{ route('subject_update') }}" class="formPost">
             <div class="modal-body">
+               <input type="text" class="form-control id" name="id" id="id" readonly hidden>
                <div class="col-lg-12">
                   <label>Subject Name</label>
-                  <input type="text" class="form-control" name="u_subject_name" id="u_subject_name" required placeholder="subject">
+                  <input type="text" class="form-control" name="subject_name" id="u_subject_name" required placeholder="subject">
                </div>
                <div class="col-lg-12">
                   <label>Subject Code</label>
-                  <input type="text" class="form-control" name="u_subject_code" id="u_subject_code" required placeholder="subject code">
+                  <input type="text" class="form-control" name="subject_code" id="u_subject_code" required placeholder="subject code">
                </div>
                <div class="col-lg-12">
                   <label>Grade</label>
-                  <select class="form-control" name="u_grade" id="u_grade" required>
+                  <select class="form-control" name="grade" id="u_grade" required>
                      <option value="" disabled selected>Select Grade</option>
-                     <option value="Grade 1">Grade 1</option>
-                     <option value="Grade 2">Grade 2</option>
-                     <option value="Grade 3">Grade 3</option>
+                     @foreach ($grades as $grade)
+                        <option value="{{ $grade['id'] }}">{{ $grade['grade'] }}</option>
+                     @endforeach
                      <!-- Add more options as needed -->
                   </select>
                </div>
@@ -159,10 +160,10 @@
                   <label>Schedule</label>
                   <div class="row">
                      <div class="col-lg-6">
-                        <input type="time" class="form-control" name="u_schedule_am" id="u_schedule_am" required>
+                        <input type="time" class="form-control" name="schedule_time" id="u_schedule_time" required>
                      </div>
                      <div class="col-lg-6">
-                        <input type="time" class="form-control" name="u_schedule_time_end" id="u_schedule_time_end" required>
+                        <input type="time" class="form-control" name="schedule_time_end" id="u_schedule_time_end" required>
                      </div>
                   </div>
                </div>

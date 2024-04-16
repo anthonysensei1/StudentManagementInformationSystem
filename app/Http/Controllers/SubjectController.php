@@ -16,7 +16,7 @@ class SubjectController extends Controller
     {
         $render_data = [
             'grades' => GradeLevel::all(),
-            'subjects' => Subject::all(),
+            'subjects' => Subject::join('grade_levels', 'subjects.grade_level_id', '=', 'grade_levels.id')->select('subjects.*', 'grade_levels.grade')->orderBy('subjects.grade_level_id', 'asc')->get(),
         ];
 
         return view('Subject/subject', $render_data);
@@ -53,15 +53,30 @@ class SubjectController extends Controller
             return response()->json($render_message); 
         }
 
+        if(strtotime($request->schedule_time) >= strtotime($request->schedule_time_end)) {
+            $render_message = [
+                'response' => 0,
+                'message' => 'Schedule is invalid!',
+                'path' => '/Subject/subject'
+            ];
+
+            return response()->json($render_message);
+        }
+
         $schedule_times = Subject::where('grade_level_id', $request->grade)->get();
-        foreach($schedule_times as $schedule_time) {
-            if ($schedule_time['schedule_time'] == date('h:i A', strtotime($request->schedule_time))) {
+        foreach ($schedule_times as $schedule_time) {
+            $existing_start = strtotime($schedule_time['schedule_time']);
+            $existing_end = strtotime($schedule_time['schedule_time_end']);
+            $new_start = strtotime($request->schedule_time);
+            $new_end = strtotime($request->schedule_time_end);
+
+            if (($new_start < $existing_end) && ($new_end > $existing_start)) {
                 $render_message = [
                     'response' => 0,
-                    'message' => 'Schedule is invalid! Already exist!',
+                    'message' => 'Schedule is invalid! Conflict schedule. Please check the schedule in the table!',
                     'path' => '/Subject/subject'
                 ];
-    
+
                 return response()->json($render_message);
             }
         }
@@ -71,6 +86,7 @@ class SubjectController extends Controller
             'subject_code' => $request->subject_code,
             'grade_level_id' => $request->grade,
             'schedule_time' => date('h:i A', strtotime($request->schedule_time)),
+            'schedule_time_end' => date('h:i A', strtotime($request->schedule_time_end)),
         ];
 
         Subject::create($form_data);
@@ -116,27 +132,62 @@ class SubjectController extends Controller
     public function update(Request $request)
     {
 
-        $section = Subject::where('section', $request->section)->where('id', '!=', $request->id)->first();
-
-        if ($section) {
+        $subject = Subject::where(function ($query) use ($request) {
+            $query->where('subject_name', $request->subject_name)
+                  ->orWhere('subject_code', $request->subject_code);
+        })->where('id', '!=', $request->id)->first();
+        
+        if ($subject) {
             $render_message = [
                 'response' => 0,
-                'message' => 'Section is already exist!',
+                'message' => 'Subject is invalid! Subject name or Subject code already exist! Please check Subject name and Subject code! ',
+                'path' => '/Subject/subject'
+            ];
+        
+            return response()->json($render_message); 
+        }        
+
+        if(strtotime($request->schedule_time) >= strtotime($request->schedule_time_end)) {
+            $render_message = [
+                'response' => 0,
+                'message' => 'Schedule is invalid!',
                 'path' => '/Subject/subject'
             ];
 
-            return response()->json($render_message); 
+            return response()->json($render_message);
+        }
+
+        $schedule_times = Subject::where('grade_level_id', $request->grade)->where('id', '!=', $request->id)->get();
+        foreach ($schedule_times as $schedule_time) {
+            $existing_start = strtotime($schedule_time['schedule_time']);
+            $existing_end = strtotime($schedule_time['schedule_time_end']);
+            $new_start = strtotime($request->schedule_time);
+            $new_end = strtotime($request->schedule_time_end);
+
+            if (($new_start < $existing_end) && ($new_end > $existing_start)) {
+                $render_message = [
+                    'response' => 0,
+                    'message' => 'Schedule is invalid! Conflict schedule. Please check the schedule in the table!',
+                    'path' => '/Subject/subject'
+                ];
+
+                return response()->json($render_message);
+            }
         }
 
         $form_data = [
-            'section' => ucfirst($request->section),
+            'subject_name' => ucfirst($request->subject_name),
+            'subject_code' => $request->subject_code,
+            'grade_level_id' => $request->grade,
+            'schedule_time' => date('h:i A', strtotime($request->schedule_time)),
+            'schedule_time_end' => date('h:i A', strtotime($request->schedule_time_end)),
         ];
 
         Subject::where('id', '=', $request->id)->update($form_data);
 
         $render_message = [
             'response' => 1,
-            'message' => 'Updating section sucess',
+            'message' => 'Updating subject sucess',
             'path' => '/Subject/subject'
         ];
 
