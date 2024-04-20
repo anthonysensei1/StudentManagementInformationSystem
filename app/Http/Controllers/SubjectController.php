@@ -204,12 +204,12 @@ class SubjectController extends Controller
     {
         Subject::where('id', '=', $request->id)->delete();
 
-        $renderMessage = [
+        $render_message = [
             'response' => 1,
             'message' => 'Delete subject success!',
             'path' => '/Subject/subject'
         ];
 
-        return response()->json($renderMessage);
+        return response()->json($render_message);
     }
 }

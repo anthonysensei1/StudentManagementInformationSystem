@@ -278,13 +278,13 @@ class TeacherController extends Controller
     {
         Teacher::where('id', '=', $request->id)->delete();
 
-        $renderMessage = [
+        $render_message = [
             'response' => 1,
             'message' => 'Delete teacher success!',
             'path' => '/Teacher/teacher'
         ];
 
-        return response()->json($renderMessage);
+        return response()->json($render_message);
     }
 
     /**
@@ -301,20 +301,20 @@ class TeacherController extends Controller
             $imageName = time() . '.' . $image->getClientOriginalExtension();
             $image->move(public_path('images_teacher'), $imageName);
 
-            $renderMessage = [
+            $render_message = [
                 'response' => 1,
                 'message' => $imageName
             ];
 
-            return response()->json($renderMessage);
+            return response()->json($render_message);
         } else {
 
-            $renderMessage = [
+            $render_message = [
                 'response' => 0,
                 'message' => 'No image found'
             ];
 
-            return response()->json($renderMessage);
+            return response()->json($render_message);
         }
     }
 
