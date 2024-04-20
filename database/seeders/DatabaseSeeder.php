@@ -21,6 +21,7 @@ class DatabaseSeeder extends Seeder
             'username' => 'admin',
             'password' => bcrypt('1234a'), // You should hash your password
             'type' => '1',
+            'user_type_id' => '0',
         ]);
     }
 }

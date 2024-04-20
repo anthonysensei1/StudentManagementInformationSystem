@@ -19,7 +19,7 @@ class CreateUsersTable extends Migration
             $table->string('username');
             $table->string('password');
             $table->integer('type')->default(2);
-            $table->foreignId('user_type_id')->nullable();
+            $table->foreignId('user_type_id');
             $table->timestamps();
         });
     }

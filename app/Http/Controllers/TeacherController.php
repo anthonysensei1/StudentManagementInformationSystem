@@ -88,7 +88,7 @@ class TeacherController extends Controller
             ]);
         }
 
-        $exists = Teacher::where('employee_id', $request->id_no)
+        $exists = Teacher::where('employee_id', $request->employee_id)
             ->orWhere(function ($query) use ($request) {
                 $query->where('first_name', $request->first_name)
                     ->where('middle_name', $request->middle_name)
@@ -182,9 +182,90 @@ class TeacherController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        //
+
+        if ($request->contact_number[0] != '0' || $request->contact_number[1] != '9' || strlen($request->contact_number) != 11) {
+            return response()->json([
+                'response' => 0,
+                'message' => 'Teacher is invalid! Invalid phone number!',
+                'path' => '/Teacher/teacher'
+            ]);
+        }
+
+        if ($request->u_subjects === null || $request->u_classes === null) {
+            return response()->json([
+                'response' => 0,
+                'message' => 'Teacher is invalid! Please select classes and subjects!',
+                'path' => '/Teacher/teacher'
+            ]);
+        }
+
+        $exists = Teacher::where(function ($query) use ($request) {
+            $query->where('id', '!=', $request->id)
+                ->where(function ($query) use ($request) {
+                    $query->where('employee_id', $request->employee_id)
+                        ->orWhere(function ($query) use ($request) {
+                            $query->where('first_name', $request->first_name)
+                                ->where('middle_name', $request->middle_name)
+                                ->where('last_name', $request->last_name);
+                        });
+                });
+        })->exists();
+
+        if ($exists) {
+            return response()->json([
+                'response' => 0,
+                'message' => 'Teacher is invalid! Duplicate Id number, LRN, or Name detected.',
+                'path' => '/Teacher/teacher'
+            ]);
+        }
+
+        $exists = User::where('username', $request->username)->where('user_type_id', '!=', $request->id)->first();
+
+        if ($exists) {
+            return response()->json([
+                'response' => 0,
+                'message' => 'Username is invalid! Please use other username.',
+                'path' => '/Teacher/teacher'
+            ]);
+        }
+
+        $request->u_subjects = implode(', ', $request->u_subjects);
+        $request->u_classes = implode(', ', $request->u_classes);
+
+        $form_data = [
+            'upload_image_name' => $request->upload_image_name,
+            'employee_id' => $request->employee_id,
+            'first_name' => ucfirst($request->first_name),
+            'middle_name' => ucfirst($request->middle_name),
+            'last_name' => ucfirst($request->last_name),
+            'address' => ucfirst($request->address),
+            'contact_number' => $request->contact_number,
+            'email_add' => $request->email_add,
+            'b_date' => $request->b_date,
+            'age' => $request->age,
+            'gender' => $request->u_gender[0],
+            'subjects' => $request->u_subjects,
+            'classes' => $request->u_classes,
+        ];
+
+        Teacher::where('id', '=', $request->id)->update($form_data);
+        $form_data = [
+            'name' => ucfirst($request->first_name) . " " . ucfirst($request->middle_name) . " " . ucfirst($request->last_name),
+            'username' => $request->username,
+            // 'password' => bcrypt($request->password),
+        ];
+
+        User::where('user_type_id', '=', $request->id)->update($form_data);
+
+        $render_message = [
+            'response' => 1,
+            'message' => 'Updating teacher success',
+            'path' => '/Teacher/teacher'
+        ];
+
+        return response()->json($render_message);
     }
 
     /**
@@ -249,20 +330,20 @@ class TeacherController extends Controller
         $subject = Subject::join('grade_levels', 'subjects.grade_level_id', '=', 'grade_levels.id')->select('subjects.*', 'grade_levels.grade')->get();
 
         $classes = collect($subject)
-        ->whereIn('id', explode(',', $teacher['subjects']))
-        ->map(function ($class) {
+            ->whereIn('id', explode(',', $teacher['subjects']))
+            ->map(function ($class) {
 
-            $response = [
-                'grade' => $class['grade'], 
-                'subject_name' => $class['subject_name'], 
-                'subject_code' => $class['subject_code'], 
-                'schedule_time' => $class['schedule_time'], 
-                'schedule_time_end' => $class['schedule_time_end']
-            ];
+                $response = [
+                    'grade' => $class['grade'],
+                    'subject_name' => $class['subject_name'],
+                    'subject_code' => $class['subject_code'],
+                    'schedule_time' => $class['schedule_time'],
+                    'schedule_time_end' => $class['schedule_time_end']
+                ];
 
-            return $response;
-        });
-        
+                return $response;
+            });
+
         return response()->json($classes);
     }
 }

@@ -1,3 +1,6 @@
+let selectedGradeLevels = [];
+let u_selectedGradeLevels = [];
+
 function edit(id, data) {
     $(".id").val(id);
     if (data === null) return;
@@ -74,6 +77,37 @@ function edit(id, data) {
             $(`#${key}`).val(value);
             $("#u_image").attr("src", getBaseUrl() + "images_teacher/" + value);
             $(".uploadImageLabel").text(value);
+        } else if (key === "u_classes_checkbox") {
+            let classesId = value.split(", ");
+            classesId.forEach(function (element, index) {
+                $(`input[name='u_classes[]'][value='${element}']`).prop(
+                    "checked",
+                    true
+                );
+            });
+        } else if (key === "u_subjects") {
+            let subjectsId = value.split(", ");
+
+            if (subjectsId.length > 0) {
+                $("#u_check1").prop("disabled", false);
+            }
+
+            subjectsId.forEach(function (element) {
+                $(`input[name='u_subjects[]'][value='${element}']`).prop(
+                    "checked",
+                    true
+                );
+
+                $(`.u_table_classes table tbody tr[data-section-id=${element}]`)
+                    .removeAttr("hidden")
+                    .show();
+            });
+
+            let classesId = data['u_classes_checkbox'].split(", ");
+            classesId.forEach(function (element, index) {
+                let grade_level = $(`input[name='u_classes[]'][value='${element}']`).data('classes-value');
+                u_selectedGradeLevels.push(parseInt(grade_level));
+            });
         } else {
             $(`#${key}`).val(value);
         }
@@ -88,7 +122,10 @@ function view(id, data) {
         if (key === "upload_image_name") {
             $(`#${key}`).attr("src", getBaseUrl() + "images/" + data[key]);
         } else if (key === "t_upload_image_name") {
-            $(`#${key}`).attr("src", getBaseUrl() + "images_teacher/" + data[key]);
+            $(`#${key}`).attr(
+                "src",
+                getBaseUrl() + "images_teacher/" + data[key]
+            );
         } else {
             $(`#${key}`).text(data[key]);
         }
@@ -96,6 +133,8 @@ function view(id, data) {
 }
 
 $(".close").on("click", function () {
+    selectedGradeLevels = [];
+    u_selectedGradeLevels = [];
     $(".modal input[type='text']").val("");
     $(".modal input[type='password']").val("");
     $(".modal select").val("");
@@ -112,9 +151,13 @@ $(".close").on("click", function () {
     $(".modal .radios_section").prop("hidden", true);
     $(".modal .c_section_div").prop("hidden", true);
     $(".modal input:checkbox.check2").prop("checked", false);
+    $(".table_classes table tbody tr").hide();
     $(".modal input:checkbox#check1").prop("checked", false);
     $(".modal input:checkbox.u_check2").prop("checked", false);
+    $(".u_table_classes table tbody tr").hide();
     $(".modal input:checkbox#u_check1").prop("checked", false);
+    $(".modal input:checkbox.classes_checkbox").prop("checked", false);
+    $(".modal input:checkbox.u_classes_checkbox").prop("checked", false);
 });
 
 $("#searcharea").on("input", function () {
@@ -185,9 +228,8 @@ $(".c_grade").change(function () {
     $(".c_section option:first").show();
 });
 
-let selectedGradeLevels = [];
 $(".classes_checkbox").on("change", function () {
-    const gradeLevelId = $(this).data('classes-value');
+    const gradeLevelId = $(this).data("classes-value");
     const isChecked = $(this).is(":checked");
 
     if (isChecked) {
@@ -222,27 +264,26 @@ $(".classes_checkbox").on("change", function () {
 
 $("#check1").change(function () {
     var isChecked = this.checked;
-    
-    $("input:checkbox.check2").each(function() {
-        var tr = $(this).closest('tr');
-        
-        if (tr.is(':visible')) {
+
+    $("input:checkbox.check2").each(function () {
+        var tr = $(this).closest("tr");
+
+        if (tr.is(":visible")) {
             $(this).prop("checked", isChecked);
         }
     });
 });
 
-let u_selectedGradeLevels = [];
 $(".u_classes_checkbox").on("change", function () {
-    const gradeLevelId = $(this).data('classes-value');
+    const gradeLevelId = $(this).data("classes-value");
     const isChecked = $(this).is(":checked");
 
     if (isChecked) {
-        selectedGradeLevels.push(gradeLevelId);
+        u_selectedGradeLevels.push(gradeLevelId);
     } else if (!isChecked) {
-        const index = selectedGradeLevels.indexOf(gradeLevelId);
+        const index = u_selectedGradeLevels.indexOf(gradeLevelId);
         if (index > -1) {
-            selectedGradeLevels.splice(index, 1);
+            u_selectedGradeLevels.splice(index, 1);
         }
     }
 
@@ -250,12 +291,12 @@ $(".u_classes_checkbox").on("change", function () {
     $("#u_check1").prop("disabled", true);
     $("#u_check1").prop("checked", false);
     $("input:checkbox.u_check2").prop("checked", false);
-    if (selectedGradeLevels.length === 0) {
+    if (u_selectedGradeLevels.length === 0) {
         $(".u_table_classes table tbody tr").hide();
         $("input:checkbox.u_check2").prop("checked", false);
     } else {
         $("#u_check1").prop("disabled", false);
-        $.each(selectedGradeLevels, function (index, value) {
+        $.each(u_selectedGradeLevels, function (index, value) {
             $(
                 '.u_table_classes table tbody tr[data-grade-level-id="' +
                     value +
@@ -269,11 +310,11 @@ $(".u_classes_checkbox").on("change", function () {
 
 $("#u_check1").change(function () {
     var isChecked = this.checked;
-    
-    $("input:checkbox.u_check2").each(function() {
-        var tr = $(this).closest('tr');
-        
-        if (tr.is(':visible')) {
+
+    $("input:checkbox.u_check2").each(function () {
+        var tr = $(this).closest("tr");
+
+        if (tr.is(":visible")) {
             $(this).prop("checked", isChecked);
         }
     });
