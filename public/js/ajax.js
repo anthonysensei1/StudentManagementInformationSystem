@@ -113,7 +113,7 @@ $(".formPostSelect").on("submit", function (e) {
 
     const formData = {
         id: id,
-        role: u_role != null ? u_role : role,
+        role: u_role || role,
         permissionRole: selectedPermissions
     };
 
