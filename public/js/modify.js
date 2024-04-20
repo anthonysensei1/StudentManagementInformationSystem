@@ -108,6 +108,18 @@ function edit(id, data) {
                 let grade_level = $(`input[name='u_classes[]'][value='${element}']`).data('classes-value');
                 u_selectedGradeLevels.push(parseInt(grade_level));
             });
+        } else if ( key === "u_permissionRole") {
+            let permissionRole = value.split(", ");
+
+            $("select[name='u_permissionRole']").val(permissionRole);
+        
+            $("select[name='u_permissionRole'] option").removeClass('selected');
+        
+            $("select[name='u_permissionRole'] option").each(function() {
+                if(permissionRole.includes($(this).val())) {
+                    $(this).addClass('selected');
+                }
+            });
         } else {
             $(`#${key}`).val(value);
         }

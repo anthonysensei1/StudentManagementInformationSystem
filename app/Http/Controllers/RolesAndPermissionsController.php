@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\RoleAndPermission;
 use Illuminate\Http\Request;
 
 class RolesAndPermissionsController extends Controller
@@ -13,7 +14,11 @@ class RolesAndPermissionsController extends Controller
      */
     public function index()
     {
-        return view('RolesandPermissions/rolesandpermissions');
+        $render_data = [
+            'role_and_permissions' => RoleAndPermission::all(),
+        ];
+
+        return view('RolesandPermissions/rolesandpermissions', $render_data);
     }
 
     /**
@@ -34,7 +39,32 @@ class RolesAndPermissionsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $role_and_permission = RoleAndPermission::where('role', $request->role)->first();
+
+        if ($role_and_permission) {
+            $render_message = [
+                'response' => 0,
+                'message' => 'Role and permission is invalid! Already exist!',
+                'path' => '/RolesandPermissions/rolesandpermissions'
+            ];
+
+            return response()->json($render_message); 
+        }
+        
+        $form_data = [
+            'role' => $request->role,
+            'permission' => implode(", ", $request->permissionRole),
+        ];
+
+        RoleAndPermission::create($form_data);
+
+        $render_message = [
+            'response' => 1,
+            'message' => 'Adding role and permission success',
+            'path' => '/RolesandPermissions/rolesandpermissions'
+        ];
+
+        return response()->json($render_message);
     }
 
     /**
@@ -66,9 +96,22 @@ class RolesAndPermissionsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        //
+        $form_data = [
+            'role' => $request->role,
+            'permission' => implode(", ", $request->permissionRole),
+        ];
+
+        RoleAndPermission::where('id', '=', $request->id)->update($form_data);
+
+        $render_message = [
+            'response' => 1,
+            'message' => 'Updating role and permission success',
+            'path' => '/RolesandPermissions/rolesandpermissions'
+        ];
+
+        return response()->json($render_message);
     }
 
     /**

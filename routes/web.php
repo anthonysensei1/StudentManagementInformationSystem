@@ -111,7 +111,10 @@ Route::middleware(['auth'])->group(function () {
 
     // Settings | Roles and Permissions
     Route::get('/RolesandPermissions/rolesandpermissions', [App\Http\Controllers\RolesAndPermissionsController::class,'index'])->name('rolesandpermissions');
-
+    // Settings | Roles and Permissions Store
+    Route::post('/Class/clas/rolesandpermissions_store', [App\Http\Controllers\RolesAndPermissionsController::class,'store'])->name('rolesandpermissions_store');
+    // Settings | Roles and Permissions Update
+    Route::post('/Class/clas/rolesandpermissions_update', [App\Http\Controllers\RolesAndPermissionsController::class,'update'])->name('rolesandpermissions_update');
 
     //SMS
     Route::get('/SMS/sms',[App\Http\Controllers\SMSController::class,'index'])->name('sms');
