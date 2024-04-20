@@ -15,6 +15,7 @@ class CreateSMSTable extends Migration
     {
         Schema::create('s_m_s', function (Blueprint $table) {
             $table->id();
+            $table->text('message');
             $table->timestamps();
         });
     }

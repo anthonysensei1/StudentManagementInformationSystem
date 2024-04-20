@@ -118,6 +118,12 @@ Route::middleware(['auth'])->group(function () {
 
     //SMS
     Route::get('/SMS/sms',[App\Http\Controllers\SMSController::class,'index'])->name('sms');
+    // SMS Store
+    Route::post('/SMS/sms/sms_store', [App\Http\Controllers\SMSController::class,'store'])->name('sms_store');
+    // SMS Update
+    Route::post('/SMS/sms/sms_update', [App\Http\Controllers\SMSController::class,'update'])->name('sms_update');
+    // SMS Destroy
+    Route::post('/SMS/sms/sms_destroy', [App\Http\Controllers\SMSController::class,'destroy'])->name('sms_destroy');
 
 });
 
