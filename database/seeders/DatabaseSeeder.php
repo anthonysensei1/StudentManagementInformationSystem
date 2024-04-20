@@ -20,8 +20,7 @@ class DatabaseSeeder extends Seeder
             'name' => 'Admin',
             'username' => 'admin',
             'password' => bcrypt('1234a'), // You should hash your password
-            'email_verified_at' => now(),
-            'remember_token' => Str::random(10),
+            'type' => '1',
         ]);
     }
 }

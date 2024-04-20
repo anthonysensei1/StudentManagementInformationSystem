@@ -83,6 +83,16 @@ Route::middleware(['auth'])->group(function () {
 
     // Teacher
     Route::get('/Teacher/teacher', [App\Http\Controllers\TeacherController::class,'index'])->name('teacher');
+    // Teacher Store
+    Route::post('/Teacher/teacher/teacher_store', [App\Http\Controllers\TeacherController::class,'store'])->name('teacher_store');
+    // Teacher Update
+    Route::post('/Teacher/teacher/teacher_update', [App\Http\Controllers\TeacherController::class,'update'])->name('teacher_update');
+    // Teacher Destroy
+    Route::post('/Teacher/teacher/teacher_destroy', [App\Http\Controllers\TeacherController::class,'destroy'])->name('teacher_destroy');
+    // Teacher Image Upload
+    Route::post('/Teacher/teacher/teacher_upload', [App\Http\Controllers\TeacherController::class,'upload'])->name('teacher_upload');
+    // Teacher Get Classes
+    Route::get('/teacher/classes/{id}', [App\Http\Controllers\TeacherController::class, 'classes'])->name('teacher_classes');
 
 
     // Class
