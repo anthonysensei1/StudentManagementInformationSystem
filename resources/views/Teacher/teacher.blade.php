@@ -637,8 +637,6 @@
                     var $table = $('#classes_table');
                     $table.empty();
 
-                    console.log(data);
-
                     $.each(data, function(i, cls) {
                         var $row = $('<tr>').append(
                             $('<td>').text(cls.subject_name),

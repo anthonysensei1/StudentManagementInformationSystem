@@ -92,7 +92,7 @@ Route::middleware(['auth'])->group(function () {
     // Teacher Image Upload
     Route::post('/Teacher/teacher/teacher_upload', [App\Http\Controllers\TeacherController::class,'upload'])->name('teacher_upload');
     // Teacher Get Classes
-    Route::get('/teacher/classes/{id}', [App\Http\Controllers\TeacherController::class, 'classes'])->name('teacher_classes');
+    Route::get('/Teacher/teacher/classes/{id}', [App\Http\Controllers\TeacherController::class, 'classes'])->name('teacher_classes');
 
 
     // Class
@@ -107,6 +107,14 @@ Route::middleware(['auth'])->group(function () {
 
     // Payments
     Route::get('/Payments/payments', [App\Http\Controllers\PaymentsController::class,'index'])->name('payments');
+    // Payments Store
+    Route::post('/Payments/payments/payments_store', [App\Http\Controllers\PaymentsController::class,'store'])->name('payments_store');
+    // Payments Update
+    Route::post('/Payments/payments/payments_update', [App\Http\Controllers\PaymentsController::class,'update'])->name('payments_update');
+    // Payments Destroy
+    Route::post('/Payments/payments/payments_destroy', [App\Http\Controllers\PaymentsController::class,'destroy'])->name('payments_destroy');
+    // Payments Search
+    Route::get('/Payments/payments/payments_student_search/{id}', [App\Http\Controllers\PaymentsController::class,'student_search'])->name('payments_student_search');
 
 
     // Settings | Roles and Permissions

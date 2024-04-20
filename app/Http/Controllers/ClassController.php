@@ -140,12 +140,12 @@ class ClassController extends Controller
     {
         Classes::where('id', '=', $request->id)->delete();
 
-        $renderMessage = [
+        $render_message = [
             'response' => 1,
             'message' => 'Delete class success!',
             'path' => '/Class/class'
         ];
 
-        return response()->json($renderMessage);
+        return response()->json($render_message);
     }
 }

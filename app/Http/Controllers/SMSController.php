@@ -134,12 +134,12 @@ class SMSController extends Controller
     {
         SMS::where('id', '=', $request->id)->delete();
 
-        $renderMessage = [
+        $render_message = [
             'response' => 1,
             'message' => 'Delete sms message success',
             'path' => '/SMS/sms'
         ];
 
-        return response()->json($renderMessage);
+        return response()->json($render_message);
     }
 }
