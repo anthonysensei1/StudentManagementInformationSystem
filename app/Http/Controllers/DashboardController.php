@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\RoleAndPermission;
 
 class DashboardController extends Controller
 {
@@ -80,5 +81,17 @@ class DashboardController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function get_all_permission()
+    {
+        $role_and_permission = RoleAndPermission::first();
+        return $role_and_permission['permission'];
     }
 }

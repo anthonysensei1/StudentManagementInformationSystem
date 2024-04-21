@@ -36,6 +36,8 @@ Route::middleware(['auth'])->group(function () {
 
     // Dashboard
     Route::get('/Dashboard/dashboard', [App\Http\Controllers\DashboardController::class,'index'])->name('dashboard');
+    // Permissions
+    Route::get('/Dashboard/dashboard/get_all_permission', [App\Http\Controllers\DashboardController::class,'get_all_permission'])->name('get_all_permission');
 
 
     // Student

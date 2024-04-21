@@ -82,7 +82,9 @@
                                 <option value="Subject">Subject</option>
                                 <option value="Teacher">Teacher</option>
                                 <option value="Class">Class</option>
-                                <option value="Settings">Settings</option>
+                                <option value="Payments">Payments</option>
+                                <option value="Roles And Permissions">Roles And Permissions</option>
+                                <option value="SMS Management">SMS Management"</option>
                             </select>
                         </div>
                     </div>
@@ -129,7 +131,9 @@
                                 <option value="Subject">Subject</option>
                                 <option value="Teacher">Teacher</option>
                                 <option value="Class">Class</option>
-                                <option value="Settings">Settings</option>
+                                <option value="Payments">Payments</option>
+                                <option value="Roles And Permissions">Roles And Permissions</option>
+                                <option value="SMS Management">SMS Management"</option>
                             </select>
                         </div>
                     </div>
