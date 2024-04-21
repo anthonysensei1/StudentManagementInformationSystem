@@ -65,27 +65,30 @@
                 <!-- EndTable -->
 
 
-                <!-- This table will be shown only if the status of the user logged in is TEACHER -->
-                <!-- TableArea -->
-                <!-- <table id="example1" class="table table-bordered table-striped">
-                <thead>
-                   <tr class="text-center">
-                      <th>#</th>
-                      <th>Class</th>
-                      <th>Subject</th>
-                      <th>Schedule</th>
-                   </tr>
-                </thead>
-                <tbody>
-                   <tr class="text-center">
-                      <td>1</td>
-                      <td><a href="#" class="student_name" data-toggle="modal" data-target="#studentListModal">Grade 2 - A</a></td>
-                      <td>Subject</td>
-                      <td>8:00 AM - 9:00 AM</td>
-                   </tr>
-                </tbody>
-             </table> -->
-                <!-- EndTable -->
+                @if (auth()->user()->type == 2)
+                    <!-- This table will be shown only if the status of the user logged in is TEACHER -->
+                    <!-- TableArea -->
+                    <table id="example1" class="table table-bordered table-striped">
+                        <thead>
+                            <tr class="text-center">
+                                <th>#</th>
+                                <th>Class</th>
+                                <th>Subject</th>
+                                <th>Schedule</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="text-center">
+                                <td>1</td>
+                                <td><a href="#" class="student_name" data-toggle="modal"
+                                        data-target="#studentListModal">Grade 2 - A</a></td>
+                                <td>Subject</td>
+                                <td>8:00 AM - 9:00 AM</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <!-- EndTable -->
+                @endif
 
             </div>
         </section>
