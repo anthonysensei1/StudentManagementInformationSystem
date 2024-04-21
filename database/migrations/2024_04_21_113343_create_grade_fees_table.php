@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreatePaymentsTable extends Migration
+class CreateGradeFeesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,12 @@ class CreatePaymentsTable extends Migration
      */
     public function up()
     {
-        Schema::create('payments', function (Blueprint $table) {
+        Schema::create('grade_fees', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('student_id');
-            $table->integer('student_balance');
-            $table->integer('amount');
-            $table->text('remarks')->nullable();
-            $table->integer('payable_balance');
+            $table->foreignId('grade_level_id');
+            $table->string('month');
+            $table->text('fee_details');
+            $table->text('total_amount');
             $table->timestamps();
         });
     }
@@ -31,6 +30,6 @@ class CreatePaymentsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('payments');
+        Schema::dropIfExists('grade_fees');
     }
 }

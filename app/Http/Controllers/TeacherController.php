@@ -254,7 +254,7 @@ class TeacherController extends Controller
         $form_data = [
             'name' => ucfirst($request->first_name) . " " . ucfirst($request->middle_name) . " " . ucfirst($request->last_name),
             'username' => $request->username,
-            // 'password' => bcrypt($request->password),
+            'password' => bcrypt($request->password),
         ];
 
         User::where('user_type_id', '=', $request->id)->update($form_data);

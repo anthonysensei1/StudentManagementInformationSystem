@@ -103,18 +103,20 @@ $(".formPostSelect").on("submit", function (e) {
         showConfirmButton: false,
         timer: 1500,
     });
-    const id = $('#id').val();
-    const role = $('#role').val();
-    const u_role = $('#u_role').val();
+    const id = $("#id").val();
+    const role = $("#role").val();
+    const u_role = $("#u_role").val();
 
-    const selectedPermissions = $('.permissionRole .selected').map(function() {
-        return this.value;
-    }).get();
+    const selectedPermissions = $(".permissionRole .selected")
+        .map(function () {
+            return this.value;
+        })
+        .get();
 
     const formData = {
         id: id,
         role: u_role || role,
-        permissionRole: selectedPermissions
+        permissionRole: selectedPermissions,
     };
 
     const formPostData = $.param(formData);
@@ -152,6 +154,66 @@ $(".formPostSelect").on("submit", function (e) {
                             "</p>",
                     });
                     break;
+            }
+        },
+    });
+});
+
+$(".edit").on("click", function (e) {
+    e.preventDefault();
+    const id = $(this).data("id");
+    let routeTemplate = $(this).data("route-template");
+    const url = routeTemplate.replace(":id", id);
+
+    $.ajax({
+        type: "GET",
+        cache: false,
+        url: url,
+        data: {
+            id: id,
+        },
+        success: function (data) {
+            for (const key in data["message"]) {
+                if (data["message"].hasOwnProperty(key)) {
+                    $(`.${key},#${key}`).val(data["message"][key]);
+                }
+            }
+        },
+    });
+});
+
+$(".edit_view").on("click", function (e) {
+    e.preventDefault();
+    const id = $(this).data("id");
+    let routeTemplate = $(this).data("route-template");
+    const url = routeTemplate.replace(":id", id);
+
+    $.ajax({
+        type: "GET",
+        cache: false,
+        url: url,
+        data: {
+            id: id,
+        },
+        success: function (data) {
+            for (const key in data["message"]) {
+                if (data["message"].hasOwnProperty(key)) {
+                    $(`.${key},#${key}`).text(data["message"][key]);
+
+                    if (key == "payments_date") {
+                        const date = new Date(data['message']['payments_date']);
+
+                        const monthNames = ["January", "February", "March", "April", "May",
+                            "June",
+                            "July", "August", "September", "October", "November", "December"
+                        ];
+
+                        const formattedDate =
+                            `${monthNames[date.getMonth()]} ${date.getDate()}, ${date.getFullYear()}`;
+
+                        $(`.${key}`).html(formattedDate);
+                    }
+                }
             }
         },
     });

@@ -494,6 +494,10 @@
 <!-- OPTIONAL SCRIPTS -->
 <script src="{{asset('plugins/chart.js/Chart.min.js')}}"></script>
 
+<!-- Include printThis -->
+<script src="{{asset('js/printThis.js')}}"></script>
+
+
 <!-- Page specific script -->
 <script>
   $(function () {
