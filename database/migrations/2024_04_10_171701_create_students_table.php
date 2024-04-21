@@ -33,6 +33,7 @@ class CreateStudentsTable extends Migration
             $table->text('contact_number');
             $table->string('email_add')->nullable();
             $table->integer('status')->default(1);
+            $table->integer('balance')->default(0);
             $table->timestamps();
         });
     }

@@ -109,12 +109,24 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/Payments/payments', [App\Http\Controllers\PaymentsController::class,'index'])->name('payments');
     // Payments Store
     Route::post('/Payments/payments/payments_store', [App\Http\Controllers\PaymentsController::class,'store'])->name('payments_store');
+    // Payments Edit
+    Route::get('/Payments/payments/payment_edit/{id}', [App\Http\Controllers\PaymentsController::class,'edit'])->name('payment_edit');
     // Payments Update
     Route::post('/Payments/payments/payments_update', [App\Http\Controllers\PaymentsController::class,'update'])->name('payments_update');
     // Payments Destroy
     Route::post('/Payments/payments/payments_destroy', [App\Http\Controllers\PaymentsController::class,'destroy'])->name('payments_destroy');
     // Payments Search
     Route::get('/Payments/payments/payments_student_search/{id}', [App\Http\Controllers\PaymentsController::class,'student_search'])->name('payments_student_search');
+    // Payments Fee Store
+    Route::post('/Payments/payments/payments_fee_store', [App\Http\Controllers\PaymentsController::class,'fee_store'])->name('payments_fee_store');
+    // Payments Fee Edit
+    Route::get('/Payments/payments/payments_fee_edit/{id}', [App\Http\Controllers\PaymentsController::class,'fee_edit'])->name('payments_fee_edit');
+    // Payments Fee Update
+    Route::post('/Payments/payments/payments_fee_update', [App\Http\Controllers\PaymentsController::class,'fee_update'])->name('payments_fee_update');
+    // Payments Fee Destroy
+    Route::post('/Payments/payments/payments_fee_destroy', [App\Http\Controllers\PaymentsController::class,'fee_destroy'])->name('payments_fee_destroy');
+    // Payments Student Search Free
+    Route::get('/Payments/payments/payments_student_search_fees/{id}', [App\Http\Controllers\PaymentsController::class,'student_search_fees'])->name('payments_student_search_fees');
 
 
     // Settings | Roles and Permissions
