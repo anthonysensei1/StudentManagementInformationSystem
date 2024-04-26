@@ -6,66 +6,69 @@
             <div class="container-fluid pt-2">
                 <button class="btn btn-outline-success btn-md mb-2" data-toggle="modal" data-target="#addClass">Add New
                     Class</button>
-                <!-- SearchArea -->
-                <form action="#">
-                    <div class="input-group">
-                        <input type="search" class="form-control form-control-md" name="searcharea" id="searcharea"
-                            placeholder="Search . . .">
-                        <div class="input-group-append">
-                            <button type="submit" class="btn btn-md btn-default">
-                                <i class="fa fa-search"></i>
-                            </button>
+
+                @if (auth()->user()->type == 1)
+                    <!-- SearchArea -->
+                    <form action="#">
+                        <div class="input-group">
+                            <input type="search" class="form-control form-control-md" name="searcharea" id="searcharea"
+                                placeholder="Search . . .">
+                            <div class="input-group-append">
+                                <button type="submit" class="btn btn-md btn-default">
+                                    <i class="fa fa-search"></i>
+                                </button>
+                            </div>
                         </div>
-                    </div>
-                </form>
-                <!-- EndSearch -->
-                <!-- TableArea -->
-                <table id="example1" class="table table-bordered table-striped mt-2">
-                    <thead>
-                        <tr class="text-center">
-                            <th>#</th>
-                            <th>Class</th>
-                            <th>Action</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @php
-                            $counter = 1;
-                        @endphp
-                        @if (count($classes) > 0)
-                            @foreach ($classes as $class)
-                                <tr class="text-center">
-                                    <td>{{ $counter }}</td>
-                                    <td>{{ $class['grade'] }} {{ $class['section_name'] }}</td>
-                                    <td class="text-center">
-                                        <button class="btn btn-outline-primary btn-md" data-toggle="modal"
-                                            data-target="#updateClass"
-                                            onclick="edit('{{ $class['id'] }}', { u_c_grade: '{{ $class['grade_level'] }}', u_c_section: '{{ $class['section'] }}', section_id: '{{ $class['id'] }}' })">
-                                            <i class="fas fa-pen"></i>
-                                            update
-                                        </button>
-                                        <button class="btn btn-outline-danger btn-md" data-toggle="modal"
-                                            data-target="#deleteSection" onclick="edit('{{ $class['id'] }}')">
-                                            <i class="fas fa-trash"></i>
-                                            delete
-                                        </button>
-                                    </td>
-                                </tr>
-                                @php
-                                    $counter++;
-                                @endphp
-                            @endforeach
-                        @else
-                            <tr>
-                                <td colspan="6" class="text-center">No data is displayed!</td>
+                    </form>
+                    <!-- EndSearch -->
+                @endif
+
+                @if (auth()->user()->type == 1)
+                    <!-- TableArea -->
+                    <table id="example1" class="table table-bordered table-striped mt-2">
+                        <thead>
+                            <tr class="text-center">
+                                <th>#</th>
+                                <th>Class</th>
+                                <th>Action</th>
                             </tr>
-                        @endif
-                    </tbody>
-                </table>
-                <!-- EndTable -->
-
-
-                @if (auth()->user()->type == 2)
+                        </thead>
+                        <tbody>
+                            @php
+                                $counter = 1;
+                            @endphp
+                            @if (count($classes) > 0)
+                                @foreach ($classes as $class)
+                                    <tr class="text-center">
+                                        <td>{{ $counter }}</td>
+                                        <td>{{ $class['grade'] }} {{ $class['section_name'] }}</td>
+                                        <td class="text-center">
+                                            <button class="btn btn-outline-primary btn-md" data-toggle="modal"
+                                                data-target="#updateClass"
+                                                onclick="edit('{{ $class['id'] }}', { u_c_grade: '{{ $class['grade_level'] }}', u_c_section: '{{ $class['section'] }}', section_id: '{{ $class['id'] }}' })">
+                                                <i class="fas fa-pen"></i>
+                                                update
+                                            </button>
+                                            <button class="btn btn-outline-danger btn-md" data-toggle="modal"
+                                                data-target="#deleteSection" onclick="edit('{{ $class['id'] }}')">
+                                                <i class="fas fa-trash"></i>
+                                                delete
+                                            </button>
+                                        </td>
+                                    </tr>
+                                    @php
+                                        $counter++;
+                                    @endphp
+                                @endforeach
+                            @else
+                                <tr>
+                                    <td colspan="6" class="text-center">No data is displayed!</td>
+                                </tr>
+                            @endif
+                        </tbody>
+                    </table>
+                    <!-- EndTable -->
+                @elseif (auth()->user()->type == 2)
                     <!-- This table will be shown only if the status of the user logged in is TEACHER -->
                     <!-- TableArea -->
                     <table id="example1" class="table table-bordered table-striped">
@@ -78,13 +81,33 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr class="text-center">
-                                <td>1</td>
-                                <td><a href="#" class="student_name" data-toggle="modal"
-                                        data-target="#studentListModal">Grade 2 - A</a></td>
-                                <td>Subject</td>
-                                <td>8:00 AM - 9:00 AM</td>
-                            </tr>
+                            @php
+                                $counter = 1;
+                            @endphp
+                            @if (count($teachers_subject_classes) > 0)
+                                @foreach ($teachers_subject_classes as $teachers_subject_class)
+                                    <tr class="text-center">
+                                        <td>{{ $counter }}</td>
+                                        <td><a href="#" class="student_name view" data-toggle="modal"
+                                                data-id="{{ $teachers_subject_class['current_grade_id'] }}"
+                                                data-route-template="{{ route('view_class', ['id' => ':id']) }}"
+                                                data-subject-name="{{ $teachers_subject_class['subject_name'] }}"
+                                                data-subject-name-id="{{ $teachers_subject_class['subject_name_id'] }}"
+                                                data-target="#studentListModal">{{ $teachers_subject_class['current_grade'] }}</a>
+                                        </td>
+                                        <td>{{ $teachers_subject_class['subject_name'] }}</td>
+                                        <td>{{ $teachers_subject_class['schedule_time'] }} -
+                                            {{ $teachers_subject_class['schedule_time_end'] }}</td>
+                                    </tr>
+                                    @php
+                                        $counter++;
+                                    @endphp
+                                @endforeach
+                            @else
+                                <tr>
+                                    <td colspan="6" class="text-center">No data is displayed!</td>
+                                </tr>
+                            @endif
                         </tbody>
                     </table>
                     <!-- EndTable -->
@@ -120,14 +143,7 @@
                                     <th>Students</th>
                                 </tr>
                             </thead>
-                            <tbody>
-                                <tr class="text-center">
-                                    <td>1</td>
-                                    <td><a href="#" class="student_name" data-toggle="modal"
-                                            data-target="#studentGradeModal">1001</a></td>
-                                    <td>10003234</td>
-                                    <td>Gumatay, Jemima Najos</td>
-                                </tr>
+                            <tbody id="student_list">
                             </tbody>
                         </table>
                         <!-- EndTable -->
@@ -151,45 +167,50 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <form action="#" class="formPost">
-                    <div class="modal-body">
-                        <div class="row">
-                            <div class="col-lg-6">
-                                <!-- TableArea -->
-                                <table class="table table-bordered">
-                                    <tbody>
-                                        <tr>
-                                            <td>ID No. :</td>
-                                            <td> <a href="#">1001</a> </td>
-                                        </tr>
-                                        <tr>
-                                            <td>LRN :</td>
-                                            <td>10003234</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Name :</td>
-                                            <td>Gumatay, Jemima Najos</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Grade Level :</td>
-                                            <td>Grade 2</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Section :</td>
-                                            <td>A</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                                <!-- EndTable -->
-                                <div class="modal-footer">
-                                    School Year 2023 - 2024
-                                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <!-- TableArea -->
+                            <table class="table table-bordered">
+                                <tbody>
+                                    <tr>
+                                        <td>ID No. :</td>
+                                        <td> <a href="#" id="student_grade_id_no">1001</a> </td>
+                                    </tr>
+                                    <tr>
+                                        <td>LRN :</td>
+                                        <td id="student_grade_lrn">10003234</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Name :</td>
+                                        <td id="student_grade_name">Gumatay, Jemima Najos</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Grade Level :</td>
+                                        <td id="student_grade_level">Grade 2</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Section :</td>
+                                        <td id="student_grade_section">A</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <!-- EndTable -->
+                            <div class="modal-footer">
+                                <span id="current_year"></span>
                             </div>
-                            <div class="col-lg-6">
-                                <div class="sub_label">
-                                    Subject
-                                </div>
-                                <input type="text" class="form-control" name="sub_in" class="sub_in" readonly>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="sub_label">
+                                Subject
+                            </div>
+                            <form action="{{ route('class_store_grade') }}" class="formPost">
+                                <input type="text" class="form-control" name="student_id" class="student_id"
+                                    id="student_id" readonly hidden>
+                                <input type="text" class="form-control" name="sub_in" class="sub_in" id="sub_in"
+                                    disabled>
+                                <input type="text" class="form-control" name="sub_in_id" class="sub_in_id"
+                                    id="sub_in_id" readonly hidden>
                                 <div class="ag_label">
                                     Add Grade
                                 </div>
@@ -197,23 +218,27 @@
                                     <tbody>
                                         <tr>
                                             <td>1st Quarter</td>
-                                            <td class="editable-cell"> 91 </td>
+                                            <td> <input type="number" class="form-control" name="quarter_1"
+                                                    id="quarter_1" placeholder="91" min="50" max="100"> </td>
                                         </tr>
                                         <tr>
                                             <td>2nd Quarter</td>
-                                            <td class="editable-cell"> 85 </td>
+                                            <td> <input type="number" class="form-control" name="quarter_2"
+                                                    id="quarter_2" placeholder="85" min="50" max="100"> </td>
                                         </tr>
                                         <tr>
                                             <td>3rd Quarter</td>
-                                            <td class="editable-cell"> 89 </td>
+                                            <td> <input type="number" class="form-control" name="quarter_3"
+                                                    id="quarter_3" placeholder="89" min="50" max="100"> </td>
                                         </tr>
                                         <tr>
                                             <td>4th Quarter</td>
-                                            <td class="editable-cell"> 87 </td>
+                                            <td> <input type="number" class="form-control" name="quarter_4"
+                                                    id="quarter_4" placeholder="87" min="50" max="100"> </td>
                                         </tr>
                                         <tr>
                                             <td>Final Rating</td>
-                                            <td class="final_grade_result"></td>
+                                            <td class="final_grade_result" id="final_rating"></td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -224,10 +249,10 @@
                                         Save
                                     </button>
                                 </div>
-                            </div>
+                            </form>
                         </div>
                     </div>
-                </form>
+                </div>
             </div><!-- /.modal-content -->
         </div> <!-- /.modal-dialog -->
     </div><!-- /.modal -->
@@ -402,6 +427,87 @@
                 var finalGradeCell = document.querySelector('.final_grade_result');
                 finalGradeCell.textContent = (total / quarters.length).toFixed(2);
             }
+
+            const currentYear = new Date().getFullYear();
+            const lastYear = new Date().getFullYear() - 1;
+
+            $('#current_year').text(`School Year ${lastYear} - ${currentYear}`);
+
+        });
+
+        let subject_name = '';
+        let subject_name_id = '';
+
+        $(".view").on("click", function(e) {
+            e.preventDefault();
+            const id = $(this).data("id");
+            let routeTemplate = $(this).data("route-template");
+            const url = routeTemplate.replace(":id", id);
+            $('#student_list').empty();
+
+            subject_name = $(this).data("subject-name");
+            subject_name_id = $(this).data("subject-name-id");
+
+            $.ajax({
+                type: "GET",
+                cache: false,
+                url: url,
+                data: {
+                    id: id,
+                },
+                success: function(data) {
+                    let counter = 1;
+                    data['message'].forEach(element => {
+                        const newRow = `
+                            <tr class="text-center">
+                                <td>${counter}</td>
+                                <td><a href="#" class="student_name edit_student" data-toggle="modal" data-id="${element.id}" data-target="#studentGradeModal">${element.id_no}</a></td>
+                                <td>${element.lrn}</td>
+                                <td>${element.first_name} ${element.middle_name} ${element.last_name}</td>
+                            </tr>
+                        `;
+                        $('#student_list').append(newRow);
+                        counter++;
+                    });
+                },
+            });
+        });
+
+
+        $(document).on("click", ".edit_student", function(e) {
+            e.preventDefault();
+            const id = $(this).data("id");
+            const subject_id = subject_name_id;
+            const pathTemplate =
+                "{{ route('view_student_grade', ['id' => ':id', 'subject_id' => ':subject_id']) }}";
+            const path = pathTemplate.replace(":id", id).replace(":subject_id", subject_id);
+
+            $.ajax({
+                type: "GET",
+                cache: false,
+                url: path,
+                data: {
+                    id: id,
+                    subject_id: subject_id
+                },
+                success: function(data) {
+                    $('#student_grade_id_no').text(data['message']['id_no']);
+                    $('#student_grade_lrn').text(data['message']['lrn']);
+                    $('#student_grade_name').text(data['message']['first_name'] + " " + data['message'][
+                        'middle_name'
+                    ] + " " + data['message']['last_name']);
+                    $('#student_grade_level').text(data['message']['grade']);
+                    $('#student_grade_section').text(data['message']['section_name']);
+                    $('#sub_in').val(subject_name);
+                    $('#sub_in_id').val(subject_name_id);
+                    $('#student_id').val(data['message']['id']);
+                    $('#quarter_1').val(data['message']['quarter_1']);
+                    $('#quarter_2').val(data['message']['quarter_2']);
+                    $('#quarter_3').val(data['message']['quarter_3']);
+                    $('#quarter_4').val(data['message']['quarter_4']);
+                    $('#final_rating').text(data['message']['final_rating']);
+                },
+            });
         });
     </script>
 

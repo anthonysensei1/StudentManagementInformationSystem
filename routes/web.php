@@ -38,6 +38,8 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/Dashboard/dashboard', [App\Http\Controllers\DashboardController::class,'index'])->name('dashboard');
     // Permissions
     Route::get('/Dashboard/dashboard/get_all_permission', [App\Http\Controllers\DashboardController::class,'get_all_permission'])->name('get_all_permission');
+    // Update User
+    Route::post('/Dashboard/dashboard/update_user', [App\Http\Controllers\DashboardController::class,'update'])->name('update_user');
 
 
     // Student
@@ -105,6 +107,12 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/Class/clas/class_update', [App\Http\Controllers\ClassController::class,'update'])->name('class_update');
     // Class Destroy
     Route::post('/Class/clas/class_destroy', [App\Http\Controllers\ClassController::class,'destroy'])->name('class_destroy');
+    // View Class
+    Route::get('/Class/clas/view_class/{id}', [App\Http\Controllers\ClassController::class,'view_class'])->name('view_class');
+    // View Class
+    Route::get('/Class/clas/view_student_grade/{id}/{subject_id}', [App\Http\Controllers\ClassController::class,'view_student_grade'])->name('view_student_grade');
+    // Class Store
+    Route::post('/Class/clas/class_store_grade', [App\Http\Controllers\ClassController::class,'store_grade'])->name('class_store_grade');
 
 
     // Payments

@@ -208,7 +208,7 @@ $("input[type=radio][name='grade_level[]']").change(function () {
         .show();
 });
 
-$("input[type=radio][name='u_grade_level[]']").change(function () {
+$("input[type=radio][name='u_grade_level_[]']").change(function () {
     const gradeLevelId = this.value;
     $(".u_radios_section").hide();
     $(".u_radios_section input[type=radio]").prop("checked", false);
