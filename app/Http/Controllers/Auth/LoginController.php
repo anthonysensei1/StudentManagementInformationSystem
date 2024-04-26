@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\Auth;
 
-use session;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Models\RoleAndPermission;
@@ -10,6 +9,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Support\Facades\Session;
 
 class LoginController extends Controller
 {
@@ -52,7 +52,7 @@ class LoginController extends Controller
     {
         $credentials = $request->only('username', 'password');
 
-        $user = User::where('username', '=', $request->username)->where('type', '=', '2')->first();
+        $user = User::select('users.*', 'teachers.*', 'teachers.id AS teachers_id')->join('teachers', 'users.user_type_id', 'teachers.id')->where('username', '=', $request->username)->where('type', '=', '2')->first();
 
         $role_and_permission = RoleAndPermission::first();
 
@@ -61,6 +61,24 @@ class LoginController extends Controller
             $path = '/Dashboard/dashboard';
 
             if ($user) {
+
+                $request->session()->regenerate();
+                $arr_sessions = [
+                    'teachers_id' => $user->teachers_id,
+                    'upload_image_name' => $user->upload_image_name,
+                    'em_id' => $user->employee_id,
+                    'user_name' => $user->username,
+                    'address' => $user->address,
+                    'b_date' => $user->b_date,
+                    'gender' => $user->gender,
+                    'e_address' => $user->email_add,
+                    'c_number' => $user->contact_number,
+                    'd_created' => $user->created_at,
+                    'name' => $user->name,
+                ];
+
+                Session::put($arr_sessions);
+
                 $permissions = explode(', ', $role_and_permission['permission']);
 
                 foreach ($permissions as $permission) {

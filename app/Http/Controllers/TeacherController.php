@@ -99,7 +99,7 @@ class TeacherController extends Controller
         if ($exists) {
             return response()->json([
                 'response' => 0,
-                'message' => 'Teacher is invalid! Duplicate Id number, LRN, or Name detected.',
+                'message' => 'Teacher is invalid! Duplicate Employee or Name detected.',
                 'path' => '/Teacher/teacher'
             ]);
         }
@@ -216,7 +216,7 @@ class TeacherController extends Controller
         if ($exists) {
             return response()->json([
                 'response' => 0,
-                'message' => 'Teacher is invalid! Duplicate Id number, LRN, or Name detected.',
+                'message' => 'Teacher is invalid! Duplicate Employee or Name detected.',
                 'path' => '/Teacher/teacher'
             ]);
         }
