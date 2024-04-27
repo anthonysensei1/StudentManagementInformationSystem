@@ -455,6 +455,10 @@
     letter-spacing: 2px;
   }
 
+  #grade_list:hover{
+    text-decoration: underline;
+  }
+
   .grade_header{
     font-size: 25px;
     font-weight: 700;
@@ -491,6 +495,20 @@
     letter-spacing: 2px;
     text-transform: uppercase;
     color: #fff;
+  }
+
+  .b_data:hover{
+    background-color: rgba(173, 255, 47, 0.7);
+    box-shadow: 0 0 10px rgba(192, 192, 192, 0.7);
+    cursor:pointer;
+    transition: .3s;
+  }
+
+  .g_data:hover{
+    background-color: rgba(173, 255, 47, 0.7);
+    box-shadow: 0 0 10px rgba(192, 192, 192, 0.7);
+    cursor:pointer;
+    transition: .3s;
   }
 </style>
 

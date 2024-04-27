@@ -18,7 +18,7 @@
                 </form>
                 <!-- EndSearch -->
                 <!-- TableArea -->
-                <table id="example1" class="table table-bordered mt-2">
+                <table class="table table-bordered mt-2">
                     <thead>
                         <tr class="text-center">
                             <th>Grade Levels</th>

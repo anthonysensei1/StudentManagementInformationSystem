@@ -69,12 +69,29 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="{{ route('payments') }}" class="nav-link pay">
+                        <a href="#" class="nav-link" id="ass">
                             <i class="nav-icon fas fa-inbox"></i>
                             <p>
-                                Payments
+                                Assessments
+                                <i class="right fas fa-angle-left"></i>
                             </p>
                         </a>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <a href="{{ route('enrollmentprocess') }}" class="nav-link enrollment_process">
+                                    <i class="fas fa-user-graduate"></i>
+                                    <p>Enrollment Process</p>
+                                </a>
+                            </li>
+                        </ul>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <a href="{{ route('payments') }}" class="nav-link pay">
+                                    <i class="fas fa-money-bill-wave"></i>
+                                    <p>Payments</p>
+                                </a>
+                            </li>
+                        </ul>
                     </li>
                     <li class="nav-item">
                         <a href="{{ route('rolesandpermissions') }}" class="nav-link rap">

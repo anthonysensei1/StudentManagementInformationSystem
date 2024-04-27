@@ -287,6 +287,9 @@
             <div class="modal-content">
                 <div class="modal-header bg-gradient-secondary">
                     <h4 class="modal-title">Update Payment</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
                 </div>
                 <form action="{{ route('payments_update') }}" class="formPost">
                     <div class="modal-body">
@@ -329,13 +332,9 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="submit" class="btn btn-outline-success btn-md">
+                        <button type="submit" class="btn btn-outline-primary btn-md">
                             <i class="fas fa-money"></i>
-                            pay
-                        </button>
-                        <button type="button" class="btn btn-outline-danger btn-md close" data-dismiss="modal">
-                            <i class="fas fa-times"></i>
-                            cancel
+                            save
                         </button>
                     </div>
                 </form>
@@ -442,6 +441,9 @@
             <div class="modal-content">
                 <div class="modal-header bg-gradient-secondary">
                     <h4 class="modal-title">Update Fee Entry</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
                 </div>
                 <form action="{{ route('payments_fee_update') }}" class="formPostFee">
                     <div class="modal-body">
@@ -532,6 +534,11 @@
     <div class="modal fade" id="viewData" data-backdrop="static">
         <div class="modal-dialog modal-xl">
             <div class="modal-content">
+                <div class="modal-header bg-gradient-secondary">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
                 <div class="modal-body">
                     <form action="#">
                         <div class="LSG">
@@ -651,11 +658,6 @@
                             <button type="button" class="btn btn-outline-success btn-md" id="printButton">
                                 <i class="fas fa-print"></i>
                                 print
-                            </button>
-                            <button type="button" class="btn btn-outline-danger btn-md close_local"
-                                data-dismiss="modal">
-                                <i class="fas fa-times"></i>
-                                cancel
                             </button>
                         </div>
                 </div>

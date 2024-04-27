@@ -159,6 +159,12 @@ Route::middleware(['auth'])->group(function () {
     //AnnualStudentRoster
     Route::get('/AnnualStudentRoster/annualstudentroster',[App\Http\Controllers\AnnualStudentRosterController::class,'index'])->name('annualstudentroster');
 
+
+
+
+    //EnrollmentProcess
+    Route::get('/EnrollmentProcess/enrollmentprocess',[App\Http\Controllers\EnrollmentProcessController::class,'index'])->name('enrollmentprocess');
+
 });
 
 
