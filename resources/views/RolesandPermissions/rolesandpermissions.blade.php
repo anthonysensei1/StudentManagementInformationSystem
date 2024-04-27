@@ -85,6 +85,7 @@
                                 <option value="Payments">Payments</option>
                                 <option value="Roles And Permissions">Roles And Permissions</option>
                                 <option value="SMS Management">SMS Management"</option>
+                                <option value="Annual Student Roster">Annual Student Roster"</option>
                             </select>
                         </div>
                     </div>
@@ -133,7 +134,8 @@
                                 <option value="Class">Class</option>
                                 <option value="Payments">Payments</option>
                                 <option value="Roles And Permissions">Roles And Permissions</option>
-                                <option value="SMS Management">SMS Management"</option>
+                                <option value="SMS Management">SMS Management</option>
+                                <option value="Annual Student Roster">Annual Student Roster</option>
                             </select>
                         </div>
                     </div>

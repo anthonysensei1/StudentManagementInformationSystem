@@ -19,6 +19,9 @@ class DashboardController extends Controller
      */
     public function index()
     {
+        if (!in_array('Dashboard',session('permission')) && auth()->user()->type != 1) {
+            abort(404);
+        }
         return view('Dashboard/dashboard');
     }
 
@@ -177,7 +180,9 @@ class DashboardController extends Controller
      */
     public function get_all_permission()
     {
-        $role_and_permission = RoleAndPermission::first();
+        $type = auth()->user()->type == 2 ? 2 : 1;
+
+        $role_and_permission = RoleAndPermission::where('id', '=', $type)->first();
         return $role_and_permission['permission'];
     }
 

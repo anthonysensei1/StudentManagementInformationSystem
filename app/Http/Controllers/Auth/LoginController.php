@@ -54,15 +54,18 @@ class LoginController extends Controller
 
         $user = User::select('users.*', 'teachers.*', 'teachers.id AS teachers_id')->join('teachers', 'users.user_type_id', 'teachers.id')->where('username', '=', $request->username)->where('type', '=', '2')->first();
 
-        $role_and_permission = RoleAndPermission::first();
-
         if (Auth::attempt($credentials)) {
 
             $path = '/Dashboard/dashboard';
+            $request->session()->regenerate();
+            $arr_sessions['permission'] = [];
 
             if ($user) {
 
-                $request->session()->regenerate();
+                $role_and_permission = RoleAndPermission::where('id', '=', '2')->first();
+
+                $permissions = explode(', ', $role_and_permission['permission']);
+
                 $arr_sessions = [
                     'teachers_id' => $user->teachers_id,
                     'upload_image_name' => $user->upload_image_name,
@@ -75,52 +78,27 @@ class LoginController extends Controller
                     'c_number' => $user->contact_number,
                     'd_created' => $user->created_at,
                     'name' => $user->name,
+                    'permission' => $permissions
                 ];
 
-                Session::put($arr_sessions);
+                $path = $this->settingPath($permissions);
+            } else {
 
-                $permissions = explode(', ', $role_and_permission['permission']);
+                $registrar = User::where('username', '=', $request->username)->where('type', '=', '3')->first();
+                $role_and_permission = RoleAndPermission::where('id', '=', '1')->first();
 
-                foreach ($permissions as $permission) {
+                if ($registrar) {
+                    $permissions = explode(', ', $role_and_permission['permission']);
 
-                    if ($permission == 'All') {
-                        continue;
-                    }
-
-                    switch ($permission) {
-                        case 'Dashboard':
-                            $path = '/Dashboard/dashboard';
-                            break 2;
-                        case 'Students':
-                            $path = '/Students/students';
-                            break 2;
-                        case 'Grade Level':
-                            $path = '/GradeLevel/grade';
-                            break 2;
-                        case 'Section':
-                            $path = '/Section/section';
-                            break 2;
-                        case 'Subject':
-                            $path = '/Subject/subject';
-                            break 2;
-                        case 'Teacher':
-                            $path = '/Teacher/teacher';
-                            break 2;
-                        case 'Class':
-                            $path = '/Class/class';
-                            break 2;
-                        case 'Payments':
-                            $path = '/Payments/payments';
-                            break 2;
-                        case 'Roles And Permissions':
-                            $path = '/RolesandPermissions/rolesandpermissions';
-                            break 2;
-                        case 'SMS Management':
-                            $path = '/SMS/sms';
-                            break 2;
-                    }
+                    $arr_sessions = [
+                        'permission' => $permissions
+                    ];
+                    $path = $this->settingPath($permissions);
                 }
             }
+
+
+            Session::put($arr_sessions);
 
             $render_message = [
                 'response' => 1,
@@ -137,10 +115,61 @@ class LoginController extends Controller
         }
     }
 
+    public function settingPath($permissions)
+    {
+
+        $path = '/Dashboard/dashboard';
+
+        foreach ($permissions as $permission) {
+
+            if ($permission == 'All') {
+                continue;
+            }
+
+            switch ($permission) {
+                case 'Dashboard':
+                    $path = '/Dashboard/dashboard';
+                    break 2;
+                case 'Students':
+                    $path = '/Students/students';
+                    break 2;
+                case 'Grade Level':
+                    $path = '/GradeLevel/grade';
+                    break 2;
+                case 'Section':
+                    $path = '/Section/section';
+                    break 2;
+                case 'Subject':
+                    $path = '/Subject/subject';
+                    break 2;
+                case 'Teacher':
+                    $path = '/Teacher/teacher';
+                    break 2;
+                case 'Class':
+                    $path = '/Class/class';
+                    break 2;
+                case 'Payments':
+                    $path = '/Payments/payments';
+                    break 2;
+                case 'Roles And Permissions':
+                    $path = '/RolesandPermissions/rolesandpermissions';
+                    break 2;
+                case 'SMS Management':
+                    $path = '/SMS/sms';
+                    break 2;
+                case 'Annual Student Roster':
+                    $path = '/AnnualStudentRoster/annualstudentroster';
+                    break 2;
+            }
+        }
+
+        return $path;
+    }
 
     public function logout()
     {
         Auth::logout();
+        Session::flush();
         $render_message = [
             'response' => 1,
             'message' => 'Logout success!',

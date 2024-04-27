@@ -21,6 +21,11 @@ class PaymentsController extends Controller
      */
     public function index()
     {
+        
+        if (!in_array('Payments',session('permission')) && auth()->user()->type != 1) {
+            abort(404);
+        }
+
         $render_data = [
             'sections' => Section::join('grade_levels', 'sections.grade_level_id', '=', 'grade_levels.id')->select('sections.*', 'grade_levels.grade')->orderBy('grade_levels.grade', 'asc')->get(),
             'grades' => GradeLevel::all(),

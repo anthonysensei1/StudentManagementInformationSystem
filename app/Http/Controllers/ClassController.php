@@ -22,6 +22,11 @@ class ClassController extends Controller
      */
     public function index()
     {
+
+        if (!in_array('Class',session('permission')) && auth()->user()->type != 1) {
+            abort(404);
+        }
+
         $teachers_subject_classes = [];
         if (session('teachers_id')) {
             $teacher = Teacher::where('id', session('teachers_id'))->firstOrFail();

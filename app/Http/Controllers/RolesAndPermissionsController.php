@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\RoleAndPermission;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 class RolesAndPermissionsController extends Controller
 {
@@ -14,6 +15,11 @@ class RolesAndPermissionsController extends Controller
      */
     public function index()
     {
+        
+        if (!in_array('Roles And Permissions',session('permission')) && auth()->user()->type != 1) {
+            abort(404);
+        }
+
         $render_data = [
             'role_and_permissions' => RoleAndPermission::all(),
         ];
@@ -102,6 +108,10 @@ class RolesAndPermissionsController extends Controller
             'role' => $request->role,
             'permission' => implode(", ", $request->permissionRole),
         ];
+        
+        $request->session()->regenerate();
+        $arr_sessions['permission'] = $request->permissionRole;
+        Session::put($arr_sessions);
 
         RoleAndPermission::where('id', '=', $request->id)->update($form_data);
 
