@@ -22,23 +22,25 @@ class ClassController extends Controller
      */
     public function index()
     {
-        $teacher = Teacher::where('id', session('teachers_id'))->firstOrFail();
         $teachers_subject_classes = [];
-
-        $subject_ids = explode(', ', $teacher->subjects);
-        $subjects = Subject::whereIn('id', $subject_ids)->get();
-
-        foreach ($subjects as $subject) {
-            $current_grade = GradeLevel::where('id', $subject->grade_level_id)->first();
-
-            $teachers_subject_classes[] = [
-                'subject_name_id' => $subject['id'],
-                'subject_name' => $subject['subject_name'],
-                'schedule_time' => $subject['schedule_time'],
-                'schedule_time_end' => $subject['schedule_time_end'],
-                'current_grade' => $current_grade['grade'],
-                'current_grade_id' => $current_grade['id']
-            ];
+        if (session('teachers_id')) {
+            $teacher = Teacher::where('id', session('teachers_id'))->firstOrFail();
+    
+            $subject_ids = explode(', ', $teacher->subjects);
+            $subjects = Subject::whereIn('id', $subject_ids)->get();
+    
+            foreach ($subjects as $subject) {
+                $current_grade = GradeLevel::where('id', $subject->grade_level_id)->first();
+    
+                $teachers_subject_classes[] = [
+                    'subject_name_id' => $subject['id'],
+                    'subject_name' => $subject['subject_name'],
+                    'schedule_time' => $subject['schedule_time'],
+                    'schedule_time_end' => $subject['schedule_time_end'],
+                    'current_grade' => $current_grade['grade'],
+                    'current_grade_id' => $current_grade['id']
+                ];
+            }
         }
 
         $render_data = [
