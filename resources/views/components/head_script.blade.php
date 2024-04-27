@@ -31,7 +31,7 @@
 <link rel="stylesheet" href="{{asset('plugins/toastr/toastr.min.css')}}">
 
 <!-- Web Icon -->
-<link rel="shortcut icon" href=""> 
+<link rel="shortcut icon" href="{{asset ('/images/logo.png') }}"> 
 
 <style>
 
@@ -89,11 +89,12 @@
     box-shadow: 0 0 20px rgba(173, 255, 47, 0.7);
     color: rgba(0, 128, 0, 0.7);
   }
-
+  
   .student_name{
-    color: #000;
+    text-decoration: underline;
   }
-  .student_name:hover{
+
+  .view_teacher_class{
     text-decoration: underline;
   }
 
@@ -222,6 +223,27 @@
       border-color: #007bff;
   }
 
+
+  .u_radios_section input[type="radio"] {
+    width: 53px;
+    height: 22px;
+    border-radius: 50%;
+    margin-right: -8px;
+    vertical-align: middle;
+    border: 1px solid #ccc;
+    display: inline-flex;
+    cursor: pointer;
+  }
+
+  .u_radios_section label {
+      cursor: pointer;
+  }
+
+  .u_radios_section input[type="radio"]:checked {
+      background-color: #007bff;
+      border-color: #007bff;
+  }
+
   .returns{
     border:1px solid #6c757d;
     border-radius: 1px;
@@ -242,32 +264,46 @@
     font-weight: 900;
   }
 
-  .radio-wrapper-classes{
+  .checkbox-wrapper-classes{
     display: flex;
     gap: 10px;
     flex-direction: column;
     flex-wrap: wrap;
   }
 
-  .radios_classes input[type="radio"] {
-    width: 53px;
-    height: 22px;
-    border-radius: 50%;
-    margin-right: -8px;
-    vertical-align: middle;
-    border: 1px solid #ccc;
-    display: inline-flex;
-    cursor: pointer;
+  .radios_classes{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
   }
 
-  .radios_classes label {
+  .classes_checkbox{
+    display: block;
+    width: 30px;
+    height: calc(2.25rem + 2px);
+    padding: .375rem .75rem;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #495057;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #ced4da;
+    border-radius: .25rem;
+    box-shadow: inset 0 0 0 transparent;
+    transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+    margin-right: 15px;
+  }
+
+  .classes_checkbox:hover {
       cursor: pointer;
   }
 
-  .radios_classes input[type="radio"]:checked {
-      background-color: #007bff;
-      border-color: #007bff;
+  .class_check_lbl:hover {
+      cursor: pointer;
   }
+
 
   .division{
     display:flex;
@@ -412,6 +448,50 @@
     display: flex;
     justify-content: flex-end;
   }
+
+  .grade_list{
+    font-size: 25px;
+    font-weight: 700;
+    letter-spacing: 2px;
+  }
+
+  .grade_header{
+    font-size: 25px;
+    font-weight: 700;
+    letter-spacing: 2px;
+  }
+
+  .batch_year{
+    font-size: 30px;
+    font-weight: 700;
+    letter-spacing:2px;
+    background-color: rgba(173, 255, 47, 0.7);
+    box-shadow: 0 0 10px rgba(192, 192, 192, 0.7);
+    border:1px solid #000;
+    margin-bottom: 5px;
+  }
+  .boys{
+    background-color:#0047AB;
+    width: 50%;
+    /* border-radius:5px 0 0 5px; */
+    border:1px solid #000;
+    font-size: 20px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #fff;
+  }
+  .girls{
+    background-color:#FF4433;
+    width: 50%;
+    /* border-radius:0 5px 5px 0; */
+    border:1px solid #000;
+    font-size: 20px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #fff;
+  }
 </style>
 
 
@@ -507,6 +587,8 @@
       "autoWidth": false,
       "searching": false,
       "ordering":false,
+      "paging": true,
+      "info": true,
     }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
     $('#example2').DataTable({
       "paging": true,

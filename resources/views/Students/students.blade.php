@@ -40,7 +40,7 @@
                             <td>{{ $student['id_no'] }}</td>
                             <td>{{ $student['lrn'] }}</td>
                             <td><a href="" class="student_name" data-toggle="modal" data-target="#popStudentsInfo" onclick="view('{{ $student['id'] }}', { upload_image_name: '{{ $student['upload_image_name'] }}', id_no: '{{ $student['id_no'] }}', lrn: '{{ $student['lrn'] }}', first_name: '{{ $student['first_name'] }}', middle_name: '{{ $student['middle_name'] }}', last_name: '{{ $student['last_name'] }}', address: '{{ $student['address'] }}', b_date: '{{ $student['b_date'] }}', age: '{{ $student['age'] }}', age: '{{ $student['age'] }}', gender: '{{ $student['gender'] == 1 ? 'Male' : 'Female' }}', grade_level: '{{ $student['grade'] }}', section: '{{ $student['section_name'] }}', p_first_name: '{{ $student['p_first_name'] }}', p_middle_name: '{{ $student['p_middle_name'] }}', p_last_name: '{{ $student['p_last_name'] }}', contact_number: '{{ $student['contact_number'] }}', email_add: '{{ $student['email_add'] }}', created_at: '{{ $student['created_at'] }}' })">{{ $student['first_name'] }} {{ $student['middle_name'] }} {{ $student['last_name'] }}</a></td>
-                            <td>{{ $student['grade'] }} {{ $student['section_name'] }}</td>
+                            <td>Grade {{ $student['grade'] }} - {{ $student['section_name'] }}</td>
                             <td class="text-center">
                             <button class="btn btn-outline-primary btn-md" data-toggle="modal" data-target="#updateStudent" onclick="edit('{{ $student['id'] }}', { u_upload_image_name: '{{ $student['upload_image_name'] }}', u_id_no: '{{ $student['id_no'] }}', u_lrn: '{{ $student['lrn'] }}', u_first_name: '{{ $student['first_name'] }}', u_middle_name: '{{ $student['middle_name'] }}', u_last_name: '{{ $student['last_name'] }}', u_address: '{{ $student['address'] }}', u_b_date: '{{ $student['b_date'] }}', u_age: '{{ $student['age'] }}', u_gender: '{{ $student['gender'] }}', u_grade_level_: '{{ $student['grade_level'] }}', u_section_: '{{ $student['section'] }}', u_p_first_name: '{{ $student['p_first_name'] }}', u_p_middle_name: '{{ $student['p_middle_name'] }}', u_p_last_name: '{{ $student['p_last_name'] }}', u_contact_number: '{{ $student['contact_number'] }}', u_email_add: '{{ $student['email_add'] }}' })">
                                     <i class="fas fa-pen"></i>
@@ -209,11 +209,11 @@
                     <div class="col-lg-3">
                         <span class="g_label">Gender</span>
                         <div class="radio-wrapper">
-                            <div class="radios">
+                            <div class="radios form-check">
                                 <input type="radio" class="form-control" name="gender[]" id="g_male" value="1" required>
                                 <label for="g_male">Male</label>
                             </div>
-                            <div class="radios">
+                            <div class="radios form-check">
                                 <input type="radio" class="form-control" name="gender[]" id="g_female" value="2" required>
                                 <label for="g_female">Female</label>
                             </div>
@@ -226,7 +226,7 @@
                             @foreach ($grades as $grade)
                                 <div class="radios_gl">
                                     <input type="radio" class="form-control grade_level_{{ $grade['id'] }}" name="grade_level[]" id="grade_level_{{ $grade['id'] }}" value="{{ $grade['id'] }}">
-                                    <label for="grade_level_{{ $grade['id'] }}">{{ $grade['grade'] }}</label>
+                                    <label for="grade_level_{{ $grade['id'] }}">Grade {{ $grade['grade'] }}</label>
                                 </div>
                             @endforeach
                         </div>
@@ -361,7 +361,7 @@
                             @foreach ($grades as $grade)
                                 <div class="radios_gl">
                                     <input type="radio" class="form-control grade_level_{{ $grade['id'] }}" name="u_grade_level_[]" id="u_grade_level_{{ $grade['id'] }}" value="{{ $grade['id'] }}">
-                                    <label for="u_grade_level_{{ $grade['id'] }}">{{ $grade['grade'] }}</label>
+                                    <label for="u_grade_level_{{ $grade['id'] }}">Grade {{ $grade['grade'] }}</label>
                                 </div>
                             @endforeach
                         </div>

@@ -86,9 +86,17 @@
                     </li>
                     <li class="nav-item">
                         <a href="{{ route('sms') }}" class="nav-link sms">
-                            <i class="nav-icon nav-icon far fa-envelope"></i>
+                            <i class="nav-icon far fa-envelope"></i>
                             <p>
-                                SMS Management
+                                Message Management
+                            </p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ route('annualstudentroster') }}" class="nav-link annualstudentroster">
+                            <i class="nav-icon far fa-chart-bar"></i>
+                            <p>
+                                Annual Student Roster
                             </p>
                         </a>
                     </li>
@@ -192,7 +200,7 @@
                                 <a href="{{ route('sms') }}" class="nav-link sms">
                                     <i class="nav-icon nav-icon far fa-envelope"></i>
                                     <p>
-                                        SMS Management
+                                        Message Management
                                     </p>
                                 </a>
                             </li>

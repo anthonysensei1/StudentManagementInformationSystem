@@ -36,7 +36,7 @@ class TeacherController extends Controller
             $classes = collect($render_data['classes'])
                 ->whereIn('id', explode(',', $user['classes']))
                 ->map(function ($class) {
-                    return $class['grade'] . ' ' . $class['section_name'];
+                    return 'Grade ' . $class['grade'] . ' - ' . $class['section_name'];
                 })
                 ->implode(', ');
 

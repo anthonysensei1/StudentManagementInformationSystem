@@ -155,6 +155,10 @@ Route::middleware(['auth'])->group(function () {
     // SMS Destroy
     Route::post('/SMS/sms/sms_destroy', [App\Http\Controllers\SMSController::class,'destroy'])->name('sms_destroy');
 
+
+    //AnnualStudentRoster
+    Route::get('/AnnualStudentRoster/annualstudentroster',[App\Http\Controllers\AnnualStudentRosterController::class,'index'])->name('annualstudentroster');
+
 });
 
 

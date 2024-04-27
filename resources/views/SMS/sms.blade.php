@@ -4,9 +4,7 @@
 <div class="content-wrapper">
     <section class="content">
         <div class="container-fluid">
-            <button class="btn btn-outline-success btn-md mt-2 mb-2" data-toggle="modal" data-target="#addMessage">Add
-                New
-                SMS</button>
+            <button class="btn btn-outline-success btn-md mt-2 mb-2" data-toggle="modal" data-target="#addMessage">Add New Message</button>
             <!-- TableArea -->
             <table id="example1" class="table table-bordered table-striped mt-2">
                 <thead>
@@ -28,7 +26,7 @@
                         <td class="text-center" width="500">
                             <button class="btn btn-outline-success btn-md" onclick="">
                                 <i class="fas fa-envelope"></i>
-                                send SMS
+                                send via email
                             </button>
                             <button class="btn btn-outline-primary btn-md" data-toggle="modal" data-target="#updateMessage" onclick="edit('{{ $message['id'] }}', { u_message: '{{ $message['message'] }}' })">
                                 <i class="fas fa-pen"></i>
@@ -94,7 +92,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header bg-gradient-secondary">
-                <h4 class="modal-title">Update Grade</h4>
+                <h4 class="modal-title">Update Message</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>

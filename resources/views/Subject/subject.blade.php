@@ -97,7 +97,7 @@
                   <select class="form-control" name="grade" id="grade" required>
                      <option value="" disabled selected>Select Grade</option>
                      @foreach ($grades as $grade)
-                        <option value="{{ $grade['id'] }}">{{ $grade['grade'] }}</option>
+                        <option value="{{ $grade['id'] }}">Grade {{ $grade['grade'] }}</option>
                      @endforeach
                   </select>
                </div>
@@ -151,7 +151,7 @@
                   <select class="form-control" name="grade" id="u_grade" required>
                      <option value="" disabled selected>Select Grade</option>
                      @foreach ($grades as $grade)
-                        <option value="{{ $grade['id'] }}">{{ $grade['grade'] }}</option>
+                        <option value="{{ $grade['id'] }}">Grade {{ $grade['grade'] }}</option>
                      @endforeach
                      <!-- Add more options as needed -->
                   </select>

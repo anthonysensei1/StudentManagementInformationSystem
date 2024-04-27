@@ -35,17 +35,26 @@
                         @foreach ($grade_levels as $grade_level)
                             <tr class="text-center">
                                 <td>{{ $counter }}</td>
-                                <td>{{ $grade_level['grade'] }}</td>
-                                <td>{{ $grade_level['status'] }}</td>
+                                <td>Grade {{ $grade_level['grade'] }}</td>
+                                <td>
+                                    @if($grade_level['status'] === 0)
+                                        <span class="text-danger">Disabled</span>
+                                    @elseif($grade_level['status'] === 1)
+                                        <span class="text-success">Active</span>
+                                    @endif
+                                </td>
                                 <td class="text-center">
-                                <button class="btn btn-outline-primary btn-md" data-toggle="modal" data-target="#updateGrade" onclick="edit('{{ $grade_level['id'] }}', { u_grade: '{{ $grade_level['grade'] }}' })">
-                                        <i class="fas fa-pen"></i>
-                                        update
-                                </button>
-                                <button class="btn btn-outline-danger btn-md" data-toggle="modal" data-target="#deleteGrade" onclick="edit('{{ $grade_level['id'] }}', { status: '{{ $grade_level['status'] }}' })">
-                                        <i class="icon fas fa-ban"></i>
-                                        disable
-                                </button>
+                                    <button class="btn btn-outline-primary btn-md" data-toggle="modal" data-target="#updateGrade" onclick="edit('{{ $grade_level['id'] }}', { u_grade: '{{ $grade_level['grade'] }}' })">
+                                            <i class="fas fa-pen"></i>
+                                            update
+                                    </button>
+                                    <button class="btn btn-md @if($grade_level['status'] === 0) btn-outline-success @else btn-outline-danger @endif" data-toggle="modal" data-target="#disableEnable" onclick="edit('{{ $grade_level['id'] }}', { status: '{{ $grade_level['status'] }}' })">
+                                        @if($grade_level['status'] === 0)
+                                            <i class="icon fas fa-check"></i> enable
+                                        @elseif($grade_level['status'] === 1)
+                                            <i class="icon fas fa-ban"></i> disable
+                                        @endif
+                                    </button>
                                 </td>
                             </tr>
                             @php
@@ -133,7 +142,7 @@
 
 
 <!-- Delete Dialog -->
-<div class="modal fade" id="deleteGrade" data-backdrop="static">
+<div class="modal fade" id="disableEnable" data-backdrop="static">
    <div class="modal-dialog">
       <div class="modal-content">
          <div class="modal-header bg-gradient-secondary">
@@ -146,7 +155,7 @@
             <div class="modal-body">
                <input type="text" class="form-control id" name="id" id="id" readonly hidden>
                <input type="text" class="form-control status" name="status" id="status" readonly hidden>
-               <h4>Are you certain you wish to proceed with the deletion?</h4>
+               <h4>Are you certain you wish to proceed the changes?</h4>
             </div>
             <div class="modal-footer">
                <button type="submit" class="btn btn-outline-success btn-md">

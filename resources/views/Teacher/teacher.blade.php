@@ -68,7 +68,7 @@
                             @endforeach
                         @else
                             <tr>
-                                <td colspan="6" class="text-center">No data is displayed!</td>
+                                <td colspan="7" class="text-center">No data is displayed!</td>
                             </tr>
                         @endif
                     </tbody>
@@ -105,35 +105,35 @@
                             <tbody>
                                 <tr>
                                     <td>Employee ID :</td>
-                                    <td id="employee_id">12345</td>
+                                    <td id="employee_id"></td>
                                 </tr>
                                 <tr>
                                     <td>Username :</td>
-                                    <td id="username">bless</td>
+                                    <td id="username"></td>
                                 </tr>
                                 <tr>
                                     <td>Address :</td>
-                                    <td id="address">Trinidad, Bohol</td>
+                                    <td id="address"></td>
                                 </tr>
                                 <tr>
                                     <td>Date of Birth :</td>
-                                    <td id="date">12/25/2001</td>
+                                    <td id="date"></td>
                                 </tr>
                                 <tr>
                                     <td>Gender :</td>
-                                    <td id="gender">Female</td>
+                                    <td id="gender"></td>
                                 </tr>
                                 <tr>
                                     <td>Email Address :</td>
-                                    <td id="email_add">sample@gmail.com </td>
+                                    <td id="email_add"></td>
                                 </tr>
                                 <tr>
                                     <td>Contact No. :</td>
-                                    <td id="contact_number">09123456789</td>
+                                    <td id="contact_number"></td>
                                 </tr>
                                 <tr>
                                     <td>Date Created :</td>
-                                    <td id="created_at">10/10/2024</td>
+                                    <td id="created_at"></td>
                                 </tr>
                             </tbody>
                         </table>
@@ -148,9 +148,9 @@
                             </thead>
                             <tbody id="classes_table">
                                 <tr class="text-center">
-                                    <td>ENG</td>
-                                    <td>8:00 - 9:00</td>
-                                    <td>Grade 2 - A</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
                                 </tr>
                             </tbody>
                         </table>
@@ -301,7 +301,7 @@
                                                 <td>{{ $subject['subject_name'] }}</td>
                                                 <td>{{ $subject['schedule_time'] }} - {{ $subject['schedule_time_end'] }}
                                                 </td>
-                                                <td>{{ $subject['grade'] }}</td>
+                                                <td>Grade {{ $subject['grade'] }}</td>
                                             </tr>
                                         @endforeach
                                     </tbody>
@@ -315,7 +315,7 @@
                                                 <input type="checkbox" class="form-control classes_checkbox"
                                                     name="classes[]" data-classes-value="{{ $class['grade_level'] }}"
                                                     value="{{ $class['id'] }}" id="classes_{{ $class['id'] }}">
-                                                <label for="classes_{{ $class['id'] }}">{{ $class['grade'] }} -
+                                                <label class="class_check_lbl" for="classes_{{ $class['id'] }}">Grade {{ $class['grade'] }} -
                                                     {{ $class['section_name'] }}</label>
                                             </div>
                                         @endforeach
@@ -470,7 +470,7 @@
                                                 <td>{{ $subject['subject_name'] }}</td>
                                                 <td>{{ $subject['schedule_time'] }} - {{ $subject['schedule_time_end'] }}
                                                 </td>
-                                                <td>{{ $subject['grade'] }}</td>
+                                                <td>Grade {{ $subject['grade'] }}</td>
                                             </tr>
                                         @endforeach
                                     </tbody>
@@ -481,10 +481,10 @@
                                     <div class="radio-wrapper-classes mt-3">
                                         @foreach ($classes as $class)
                                             <div class="radios_classes">
-                                                <input type="checkbox" class="form-control u_classes_checkbox"
+                                                <input type="checkbox" class="form-control classes_checkbox"
                                                     name="u_classes[]" data-classes-value="{{ $class['grade_level'] }}"
                                                     value="{{ $class['id'] }}" id="u_classes_{{ $class['id'] }}">
-                                                <label for="u_classes_{{ $class['id'] }}">{{ $class['grade'] }} -
+                                                <label class="class_check_lbl" for="u_classes_{{ $class['id'] }}">Grade {{ $class['grade'] }} -
                                                     {{ $class['section_name'] }}</label>
                                             </div>
                                         @endforeach

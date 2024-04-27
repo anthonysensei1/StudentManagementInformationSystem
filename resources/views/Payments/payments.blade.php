@@ -89,7 +89,7 @@
                             @endforeach
                         @else
                             <tr>
-                                <td colspan="6" class="text-center">No data is displayed!</td>
+                                <td colspan="8" class="text-center">No data is displayed!</td>
                             </tr>
                         @endif
                     </tbody>
@@ -121,7 +121,7 @@
                             @foreach ($grade_level_fees as $grade_level_fee)
                                 <tr class="text-center">
                                     <td>{{ $counter }}</td>
-                                    <td>{{ $grade_level_fee['grade'] }}</td>
+                                    <td> Grade {{ $grade_level_fee['grade'] }}</td>
                                     <td>{{ $grade_level_fee['month'] }}</td>
                                     @php
                                         $fee_details = json_decode($grade_level_fee['fee_details'], true);
@@ -199,16 +199,6 @@
                                     <td>{{ $payments_report['first_name'] }} {{ $payments_report['middle_name'] }}
                                         {{ $payments_report['last_name'] }}</td>
                                     <td>{{ $payments_report['amount'] }}</td>
-                                    <!-- <td>
-                                                                                                                                                                                       <button class="btn btn-outline-primary btn-md" data-toggle="modal" data-id="" data-target="#">
-                                                                                                                                                                                          <i class="fas fa-pen"></i>
-                                                                                                                                                                                          update
-                                                                                                                                                                                       </button>
-                                                                                                                                                                                       <button class="btn btn-outline-danger btn-md" data-toggle="modal" data-id="" data-target="#deleteEntry">
-                                                                                                                                                                                          <i class="fas fa-trash"></i>
-                                                                                                                                                                                          delete
-                                                                                                                                                                                       </button>
-                                                                                                                                                                                    </td> -->
                                 </tr>
                                 @php
                                     $counter++;
@@ -237,6 +227,9 @@
             <div class="modal-content">
                 <div class="modal-header bg-gradient-secondary">
                     <h4 class="modal-title">New Payment</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
                 </div>
                 <form action="{{ route('payments_store') }}" class="formPost">
                     <div class="modal-body">
@@ -276,10 +269,6 @@
                         <button type="submit" class="btn btn-outline-success btn-md">
                             <i class="fas fa-money"></i>
                             pay
-                        </button>
-                        <button type="button" class="btn btn-outline-danger btn-md close" data-dismiss="modal">
-                            <i class="fas fa-times"></i>
-                            cancel
                         </button>
                     </div>
                 </form>
@@ -376,7 +365,7 @@
                                     <select class="form-control" name="sgrade" id="sgrade" required>
                                         <option value="" disabled selected>Select Grade</option>
                                         @foreach ($grades as $grade)
-                                            <option value="{{ $grade['id'] }}">{{ $grade['grade'] }}</option>
+                                            <option value="{{ $grade['id'] }}">Grade {{ $grade['grade'] }}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -465,7 +454,7 @@
                                     <select class="form-control grade_level_id" name="sgrade" id="u_sgrade" required>
                                         <option value="" disabled selected>Select Grade</option>
                                         @foreach ($grades as $grade)
-                                            <option value="{{ $grade['id'] }}">{{ $grade['grade'] }}</option>
+                                            <option value="{{ $grade['id'] }}">Grade {{ $grade['grade'] }}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -548,15 +537,15 @@
                         <div class="LSG">
                             <div class="lsg">
                                 LRN :
-                                <span class="data lrn">100078457</span>
+                                <span class="data lrn"></span>
                             </div>
                             <div class="lsg">
                                 Student :
-                                <span class="data students_fullname">Nekka H. Jeminos</span>
+                                <span class="data students_fullname"></span>
                             </div>
                             <div class="lsg">
                                 Grade Level and Section :
-                                <span class="data grade_section_name">Grade 2 - A</span>
+                                <span class="data grade_section_name"></span>
                             </div>
                         </div>
                         <div class="receipt_label">
@@ -580,26 +569,7 @@
                                         </div>
                                         <div class="top_division"></div>
                                         <!--the result/datas for Fee Details will display in this div  -->
-                                        <div class="fta_fee_details">
-                                            {{-- <div>
-                                                <div class="fda">
-                                                    <!-- this is for the fee type -->
-                                                    Tuition
-                                                </div>
-                                                <div class="fda">
-                                                    <!-- this is for the Amount of fee -->
-                                                    700
-                                                </div>
-                                           </div> --}}
-                                        </div>
-                                        {{-- <div class="fta">
-                                            <div class="fda">
-                                                Guard
-                                            </div>
-                                            <div class="fda">
-                                                60
-                                            </div>
-                                        </div> --}}
+                                        <div class="fta_fee_details"></div>
                                     </th>
                                     <th>
                                         <div class="da">
@@ -615,21 +585,11 @@
                                         <div class="da">
                                             <div class="fpda payments_date">
                                                 <!-- this is for the date -->
-                                                2023-10-31
                                             </div>
                                             <div class="fpda amount">
                                                 <!-- this is for the amount result -->
-                                                700
                                             </div>
                                         </div>
-                                        {{-- <div class="da">
-                                            <div class="fpda">
-                                                2023-11-05
-                                            </div>
-                                            <div class="fpda">
-                                                60
-                                            </div>
-                                        </div> --}}
                                     </th>
                                 </tr>
                             </thead>
@@ -643,7 +603,6 @@
                                             </div>
                                             <div class="fpda_total">
                                                 <!-- this area is for FeeDetails result -->
-                                                760
                                             </div>
                                         </div>
                                     </td>
@@ -654,7 +613,6 @@
                                             </div>
                                             <div class="fpda">
                                                 <!-- this area is for FeePaymentDetails result -->
-                                                760
                                             </div>
                                         </div>
 
@@ -666,7 +624,6 @@
                                             </div>
                                             <div class="fpda amount">
                                                 <!-- this area is for total payable result -->
-                                                760
                                             </div>
                                         </div>
                                         <div class="da">
@@ -675,7 +632,6 @@
                                             </div>
                                             <div class="fpda student_balance">
                                                 <!-- this area is for total paid result -->
-                                                760
                                             </div>
                                         </div>
                                         <div class="da">
@@ -684,7 +640,6 @@
                                             </div>
                                             <div class="fpda payable_balance">
                                                 <!-- this area is for balance result -->
-                                                0
                                             </div>
                                         </div>
                                         <div class="result_division"></div>
@@ -723,6 +678,9 @@
                         <div class="lblMonth">Month of </div>
                         <input type="month" class="form-control" name="prpmonth" id="prpmonth">
                     </div>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
                 </div>
                 <form action="#" class="formPost">
                     <div class="modal-body text-center">
@@ -997,9 +955,9 @@
                         let array = JSON.parse(arr_fee_details);
                         array.forEach(item => {
 
-                            let rowHtml = `<div>
-                                <div>${item.feeType}</div>
-                                <div>${item.amount}</div>
+                            let rowHtml = `<div class="fta">
+                                <div class="fee_type">${item.feeType}</div>
+                                <div class="amount1">${item.amount}</div>
                             </div>`;
 
                             $('.fta_fee_details').append(rowHtml);
@@ -1060,11 +1018,11 @@
             };
 
             arr_fee_list.push(feeObject);
-
-            let rowHtml = `<tr>
-                       <td>${feeObject.feeType}</td>
-                       <td>${feeObject.amount}</td>
-                   </tr>`;
+            
+            let rowHtml = `<div class="fta">
+                       <div class "fee_type">${feeObject.feeType}</div>
+                       <div class="amount1">${feeObject.amount}</div>
+                   </div>`;
 
             $('.fee_details_list').append(rowHtml);
 
