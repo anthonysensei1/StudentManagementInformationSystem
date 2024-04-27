@@ -13,6 +13,11 @@ class AnnualStudentRosterController extends Controller
      */
     public function index()
     {
+
+        if (!in_array('Annual Student Roster',session('permission')) && auth()->user()->type != 1) {
+            abort(404);
+        }
+
         return view('AnnualStudentRoster/annualstudentroster');
     }
 

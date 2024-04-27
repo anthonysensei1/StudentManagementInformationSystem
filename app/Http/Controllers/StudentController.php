@@ -16,6 +16,11 @@ class StudentController extends Controller
      */
     public function index()
     {
+        
+        if (!in_array('Students',session('permission')) && auth()->user()->type != 1) {
+            abort(404);
+        }
+
         $render_data = [
             'sections' => Section::all(),
             'grades' => GradeLevel::all(),

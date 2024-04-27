@@ -14,6 +14,11 @@ class SMSController extends Controller
      */
     public function index()
     {
+        
+        if (!in_array('SMS Management',session('permission')) && auth()->user()->type != 1) {
+            abort(404);
+        }
+
         $render_data = [
             'SMS' => SMS::all(),
         ];

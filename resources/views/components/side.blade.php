@@ -204,6 +204,16 @@
                                     </p>
                                 </a>
                             </li>
+                            </li>
+                        @elseif($item == 'Annual Student Roster')
+                            <li class="nav-item">
+                                <a href="{{ route('annualstudentroster') }}" class="nav-link annualstudentroster">
+                                    <i class="nav-icon far fa-chart-bar"></i>
+                                    <p>
+                                        Annual Student Roster
+                                    </p>
+                                </a>
+                            </li>
                         @endif
                     @endforeach
                 </ul>

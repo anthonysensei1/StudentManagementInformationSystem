@@ -14,6 +14,11 @@ class GradeLevelController extends Controller
      */
     public function index()
     {
+        
+        if (!in_array('Grade Level',session('permission')) && auth()->user()->type != 1) {
+            abort(404);
+        }
+
         $render_data = [
             'grade_levels' => GradeLevel::all(),
         ];

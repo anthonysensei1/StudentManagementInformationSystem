@@ -18,6 +18,11 @@ class TeacherController extends Controller
      */
     public function index()
     {
+        
+        if (!in_array('Teacher',session('permission')) && auth()->user()->type != 1) {
+            abort(404);
+        }
+
         $render_data = [
             'classes' => Classes::join('grade_levels', 'classes.grade_level', '=', 'grade_levels.id')->join('sections', 'classes.section', '=', 'sections.id')->select('classes.*', 'grade_levels.grade', 'sections.section AS section_name')->orderBy('classes.id', 'asc')->get(),
             'subjects' => Subject::join('grade_levels', 'subjects.grade_level_id', '=', 'grade_levels.id')->select('subjects.*', 'grade_levels.grade')->orderBy('subjects.grade_level_id', 'asc')->get(),
