@@ -108,11 +108,11 @@ Route::middleware(['auth'])->group(function () {
     // Class Destroy
     Route::post('/Class/clas/class_destroy', [App\Http\Controllers\ClassController::class,'destroy'])->name('class_destroy');
     // View Class
-    Route::get('/Class/clas/view_class/{id}', [App\Http\Controllers\ClassController::class,'view_class'])->name('view_class');
+    Route::get('/Class/clas/view_class/{id}', [App\Http\Controllers\ClassController::class,'viewClass'])->name('view_class');
     // View Class
-    Route::get('/Class/clas/view_student_grade/{id}/{subject_id}', [App\Http\Controllers\ClassController::class,'view_student_grade'])->name('view_student_grade');
+    Route::get('/Class/clas/view_student_grade/{id}/{subject_id}', [App\Http\Controllers\ClassController::class,'viewStudentGrade'])->name('view_student_grade');
     // Class Store
-    Route::post('/Class/clas/class_store_grade', [App\Http\Controllers\ClassController::class,'store_grade'])->name('class_store_grade');
+    Route::post('/Class/clas/class_store_grade', [App\Http\Controllers\ClassController::class,'storeGrade'])->name('class_store_grade');
 
 
     // Payments
@@ -126,17 +126,17 @@ Route::middleware(['auth'])->group(function () {
     // Payments Destroy
     Route::post('/Payments/payments/payments_destroy', [App\Http\Controllers\PaymentsController::class,'destroy'])->name('payments_destroy');
     // Payments Search
-    Route::get('/Payments/payments/payments_student_search/{id}', [App\Http\Controllers\PaymentsController::class,'student_search'])->name('payments_student_search');
+    Route::get('/Payments/payments/payments_student_search/{id}', [App\Http\Controllers\PaymentsController::class,'studentSearch'])->name('payments_student_search');
     // Payments Fee Store
-    Route::post('/Payments/payments/payments_fee_store', [App\Http\Controllers\PaymentsController::class,'fee_store'])->name('payments_fee_store');
+    Route::post('/Payments/payments/payments_fee_store', [App\Http\Controllers\PaymentsController::class,'feeStore'])->name('payments_fee_store');
     // Payments Fee Edit
-    Route::get('/Payments/payments/payments_fee_edit/{id}', [App\Http\Controllers\PaymentsController::class,'fee_edit'])->name('payments_fee_edit');
+    Route::get('/Payments/payments/payments_fee_edit/{id}', [App\Http\Controllers\PaymentsController::class,'feeEdit'])->name('payments_fee_edit');
     // Payments Fee Update
-    Route::post('/Payments/payments/payments_fee_update', [App\Http\Controllers\PaymentsController::class,'fee_update'])->name('payments_fee_update');
+    Route::post('/Payments/payments/payments_fee_update', [App\Http\Controllers\PaymentsController::class,'feeUpdate'])->name('payments_fee_update');
     // Payments Fee Destroy
-    Route::post('/Payments/payments/payments_fee_destroy', [App\Http\Controllers\PaymentsController::class,'fee_destroy'])->name('payments_fee_destroy');
+    Route::post('/Payments/payments/payments_fee_destroy', [App\Http\Controllers\PaymentsController::class,'feeDestroy'])->name('payments_fee_destroy');
     // Payments Student Search Free
-    Route::get('/Payments/payments/payments_student_search_fees/{id}', [App\Http\Controllers\PaymentsController::class,'student_search_fees'])->name('payments_student_search_fees');
+    Route::get('/Payments/payments/payments_student_search_fees/{id}', [App\Http\Controllers\PaymentsController::class,'studentSearchFees'])->name('payments_student_search_fees');
 
 
     // Settings | Roles and Permissions
@@ -160,7 +160,7 @@ Route::middleware(['auth'])->group(function () {
     //AnnualStudentRoster
     Route::get('/AnnualStudentRoster/annualstudentroster',[App\Http\Controllers\AnnualStudentRosterController::class,'index'])->name('annualstudentroster');
     //AnnualStudentRoster Search Student
-    Route::get('/AnnualStudentRoster/annualstudentroster/search_student/{year}/{grade}', [App\Http\Controllers\AnnualStudentRosterController::class,'search_student'])->name('search_student');
+    Route::get('/AnnualStudentRoster/annualstudentroster/search_student/{year}/{grade}', [App\Http\Controllers\AnnualStudentRosterController::class,'searchStudent'])->name('search_student');
 
 
 
@@ -168,11 +168,11 @@ Route::middleware(['auth'])->group(function () {
     //EnrollmentProcess
     Route::get('/EnrollmentProcess/enrollmentprocess',[App\Http\Controllers\EnrollmentProcessController::class,'index'])->name('enrollmentprocess');
     //EnrollmentProcess Student Update
-    Route::post('/Students/students/enrollmentprocess_students_update', [App\Http\Controllers\EnrollmentProcessController::class,'students_update'])->name('enrollmentprocess_students_update');
+    Route::post('/Students/students/enrollmentprocess_students_update', [App\Http\Controllers\EnrollmentProcessController::class,'studentsUpdate'])->name('enrollmentprocess_students_update');
     //EnrollmentProcess Search Students
-    Route::get('/EnrollmentProcess/enrollmentprocess/get_students/{id}/{section}', [App\Http\Controllers\EnrollmentProcessController::class,'get_students'])->name('get_students');
+    Route::get('/EnrollmentProcess/enrollmentprocess/get_students/{id}/{section}', [App\Http\Controllers\EnrollmentProcessController::class,'getStudents'])->name('get_students');
     //EnrollmentProcess Search Student
-    Route::get('/EnrollmentProcess/enrollmentprocess/get_student/{id}', [App\Http\Controllers\EnrollmentProcessController::class,'get_student'])->name('get_student');
+    Route::get('/EnrollmentProcess/enrollmentprocess/get_student/{id}', [App\Http\Controllers\EnrollmentProcessController::class,'getStudent'])->name('get_student');
 
 });
 

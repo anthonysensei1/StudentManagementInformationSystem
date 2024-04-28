@@ -223,7 +223,7 @@ class PaymentsController extends Controller
      * @param  int|string $id The ID or name of the student to search for.
      * @return \Illuminate\Http\Response
      */
-    public function student_search($id)
+    public function studentSearch($id)
     {
         $query = Student::join('grade_levels', 'students.grade_level', '=', 'grade_levels.id')
             ->join('sections', 'students.section', '=', 'sections.id')
@@ -255,7 +255,7 @@ class PaymentsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function fee_store(Request $request)
+    public function feeStore(Request $request)
     {
 
         $form_data = [
@@ -292,7 +292,7 @@ class PaymentsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function fee_edit($id)
+    public function feeEdit($id)
     {
         $query = GradeFee::join('grade_levels', 'grade_fees.grade_level_id', 'grade_levels.id')
             ->select(
@@ -314,7 +314,7 @@ class PaymentsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function fee_update(Request $request)
+    public function feeUpdate(Request $request)
     {
         $form_data = [
             'grade_level_id' => $request->sgrade,
@@ -349,7 +349,7 @@ class PaymentsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function fee_destroy(Request $request)
+    public function feeDestroy(Request $request)
     {
         GradeFee::where('id', '=', $request->id)->delete();
 
@@ -368,7 +368,7 @@ class PaymentsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function student_search_fees($grade_level_id)
+    public function studentSearchFees($grade_level_id)
     {
         $query = GradeFee::where('grade_level_id', $grade_level_id)->get();
 

@@ -193,7 +193,7 @@ class ClassController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function view_class($id)
+    public function viewClass($id)
     {
         $query = Student::where('grade_level', $id)->get();
 
@@ -210,7 +210,7 @@ class ClassController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function view_student_grade($id, $subject_id)
+    public function viewStudentGrade($id, $subject_id)
     {
 
         $query = Student::query()->join('grade_levels', 'students.grade_level', '=', 'grade_levels.id')->join('subjects', 'grade_levels.id', '=', 'subjects.grade_level_id')->join('sections', 'students.section', '=', 'sections.id')->leftJoin('grades', 'students.id', '=', 'grades.student_id')->select(
@@ -249,7 +249,7 @@ class ClassController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store_grade(Request $request)
+    public function storeGrade(Request $request)
     {
         $grade = Grade::firstOrNew([
             'student_id' => $request->student_id,
