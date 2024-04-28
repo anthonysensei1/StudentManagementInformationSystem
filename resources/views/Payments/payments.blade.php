@@ -87,10 +87,6 @@
                                     $counter++;
                                 @endphp
                             @endforeach
-                        @else
-                            <tr>
-                                <td colspan="8" class="text-center">No data is displayed!</td>
-                            </tr>
                         @endif
                     </tbody>
                 </table>
@@ -157,10 +153,6 @@
                                     $counter++;
                                 @endphp
                             @endforeach
-                        @else
-                            <tr>
-                                <td colspan="6" class="text-center">No data is displayed!</td>
-                            </tr>
                         @endif
                     </tbody>
                 </table>

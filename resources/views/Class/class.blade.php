@@ -61,10 +61,6 @@
                     $counter++;
                     @endphp
                     @endforeach
-                    @else
-                    <tr>
-                        <td colspan="3" class="text-center">No data is displayed!</td>
-                    </tr>
                     @endif
                 </tbody>
             </table>
