@@ -167,6 +167,12 @@ Route::middleware(['auth'])->group(function () {
 
     //EnrollmentProcess
     Route::get('/EnrollmentProcess/enrollmentprocess',[App\Http\Controllers\EnrollmentProcessController::class,'index'])->name('enrollmentprocess');
+    //EnrollmentProcess Student Update
+    Route::post('/Students/students/enrollmentprocess_students_update', [App\Http\Controllers\EnrollmentProcessController::class,'students_update'])->name('enrollmentprocess_students_update');
+    //EnrollmentProcess Search Students
+    Route::get('/EnrollmentProcess/enrollmentprocess/get_students/{id}/{section}', [App\Http\Controllers\EnrollmentProcessController::class,'get_students'])->name('get_students');
+    //EnrollmentProcess Search Student
+    Route::get('/EnrollmentProcess/enrollmentprocess/get_student/{id}', [App\Http\Controllers\EnrollmentProcessController::class,'get_student'])->name('get_student');
 
 });
 

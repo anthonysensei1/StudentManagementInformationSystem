@@ -194,7 +194,11 @@
                                 </a>
                             </li>
                         @elseif($item == 'Assessments')
-                            <li class="nav-item">
+                            @if (auth()->user()->type == 3)
+                                <li class="nav-item menu-is-opening menu-open">
+                            @else
+                                <li class="nav-item">
+                            @endif
                                 <a href="#" class="nav-link" id="ass">
                                     <i class="nav-icon fas fa-inbox"></i>
                                     <p>
