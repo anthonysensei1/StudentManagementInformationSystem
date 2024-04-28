@@ -49,8 +49,8 @@ class ClassController extends Controller
         }
 
         $render_data = [
-            'sections' => Section::all(),
-            'grades' => GradeLevel::all(),
+            'sections' => Section::where('status', 1)->get(),
+            'grades' => GradeLevel::where('status', 1)->get(),
             'classes' => Classes::join('grade_levels', 'classes.grade_level', 'grade_levels.id')
                 ->join('sections', 'classes.section', 'sections.id')
                 ->select('classes.*', 'grade_levels.grade', 'sections.section AS section_name')

@@ -20,7 +20,7 @@ class SubjectController extends Controller
         }
 
         $render_data = [
-            'grades' => GradeLevel::all(),
+            'grades' => GradeLevel::where('status', 1)->get(),
             'subjects' => Subject::join('grade_levels', 'subjects.grade_level_id', '=', 'grade_levels.id')->select('subjects.*', 'grade_levels.grade')->orderBy('subjects.grade_level_id', 'asc')->get(),
         ];
 
@@ -56,16 +56,6 @@ class SubjectController extends Controller
             ];
 
             return response()->json($render_message); 
-        }
-
-        if(strtotime($request->schedule_time) >= strtotime($request->schedule_time_end)) {
-            $render_message = [
-                'response' => 0,
-                'message' => 'Schedule is invalid!',
-                'path' => '/Subject/subject'
-            ];
-
-            return response()->json($render_message);
         }
 
         $schedule_times = Subject::where('grade_level_id', $request->grade)->get();
