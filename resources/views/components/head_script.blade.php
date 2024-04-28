@@ -507,28 +507,28 @@
     color: #fff;
   }
 
-  .b_data{
+  .data{
     font-size: 20px;
     font-weight: 600;
     letter-spacing: 2px;
     border:1px solid #000;
   }
 
-  .g_data{
+  .data{
     font-size: 20px;
     font-weight: 600;
     letter-spacing: 2px;
     border:1px solid #000;
   }
 
-  .b_data:hover{
+  .data:hover{
     background-color: rgba(173, 255, 47, 0.7);
     box-shadow: 0 0 10px rgba(192, 192, 192, 0.7);
     cursor:pointer;
     transition: .3s;
   }
 
-  .g_data:hover{
+  .data:hover{
     background-color: rgba(173, 255, 47, 0.7);
     box-shadow: 0 0 10px rgba(192, 192, 192, 0.7);
     cursor:pointer;

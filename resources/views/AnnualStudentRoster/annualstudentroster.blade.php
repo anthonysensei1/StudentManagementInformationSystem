@@ -52,8 +52,8 @@
                                             <td class="girls">Girls</td>
                                         </tr>
                                         <tr id="table_tbody_row" hidden>
-                                            <td class="b_data" id="b_data"></td>
-                                            <td class="g_data" id="g_data"></td>
+                                            <td id="b_data"></td>
+                                            <td id="g_data"></td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -126,25 +126,24 @@
                 grade: grade
             },
             success: function(data) {
-    $('#b_data').empty(); // Clear previous data
-    $('#g_data').empty(); // Clear previous data
-    if (data['message'].length === 0) {
-        $('#b_data').append('<tr><td>No Data</td></tr>');
-        $('#g_data').append('<tr><td>No Data</td></tr>');
-    } else {
-        data['message'].forEach(element => {
-            let rowData = '<tr><td>';
-            rowData +=
-                `${element.first_name} ${element.middle_name} ${element.last_name}`;
-            rowData += '</td></tr>';
-            if (element.gender === 1) {
-                $('#b_data').append(rowData);
-            } else {
-                $('#g_data').append(rowData);
-            }
-        });
-    }
-},
+                $('#b_data').empty();
+                $('#g_data').empty();
+
+                if (data['message'].length === 0) {
+                    $('#b_data').append('<tr class="data"><td>No Data</td></tr>');
+                    $('#g_data').append('<tr class="data"><td>No Data</td></tr>');
+                } else {
+                    data['message'].forEach(element => {
+                        let nameData = `<tr class="data"><td>${element.first_name} ${element.middle_name} ${element.last_name}</td></tr>`;
+
+                        if (element.gender === 1) {
+                            $('#b_data').append(nameData);
+                        } else {
+                            $('#g_data').append(nameData);
+                        }
+                    });
+                }
+            },
 
         });
     })
