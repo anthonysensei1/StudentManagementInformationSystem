@@ -146,6 +146,7 @@ Route::middleware(['auth'])->group(function () {
     // Settings | Roles and Permissions Update
     Route::post('/Class/clas/rolesandpermissions_update', [App\Http\Controllers\RolesAndPermissionsController::class,'update'])->name('rolesandpermissions_update');
 
+
     //SMS
     Route::get('/SMS/sms',[App\Http\Controllers\SMSController::class,'index'])->name('sms');
     // SMS Store
@@ -158,6 +159,8 @@ Route::middleware(['auth'])->group(function () {
 
     //AnnualStudentRoster
     Route::get('/AnnualStudentRoster/annualstudentroster',[App\Http\Controllers\AnnualStudentRosterController::class,'index'])->name('annualstudentroster');
+    //AnnualStudentRoster Search Student
+    Route::get('/AnnualStudentRoster/annualstudentroster/search_student/{year}/{grade}', [App\Http\Controllers\AnnualStudentRosterController::class,'search_student'])->name('search_student');
 
 
 
