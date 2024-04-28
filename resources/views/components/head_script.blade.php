@@ -508,14 +508,14 @@
   }
 
   .data{
-    font-size: 20px;
+    font-size: 25px;
     font-weight: 600;
     letter-spacing: 2px;
     border:1px solid #000;
   }
 
   .data{
-    font-size: 20px;
+    font-size: 25px;
     font-weight: 600;
     letter-spacing: 2px;
     border:1px solid #000;
@@ -601,8 +601,13 @@
     box-shadow: inset 0 0 0 transparent;
     transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
     margin-right: 15px;
-    transform: scale(1.5); /* Adjust the scale as needed */
-        margin-right: 10px;
+    transform: scale(1.5);
+    margin-right: 10px;
+  }
+
+  .scrollable{
+    overflow-y: scroll;
+    border: 1px solid #ccc;
   }
 </style>
 

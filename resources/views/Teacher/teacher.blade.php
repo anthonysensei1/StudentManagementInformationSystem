@@ -642,7 +642,7 @@
                             $('<td>').text(cls.subject_name),
                             $('<td>').text(cls.schedule_time + " - " + cls
                                 .schedule_time_end),
-                            $('<td>').text(cls.grade),
+                            $('<td>').text("Grade " + cls.grade),
                         );
                         $table.append($row);
                     });

@@ -20,7 +20,7 @@
                             <tr class="text-center">
                                 <td> <a href="#" name="sel_grade_lvl" id="sel_grade_lvl" class="sel_grade_lvl"
                                         data-toggle="modal" data-target="#popStudents"
-                                        data-id="{{ $grade_level['id'] }}">{{ $grade_level['grade'] }}</a> </td>
+                                        data-id="{{ $grade_level['id'] }}"> Grade {{ $grade_level['grade'] }}</a> </td>
                                 <td class="text-center">
                                     <select class="form-control sel_cus_width sel_section" name="sel_section"
                                         id="sel_section">
