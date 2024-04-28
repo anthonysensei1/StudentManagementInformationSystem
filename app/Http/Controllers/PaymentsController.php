@@ -22,7 +22,7 @@ class PaymentsController extends Controller
     public function index()
     {
         
-        if (!in_array('Payments',session('permission')) && auth()->user()->type != 1) {
+        if (!in_array('Assessments',session('permission')) && auth()->user()->type != 1) {
             abort(404);
         }
 

@@ -82,10 +82,10 @@
                                 <option value="Subject">Subject</option>
                                 <option value="Teacher">Teacher</option>
                                 <option value="Class">Class</option>
-                                <option value="Payments">Payments</option>
+                                <option value="Assessments">Assessments</option>
                                 <option value="Roles And Permissions">Roles And Permissions</option>
-                                <option value="SMS Management">SMS Management"</option>
-                                <option value="Annual Student Roster">Annual Student Roster"</option>
+                                <option value="SMS Management">SMS Management</option>
+                                <option value="Annual Student Roster">Annual Student Roster</option>
                             </select>
                         </div>
                     </div>
@@ -132,7 +132,7 @@
                                 <option value="Subject">Subject</option>
                                 <option value="Teacher">Teacher</option>
                                 <option value="Class">Class</option>
-                                <option value="Payments">Payments</option>
+                                <option value="Assessments">Assessments</option>
                                 <option value="Roles And Permissions">Roles And Permissions</option>
                                 <option value="SMS Management">SMS Management</option>
                                 <option value="Annual Student Roster">Annual Student Roster</option>
