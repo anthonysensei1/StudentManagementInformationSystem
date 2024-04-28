@@ -22,7 +22,7 @@ class SectionController extends Controller
 
         $render_data = [
             'sections' => Section::join('grade_levels', 'sections.grade_level_id', '=', 'grade_levels.id')->select('sections.*', 'grade_levels.grade')->orderBy('grade_levels.grade', 'asc')->get(),
-            'grades' => GradeLevel::all(),
+            'grades' => GradeLevel::where('status', 1)->get(),
         ];
 
         return view('Section/section', $render_data);
