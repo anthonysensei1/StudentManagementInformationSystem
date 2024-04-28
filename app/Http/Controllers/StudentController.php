@@ -56,14 +56,6 @@ class StudentController extends Controller
                 'path' => '/Students/students'
             ]);
         }
-    
-        if ($request->contact_number[0] != '0' || $request->contact_number[1] != '9' || strlen($request->contact_number) != 11) {
-            return response()->json([
-                'response' => 0,
-                'message' => 'Student is invalid! Invalid phone number!',
-                'path' => '/Students/students'
-            ]);
-        }
 
         $exists = Student::where('id_no', $request->id_no)
                     ->orWhere('lrn', $request->lrn)
@@ -95,11 +87,6 @@ class StudentController extends Controller
             'gender' => $request->gender[0],
             'grade_level' => $request->grade_level[0],
             'section' => $request->section[0],
-            'p_first_name' => ucfirst($request->p_first_name),
-            'p_middle_name' => ucfirst($request->p_middle_name),
-            'p_last_name' => ucfirst($request->p_last_name),
-            'contact_number' => $request->contact_number,
-            'email_add' => $request->email_add,
         ];
 
         Student::create($form_data);
@@ -152,14 +139,6 @@ class StudentController extends Controller
                 'path' => '/Students/students'
             ]);
         }
-    
-        if ($request->contact_number[0] != '0' || $request->contact_number[1] != '9' || strlen($request->contact_number) != 11) {
-            return response()->json([
-                'response' => 0,
-                'message' => 'Student is invalid! Invalid phone number!',
-                'path' => '/Students/students'
-            ]);
-        }
 
         $exists = Student::where(function($query) use ($request) {
             $query->where('id_no', $request->id_no)
@@ -194,11 +173,6 @@ class StudentController extends Controller
             'gender' => $request->u_gender[0],
             'grade_level' => $request->u_grade_level_[0],
             'section' => $request->u_section_[0],
-            'p_first_name' => ucfirst($request->p_first_name),
-            'p_middle_name' => ucfirst($request->p_middle_name),
-            'p_last_name' => ucfirst($request->p_last_name),
-            'contact_number' => $request->contact_number,
-            'email_add' => $request->email_add,
         ];
 
         Student::where('id', '=', $request->id)->update($form_data);
