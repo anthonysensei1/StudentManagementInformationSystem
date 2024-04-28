@@ -99,7 +99,7 @@ class AnnualStudentRosterController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function search_student($year, $grade)
+    public function searchStudent($year, $grade)
     {
         $query = Student::join('grade_levels', 'students.grade_level', 'grade_levels.id')->join('sections', 'students.section', 'sections.id')->select('students.*', 'grade_levels.grade', 'sections.section AS section_name')->whereYear('students.created_at', $year)->where('students.grade_level', $grade)->get();
 
