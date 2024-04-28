@@ -35,7 +35,7 @@ class DatabaseSeeder extends Seeder
 
         RoleAndPermission::create([
             'role' => 'Registrar',
-            'permission' => 'Payments, SMS Management',
+            'permission' => 'Assessments, SMS Management',
             'status' => '1',
         ]);
     }
