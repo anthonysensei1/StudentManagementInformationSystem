@@ -114,7 +114,7 @@ class EnrollmentProcessController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function get_students($id, $section)
+    public function getStudents($id, $section)
     {
         $query = Student::join('grade_levels', 'students.grade_level', 'grade_levels.id')->join('sections', 'students.section', 'sections.id')->select('students.*', 'grade_levels.grade', 'sections.section AS section_name')->where('students.section', $section)->where('students.grade_level', $id)->get();
 
@@ -131,7 +131,7 @@ class EnrollmentProcessController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function get_student($id)
+    public function getStudent($id)
     {
         $query = Student::join('grade_levels', 'students.grade_level', 'grade_levels.id')->join('sections', 'students.section', 'sections.id')->select('students.*', 'grade_levels.grade', 'sections.section AS section_name')->where('students.id', $id)->first();
 
@@ -148,7 +148,7 @@ class EnrollmentProcessController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function students_update(Request $request)
+    public function studentsUpdate(Request $request)
     {
     
         if ($request->contact_number[0] != '0' || $request->contact_number[1] != '9' || strlen($request->contact_number) != 11) {
