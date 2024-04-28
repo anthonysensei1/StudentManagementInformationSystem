@@ -22,8 +22,8 @@ class StudentController extends Controller
         }
 
         $render_data = [
-            'sections' => Section::all(),
-            'grades' => GradeLevel::all(),
+            'sections' => Section::where('status', 1)->get(),
+            'grades' => GradeLevel::where('status', 1)->get(),
             'students' => Student::join('grade_levels', 'students.grade_level', 'grade_levels.id')->join('sections', 'students.section', 'sections.id')->select('students.*', 'grade_levels.grade', 'sections.section AS section_name')->orderBy('students.id_no', 'asc')->get(),
         ];
 
