@@ -71,7 +71,7 @@
             <form action="{{ route('sms_store') }}" class="formPost">
                 <div class="modal-body">
                     <div class="col-lg-12">
-                        <label>Message</label>
+                        <div>Message</div>
                         <textarea class="form-control" name="message" id="message" required placeholder=". . ." rows="3"></textarea>
                     </div>
                 </div>
@@ -101,7 +101,7 @@
                 <input type="text" class="form-control id" name="id" id="id" readonly hidden>
                 <div class="modal-body">
                     <div class="col-lg-12">
-                        <label>Message</label>
+                        <div>Message</div>
                         <textarea class="form-control" name="message" id="u_message" required placeholder=". . ." rows="3"></textarea>
                     </div>
                 </div>

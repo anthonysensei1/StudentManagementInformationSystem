@@ -450,6 +450,8 @@
   }
 
   .grade_list{
+    display:flex;
+    flex-direction: column;
     font-size: 25px;
     font-weight: 700;
     letter-spacing: 2px;
@@ -457,12 +459,15 @@
 
   #grade_list:hover{
     text-decoration: underline;
+    cursor: pointer;
   }
 
   .grade_header{
     font-size: 25px;
     font-weight: 700;
     letter-spacing: 2px;
+    box-shadow: 0 0 10px rgba(192, 192, 192, 0.7);
+    border:1px solid #000;
   }
 
   .batch_year{
@@ -474,6 +479,11 @@
     border:1px solid #000;
     margin-bottom: 5px;
   }
+
+  .cust_row{
+    margin: 0!important;
+  }
+
   .boys{
     background-color:#0047AB;
     width: 50%;
@@ -495,6 +505,20 @@
     letter-spacing: 2px;
     text-transform: uppercase;
     color: #fff;
+  }
+
+  .b_data{
+    font-size: 20px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    border:1px solid #000;
+  }
+
+  .g_data{
+    font-size: 20px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    border:1px solid #000;
   }
 
   .b_data:hover{

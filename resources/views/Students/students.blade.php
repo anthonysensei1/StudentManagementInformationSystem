@@ -356,7 +356,7 @@
                     </div>
                 </div>
                 <!-- ParentsInformationArea -->
-                <div class="students_parents_info mt-3">Students Parents/Guardian Basic Information</div>
+                <!-- <div class="students_parents_info mt-3">Students Parents/Guardian Basic Information</div>
                 <div class="row students_parents_row">
                     <div class="col-lg-4">
                         <label for="u_p_first_name">Firstname</label>
@@ -378,7 +378,7 @@
                         <label for="emailadd">Email Address <span class="optional">(optional)</span></label>
                         <input type="text" class="form-control" name="email_add" id="u_email_add" placeholder="email address">
                     </div>
-                </div>
+                </div> -->
             </div>
             <div class="modal-footer">
                 <button type="submit" class="btn btn-outline-primary btn-md">

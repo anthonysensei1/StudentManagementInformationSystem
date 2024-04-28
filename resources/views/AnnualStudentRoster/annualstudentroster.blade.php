@@ -7,8 +7,8 @@
                 <!-- SearchArea -->
                 <form action="#" id="form_search">
                     <div class="input-group">
-                        <input type="search" class="form-control form-control-md" name="searcharea" id="searcharea2"
-                            placeholder="Search Year . . . Ex. 2000">
+                        <input type="search" class="form-control form-control-lg" name="searcharea" id="searcharea2"
+                            placeholder="Search Year . . . Ex. 2000" autofocus>
                         <div class="input-group-append">
                             <button type="submit" class="btn btn-md btn-default">
                                 <i class="fa fa-search"></i>
@@ -27,36 +27,34 @@
                     </thead>
                     <tbody>
                         <tr class="text-center">
-                            <td class="grade_list">
-                                <div class="d-flex justify-content-center flex-column">
+                            <td style="width: 300px">
+                                <div class="grade_list">
                                     @foreach ($grade_levels as $grade_level)
-                                        <a class="grade_list_link" name="grade_list" id="grade_list" data-gradename="{{ $grade_level['grade'] }}" data-grade="{{ $grade_level['id'] }}"> {{ $grade_level['grade'] }}
+                                        <a class="grade_list_link" name="grade_list" id="grade_list" data-gradename="{{ $grade_level['grade'] }}" data-grade="{{ $grade_level['id'] }}"> Grade {{ $grade_level['grade'] }}
                                         </a>
                                     @endforeach
                                 </div>
                             </td>
                             <td>
                                 <table class="table table-bordered">
-                                    <div class="batch_year">BATCH <span id="prev_year">2023</span> - <span
-                                            id="current_year">2024</span></div>
-                                    <thead id="table_head" hidden>
-                                        <div>
-                                            <div colspan="2" class="grade_header" id="gradename"></div>
-                                        </div>
+                                    <div class="batch_year">
+                                        BATCH <span id="prev_year">2023</span> - <span
+                                            id="current_year">2024</span>
+                                    </div>
+                                    <thead>
+                                        <tr class="grade_header" id="table_head" hidden>
+                                            <td colspan="2" class="grade_header" id="gradename"></td>
+                                        </tr>
                                     </thead>
-                                    <tbody id="table_tbody">
-                                        <div class="row" id="table_tbody_row" hidden>
-                                            <div class="col-6">
-                                                Boys
-                                            </div>
-                                            <div class="col-6">
-                                                Girls
-                                            </div>
-                                            <div class="col-6" id="b_data">
-                                            </div>
-                                            <div class="col-6" id="g_data">
-                                            </div>
-                                        </div>
+                                    <tbody id="table-body">
+                                        <tr class="cust_row">
+                                            <td class="boys">Boys</td>
+                                            <td class="girls">Girls</td>
+                                        </tr>
+                                        <tr id="table_tbody_row" hidden>
+                                            <td class="b_data" id="b_data"></td>
+                                            <td class="g_data" id="g_data"></td>
+                                        </tr>
                                     </tbody>
                                 </table>
                             </td>
@@ -70,78 +68,86 @@
     </div>
 
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            document.querySelectorAll('.annualstudentroster').forEach(function(element) {
-                element.classList.add('activated');
+    document.addEventListener('DOMContentLoaded', function() {
+        document.querySelectorAll('.annualstudentroster').forEach(function(element) {
+            element.classList.add('activated');
+        });
+    });
+
+    const Toast = Swal.mixin({
+        toast: true,
+        position: "top-end",
+        showConfirmButton: false,
+        timer: 1500,
+    });
+
+    $("#form_search").on("submit", function(e) {
+        e.preventDefault();
+        const searchValue = $('#searcharea2').val();
+        if (!/^\d{4}$/.test(searchValue)) {
+            Toast.fire({
+                icon: "error",
+                title: '<p class="text-center pt-2">Invalid search. Please search only a year. Ex: 2000</p>',
             });
-        });
+            $('#annual_table').prop('hidden', true);
+            return;
+        }
 
-        const Toast = Swal.mixin({
-            toast: true,
-            position: "top-end",
-            showConfirmButton: false,
-            timer: 1500,
-        });
+        $('#table_tbody_row').prop('hidden', true);
+        $('#table_head').prop('hidden', true);
+        $('#annual_table').prop('hidden', false);
+        $('#prev_year').text(searchValue);
+        $('#current_year').text(parseInt(searchValue) + 1);
+    });
 
-        $("#form_search").on("submit", function(e) {
-            e.preventDefault();
-            const searchValue = $('#searcharea2').val();
-            if (!/^\d{4}$/.test(searchValue)) {
-                Toast.fire({
-                    icon: "error",
-                    title: '<p class="text-center pt-2">Invalid search. Please search only year. Ex: 2000</p>',
-                });
-                $('#annual_table').prop('hidden', true);
-                return;
+    $(".grade_list_link").on("click", function(e) {
+        const grade = $(this).data("grade");
+        const year = $('#searcharea2').val();
+        const gradename = $(this).data("gradename");
+        const pathTemplate =
+            "{{ route('search_student', ['year' => ':year', 'grade' => ':grade']) }}";
+        const path = pathTemplate.replace(":year", year).replace(":grade", grade);
+
+        if (gradename) {
+            $('#gradename').text(` * * * Grade ${gradename} * * *`);
+        }
+
+        $('#table_tbody_row').prop('hidden', false);
+        $('#table_head').prop('hidden', false);
+        $('#b_data').empty();
+        $('#g_data').empty();
+
+        $.ajax({
+            type: "GET",
+            cache: false,
+            url: path,
+            data: {
+                year: year,
+                grade: grade
+            },
+            success: function(data) {
+    $('#b_data').empty(); // Clear previous data
+    $('#g_data').empty(); // Clear previous data
+    if (data['message'].length === 0) {
+        $('#b_data').append('<tr><td>No Data</td></tr>');
+        $('#g_data').append('<tr><td>No Data</td></tr>');
+    } else {
+        data['message'].forEach(element => {
+            let rowData = '<tr><td>';
+            rowData +=
+                `${element.first_name} ${element.middle_name} ${element.last_name}`;
+            rowData += '</td></tr>';
+            if (element.gender === 1) {
+                $('#b_data').append(rowData);
+            } else {
+                $('#g_data').append(rowData);
             }
-
-            $('#table_tbody_row').prop('hidden', true);
-            $('#table_head').prop('hidden', true);
-            $('#annual_table').prop('hidden', false);
-            $('#prev_year').text(searchValue);
-            $('#current_year').text(parseInt(searchValue) + 1);
         });
+    }
+},
 
-        $(".grade_list_link").on("click", function(e) {
-            const grade = $(this).data("grade");
-            const year = $('#searcharea2').val();
-            const gradename = $(this).data("gradename");
-            const pathTemplate =
-                "{{ route('search_student', ['year' => ':year', 'grade' => ':grade']) }}";
-            const path = pathTemplate.replace(":year", year).replace(":grade", grade);
+        });
+    })
+</script>
 
-            $('#gradename').text(gradename);
-            $('#table_tbody_row').prop('hidden', false);
-            $('#table_head').prop('hidden', false);
-            $('#b_data').empty();
-            $('#g_data').empty();
-
-            $.ajax({
-                type: "GET",
-                cache: false,
-                url: path,
-                data: {
-                    year: year,
-                    grade: grade
-                },
-                success: function(data) {
-
-                    data['message'].forEach(element => {
-                        let rowData = '<div>';
-                        if (element.gender === 1) {
-                            rowData +=
-                                `${element.first_name} ${element.middle_name} ${element.last_name}`;
-                            rowData += '</div>';
-                            $('#b_data').append(rowData);
-                        } else {
-                            rowData +=
-                                `${element.first_name} ${element.middle_name} ${element.last_name}`;
-                            rowData += '</div>';
-                            $('#g_data').append(rowData);
-                        }
-                    });
-                },
-            });
-        })
-    </script>
 @endsection
