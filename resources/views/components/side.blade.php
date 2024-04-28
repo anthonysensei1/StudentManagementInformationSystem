@@ -83,14 +83,13 @@
                                     <p>Enrollment Process</p>
                                 </a>
                             </li>
-                        </ul>
-                        <ul class="nav nav-treeview">
                             <li class="nav-item">
                                 <a href="{{ route('payments') }}" class="nav-link pay">
                                     <i class="fas fa-money-bill-wave"></i>
                                     <p>Payments</p>
                                 </a>
                             </li>
+                            <hr class="hr">
                         </ul>
                     </li>
                     <li class="nav-item">

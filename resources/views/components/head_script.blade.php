@@ -510,6 +510,76 @@
     cursor:pointer;
     transition: .3s;
   }
+
+  .hr{
+    border:1px solid #000;
+  }
+
+  .enrollment_admission{
+    font-size: 25px;
+    font-weight: 700;
+    letter-spacing:2px;
+  }
+
+  .sel_grade_lvl:hover{
+    cursor:pointer;
+    text-decoration: underline;
+  }
+
+  .sel_cus_width{
+    width: 50%;
+  }
+
+  td.text-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .sel_cus_width:hover{
+    cursor: pointer;
+  }
+
+  .Students{
+    font-size: 30px;
+    font-weight: 700;
+    letter-spacing: 2px;
+  }
+
+  .students_fullname{
+    font-size: 30px;
+    font-weight: 700;
+    letter-spacing: 2px;
+  }
+
+  .sd{
+    display:flex;
+    align-items: center;
+  }
+  .checkboxes{
+    display:flex;
+    justify-content: space-evenly;
+  }
+
+  .nso_enroll{
+    display: block;
+    width: 30px;
+    height: calc(2.25rem + 2px);
+    padding: .375rem .75rem;
+    font-size: 2rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #495057;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #ced4da;
+    border-radius: .25rem;
+    box-shadow: inset 0 0 0 transparent;
+    transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+    margin-right: 15px;
+    transform: scale(1.5); /* Adjust the scale as needed */
+        margin-right: 10px;
+  }
 </style>
 
 

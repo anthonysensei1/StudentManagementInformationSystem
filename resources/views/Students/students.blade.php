@@ -244,30 +244,6 @@
                         </div>
                     </div>
                 </div>
-                <!-- ParentsInformationArea -->
-                <div class="students_parents_info mt-3">Students Parents/Guardian Basic Information</div>
-                <div class="row students_parents_row">
-                    <div class="col-lg-4">
-                        <label for="p_firstname">Firstname</label>
-                        <input type="text" class="form-control" name="p_first_name" id="p_first_name" required placeholder="firstname">
-                    </div>
-                    <div class="col-lg-4">
-                        <label for="p_middlename">Middlename</label>
-                        <input type="text" class="form-control" name="p_middle_name" id="p_middle_name" placeholder="middlename">
-                    </div>
-                    <div class="col-lg-4">
-                        <label for="p_lastname">Lastname</label>
-                        <input type="text" class="form-control" name="p_last_name" id="p_last_name" required placeholder="lastname">
-                    </div>
-                    <div class="col-lg-6">
-                        <label for="contactnumber">Contact Number</label>
-                        <input type="number" class="form-control" name="contact_number" id="contact_number" placeholder="Ex.09123456789">
-                    </div>
-                    <div class="col-lg-6">
-                        <label for="emailadd">Email Address <span class="optional">(optional)</span></label>
-                        <input type="text" class="form-control" name="email_add" id="email_add" placeholder="email address">
-                    </div>
-                </div>
             </div>
             <div class="modal-footer">
                 <button type="submit" class="btn btn-outline-success btn-md">

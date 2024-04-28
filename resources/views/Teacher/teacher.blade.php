@@ -312,7 +312,7 @@
                                     <div class="radio-wrapper-classes mt-3">
                                         @foreach ($classes as $class)
                                             <div class="radios_classes">
-                                                <input type="checkbox" class="form-control classes_checkbox"
+                                                <input type="checkbox" class="classes_checkbox"
                                                     name="classes[]" data-classes-value="{{ $class['grade_level'] }}"
                                                     value="{{ $class['id'] }}" id="classes_{{ $class['id'] }}">
                                                 <label class="class_check_lbl" for="classes_{{ $class['id'] }}">Grade {{ $class['grade'] }} -

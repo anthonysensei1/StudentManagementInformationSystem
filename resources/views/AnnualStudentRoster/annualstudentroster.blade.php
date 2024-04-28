@@ -30,7 +30,7 @@
                             <td class="grade_list">
                                 <div class="d-flex justify-content-center flex-column">
                                     @foreach ($grade_levels as $grade_level)
-                                        <a class="grade_list_link" name="grade_list" id="grade_list" data-grade="{{ $grade_level['id'] }}"> {{ $grade_level['grade'] }}
+                                        <a class="grade_list_link" name="grade_list" id="grade_list" data-gradename="{{ $grade_level['grade'] }}" data-grade="{{ $grade_level['id'] }}"> {{ $grade_level['grade'] }}
                                         </a>
                                     @endforeach
                                 </div>
@@ -40,11 +40,9 @@
                                     <div class="batch_year">BATCH <span id="prev_year">2023</span> - <span
                                             id="current_year">2024</span></div>
                                     <thead id="table_head" hidden>
-                                        <tr>
-                                            <th colspan="2" class="grade_header">
-                                                * * * Grade 1 * * *
-                                            </th>
-                                        </tr>
+                                        <div>
+                                            <div colspan="2" class="grade_header" id="gradename"></div>
+                                        </div>
                                     </thead>
                                     <tbody id="table_tbody">
                                         <div class="row" id="table_tbody_row" hidden>
@@ -98,6 +96,7 @@
             }
 
             $('#table_tbody_row').prop('hidden', true);
+            $('#table_head').prop('hidden', true);
             $('#annual_table').prop('hidden', false);
             $('#prev_year').text(searchValue);
             $('#current_year').text(parseInt(searchValue) + 1);
@@ -106,11 +105,14 @@
         $(".grade_list_link").on("click", function(e) {
             const grade = $(this).data("grade");
             const year = $('#searcharea2').val();
+            const gradename = $(this).data("gradename");
             const pathTemplate =
                 "{{ route('search_student', ['year' => ':year', 'grade' => ':grade']) }}";
             const path = pathTemplate.replace(":year", year).replace(":grade", grade);
 
+            $('#gradename').text(gradename);
             $('#table_tbody_row').prop('hidden', false);
+            $('#table_head').prop('hidden', false);
             $('#b_data').empty();
             $('#g_data').empty();
 
