@@ -71,8 +71,12 @@
     text-align: center;
   }
 
+  .small-box{
+    height: 200px!important;
+  }
+
   .text{
-    font-size: 20px;
+    font-size: 17px;
     text-align: center;
     font-weight: 900;
     font-family: serif;
@@ -608,6 +612,12 @@
   .scrollable{
     overflow-y: scroll;
     border: 1px solid #ccc;
+  }
+
+  .total_count{
+    font-size: 15px;
+    font-weight: 900;
+    margin-left: 10px;
   }
 </style>
 

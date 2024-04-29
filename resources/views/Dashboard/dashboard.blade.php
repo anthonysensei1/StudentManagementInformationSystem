@@ -16,6 +16,9 @@
                                     </div>
                                     <div class="text"> Students </div>
                                 </div>
+                                <div class="total_count">
+                                    Total students is ( {{$getStudents}} )
+                                </div>
                             </a>
                         </div>
 
@@ -28,6 +31,9 @@
                                         <i class="fas fa-book"></i>
                                     </div>
                                     <div class="text"> Grade </div>
+                                </div>
+                                <div class="total_count">
+                                    Total grade is ( {{$getGrades}} )
                                 </div>
                             </a>
                         </div>
@@ -42,6 +48,9 @@
                                     </div>
                                     <div class="text"> Section </div>
                                 </div>
+                                <div class="total_count">
+                                    Total section is ( {{$getSections}} )
+                                </div>
                             </a>
                         </div>
 
@@ -54,6 +63,9 @@
                                         <i class="fas fa-file-alt"></i>
                                     </div>
                                     <div class="text"> Subject </div>
+                                </div>
+                                <div class="total_count">
+                                    Total subject is ( {{$getSubjects}} )
                                 </div>
                             </a>
                         </div>
@@ -68,6 +80,9 @@
                                     </div>
                                     <div class="text"> Teachers </div>
                                 </div>
+                                <div class="total_count">
+                                    Total teacher is ( {{$getTeachers}} )
+                                </div>
                             </a>
                         </div>
 
@@ -80,6 +95,9 @@
                                         <i class="fas fa-users"></i>
                                     </div>
                                     <div class="text"> Classes </div>
+                                </div>
+                                <div class="total_count">
+                                    Total class is ( {{$getClasses}} )
                                 </div>
                             </a>
                         </div>
@@ -133,6 +151,9 @@
                                         <i class="far fa-envelope"></i>
                                     </div>
                                     <div class="text"> Message Management </div>
+                                </div>
+                                <div class="total_count">
+                                    Total messages is ( {{$getMessages}} )
                                 </div>
                             </a>
                         </div>

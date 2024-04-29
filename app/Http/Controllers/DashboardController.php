@@ -8,6 +8,11 @@ use Nette\Utils\DateTime;
 use Illuminate\Http\Request;
 use App\Models\RoleAndPermission;
 use App\Models\Student;
+use App\Models\GradeLevel;
+use App\Models\Section;
+use App\Models\Subject;
+use App\Models\Classes;
+use App\Models\SMS;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Session;
 
@@ -51,6 +56,13 @@ class DashboardController extends Controller
         $render_data = [
             'monthly_data_current' => $monthly_data_current,
             'monthly_data_past' => $monthly_data_past,
+            'getStudents' => Student::count(),
+            'getGrades' => GradeLevel::count(),
+            'getSections' => Section::count(),
+            'getTeachers' => Teacher::count(),
+            'getClasses' => Classes::count(),
+            'getSubjects' => Subject::count(),
+            'getMessages' => SMS::count()
         ];
 
         return view('Dashboard/dashboard', $render_data);
