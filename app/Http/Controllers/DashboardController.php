@@ -8,6 +8,7 @@ use Nette\Utils\DateTime;
 use Illuminate\Http\Request;
 use App\Models\RoleAndPermission;
 use App\Models\Student;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Session;
 
 class DashboardController extends Controller
@@ -19,10 +20,40 @@ class DashboardController extends Controller
      */
     public function index()
     {
-        if (!in_array('Dashboard',session('permission')) && auth()->user()->type != 1) {
+        if (!in_array('Dashboard', session('permission')) && auth()->user()->type != 1) {
             abort(404);
         }
-        return view('Dashboard/dashboard');
+
+        $currect_year = Carbon::now()->year;
+        $past_year = Carbon::now()->subYear()->year;
+
+        $students_current_year = Student::whereYear('created_at', $currect_year)
+            ->selectRaw('MONTH(created_at) as month, COUNT(*) as count')
+            ->groupBy('month')
+            ->orderBy('month', 'ASC')
+            ->get()
+            ->pluck('count', 'month');
+
+        $students_past_year = Student::whereYear('created_at', $past_year)
+            ->selectRaw('MONTH(created_at) as month, COUNT(*) as count')
+            ->groupBy('month')
+            ->orderBy('month', 'ASC')
+            ->get()
+            ->pluck('count', 'month');
+
+        $monthly_data_current = [];
+        $monthly_data_past = [];
+        for ($i = 1; $i <= 12; $i++) {
+            $monthly_data_current[] = $students_current_year->get($i) ?? 0;
+            $monthly_data_past[] = $students_past_year->get($i) ?? 0;
+        }
+
+        $render_data = [
+            'monthly_data_current' => $monthly_data_current,
+            'monthly_data_past' => $monthly_data_past,
+        ];
+
+        return view('Dashboard/dashboard', $render_data);
     }
 
     /**
@@ -117,7 +148,7 @@ class DashboardController extends Controller
             ]);
         }
 
-        $b_date = new DateTime($request->b_date); 
+        $b_date = new DateTime($request->b_date);
         $current_date = new DateTime();
         $age = $current_date->diff($b_date)->y;
 
