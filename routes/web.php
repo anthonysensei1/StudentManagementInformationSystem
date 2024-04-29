@@ -177,4 +177,4 @@ Route::middleware(['auth'])->group(function () {
 });
 
 
-Route::get('/send-notifications', [App\Http\Controllers\NotificationController::class, 'sendNotifications']);
+Route::post('/send-notifications', [App\Http\Controllers\NotificationController::class, 'sendNotifications']);

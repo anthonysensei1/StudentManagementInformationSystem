@@ -4,7 +4,8 @@
 <div class="content-wrapper">
     <section class="content">
         <div class="container-fluid">
-            <button class="btn btn-outline-success btn-md mt-2 mb-2" data-toggle="modal" data-target="#addMessage">Add New Message</button>
+            <button class="btn btn-outline-success btn-md mt-2 mb-2" data-toggle="modal" data-target="#addMessage">Add
+                New Message</button>
             <!-- TableArea -->
             <table id="example1" class="table table-bordered table-striped mt-2">
                 <thead>
@@ -24,15 +25,18 @@
                         <td>{{ $counter }}</td>
                         <td>{{ $message['message'] }}</td>
                         <td class="text-center" width="500">
-                            <button class="btn btn-outline-success btn-md" onclick="">
+                            <button class="btn btn-outline-success btn-md send-email" data-id="{{$message['id']}}">
                                 <i class="fas fa-envelope"></i>
                                 send via email
                             </button>
-                            <button class="btn btn-outline-primary btn-md" data-toggle="modal" data-target="#updateMessage" onclick="edit('{{ $message['id'] }}', { u_message: '{{ $message['message'] }}' })">
+                            <button class="btn btn-outline-primary btn-md" data-toggle="modal"
+                                data-target="#updateMessage"
+                                onclick="edit('{{ $message['id'] }}', { u_message: '{{ $message['message'] }}' })">
                                 <i class="fas fa-pen"></i>
                                 update
                             </button>
-                            <button class="btn btn-outline-danger btn-md" data-toggle="modal" data-target="#deleteMessage" onclick="edit('{{ $message['id'] }}')">
+                            <button class="btn btn-outline-danger btn-md" data-toggle="modal"
+                                data-target="#deleteMessage" onclick="edit('{{ $message['id'] }}')">
                                 <i class="fas fa-trash"></i>
                                 delete
                             </button>
@@ -68,7 +72,8 @@
                 <div class="modal-body">
                     <div class="col-lg-12">
                         <div>Message</div>
-                        <textarea class="form-control" name="message" id="message" required placeholder=". . ." rows="3"></textarea>
+                        <textarea class="form-control" name="message" id="message" required placeholder=". . ."
+                            rows="3"></textarea>
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -98,7 +103,8 @@
                 <div class="modal-body">
                     <div class="col-lg-12">
                         <div>Message</div>
-                        <textarea class="form-control" name="message" id="u_message" required placeholder=". . ." rows="3"></textarea>
+                        <textarea class="form-control" name="message" id="u_message" required placeholder=". . ."
+                            rows="3"></textarea>
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -149,14 +155,50 @@
     </div> <!-- /.modal-dialog -->
 </div><!-- /.modal -->
 <!-- End of Delete Dialog -->
-
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    document.querySelectorAll('.sms').forEach(function(element) {
+        element.classList.add('activated');
+    });
+});
+</script>
 
 <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        document.querySelectorAll('.sms').forEach(function(element) {
-            element.classList.add('activated');
-        });
+$(".send-email").on("click", function(e) {
+    e.preventDefault();
+    var id = $(this).attr('data-id');
+    const Toast = Swal.mixin({
+        toast: true,
+        position: "top-end",
+        showConfirmButton: false,
+        timer: 1500,
     });
+
+    $.ajax({
+        type: "POST",
+        cache: false,
+        url: '/send-notifications',
+        data: {
+            id: id
+        },
+        headers: {
+            "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+        },
+        success: function(data) {
+
+            console.log(data);
+
+            Toast.fire({
+                icon: "success",
+                title: '<p class="text-center pt-2 text-bold text-black">' +
+                    data.message +
+                    "</p>",
+            });
+
+
+        },
+    });
+});
 </script>
 
 @endsection

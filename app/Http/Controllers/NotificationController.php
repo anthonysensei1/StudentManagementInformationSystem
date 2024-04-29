@@ -4,21 +4,24 @@ namespace App\Http\Controllers;
 
 use App\Mail\NotifyMessage;
 use Illuminate\Support\Facades\Mail;
-use App\Models\User;
+use App\Models\SMS;
+use App\Models\Student;
 use Illuminate\Http\Request;
 
 class NotificationController extends Controller
 {
     
-    public function sendNotifications()
+    public function sendNotifications(Request $request)
     {
-        // Retrieve all users or a subset of users you wish to notify
-        // $users = User::select('email')->whereNotNull('email')->get();
 
-        // // Send an email to each user
-        // foreach ($users as $user) {
-            Mail::to('dacoylomarkemilcajes@gmail.com')->send(new NotifyMessage());
-        // }
+        // Retrieve all users or a subset of users you wish to notify
+        $students = Student::select('email_add')->get();
+        $sendNotify = SMS::where('id',$request->id)->first();
+        // Send an email to each user
+
+        foreach ($students as $student) {
+            Mail::to($student->email_add)->send(new NotifyMessage($sendNotify->message));
+        }
 
         return response()->json(['message' => 'Notifications sent successfully']);
     }
