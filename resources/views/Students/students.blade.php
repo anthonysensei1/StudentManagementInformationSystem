@@ -5,6 +5,7 @@
     <section class="content">
         <div class="container-fluid">
             <button class="btn btn-outline-success btn-md mt-2 mb-2" data-toggle="modal" data-target="#addStudent">Add New Student</button>
+            <button class="btn btn-outline-success btn-md mt-2 mb-2" data-toggle="modal" data-target="#enrolledStudent">Enrolled Student</button>
             <!-- SearchArea -->
             <form action="#">
                 <div class="input-group">
@@ -25,7 +26,8 @@
                         <th>ID no.</th>
                         <th>LRN</th>
                         <th>Fullname</th>
-                        <th>Grade and Section</th>
+                        <th>Student Status</th>
+                        <th>Enrollment Status</th>
                         <th>Action</th>
                     </tr>
                 </thead>
@@ -42,6 +44,9 @@
                             <td><a href="" class="student_name" data-toggle="modal" data-target="#popStudentsInfo" onclick="view('{{ $student['id'] }}', { upload_image_name: '{{ $student['upload_image_name'] }}', id_no: '{{ $student['id_no'] }}', lrn: '{{ $student['lrn'] }}', first_name: '{{ $student['first_name'] }}', middle_name: '{{ $student['middle_name'] }}', last_name: '{{ $student['last_name'] }}', address: '{{ $student['address'] }}', b_date: '{{ $student['b_date'] }}', age: '{{ $student['age'] }}', age: '{{ $student['age'] }}', gender: '{{ $student['gender'] == 1 ? 'Male' : 'Female' }}', grade_level: '{{ $student['grade'] }}', section: '{{ $student['section_name'] }}', p_first_name: '{{ $student['p_first_name'] }}', p_middle_name: '{{ $student['p_middle_name'] }}', p_last_name: '{{ $student['p_last_name'] }}', contact_number: '{{ $student['contact_number'] }}', email_add: '{{ $student['email_add'] }}', created_at: '{{ $student['created_at'] }}' })">{{ $student['first_name'] }} {{ $student['middle_name'] }} {{ $student['last_name'] }}</a></td>
                             <td>Grade {{ $student['grade'] }} - {{ $student['section_name'] }}</td>
                             <td class="text-center">
+
+                            <button class="btn btn-outline-success btn-md">Enroll</button>
+
                             <button class="btn btn-outline-primary btn-md" data-toggle="modal" data-target="#updateStudent" onclick="edit('{{ $student['id'] }}', { u_upload_image_name: '{{ $student['upload_image_name'] }}', u_id_no: '{{ $student['id_no'] }}', u_lrn: '{{ $student['lrn'] }}', u_first_name: '{{ $student['first_name'] }}', u_middle_name: '{{ $student['middle_name'] }}', u_last_name: '{{ $student['last_name'] }}', u_address: '{{ $student['address'] }}', u_b_date: '{{ $student['b_date'] }}', u_age: '{{ $student['age'] }}', u_gender: '{{ $student['gender'] }}', u_grade_level_: '{{ $student['grade_level'] }}', u_section_: '{{ $student['section'] }}', u_p_first_name: '{{ $student['p_first_name'] }}', u_p_middle_name: '{{ $student['p_middle_name'] }}', u_p_last_name: '{{ $student['p_last_name'] }}', u_contact_number: '{{ $student['contact_number'] }}', u_email_add: '{{ $student['email_add'] }}' })">
                                     <i class="fas fa-pen"></i>
                                     update
@@ -215,8 +220,17 @@
                             </div>
                         </div>
                     </div>
+                    <div class="col-lg-3">
+                        <label for="age">Student Status</label>
+                        <select name="student_status" id="student_status" class="form-control">
+                            <option value="0">Old</option>
+                            <option value="1">New</option>
+                            <option value="2">Transferee</option>
+                            <option value="3">Continuing</option>
+                        </select>
+                    </div>
                     <!-- GradeLevelArea -->
-                    <div class="col-lg-12">
+                    <!-- <div class="col-lg-12">
                         <span class="gl_label">Grade Level</span>
                         <div class="radio-wrapper-grade-level">
                             @foreach ($grades as $grade)
@@ -226,9 +240,9 @@
                                 </div>
                             @endforeach
                         </div>
-                    </div>
+                    </div> -->
                     <!-- SectionArea -->
-                    <div class="col-lg-12">
+                    <!-- <div class="col-lg-12">
                         <span class="section_label">Section</span>
                         <div class="radio-wrapper-section">
                             @foreach ($sections as $section)
@@ -238,6 +252,29 @@
                                 </div>
                             @endforeach
                         </div>
+                    </div> -->
+                </div>
+                <div class="students_parents_info mt-3">Students Parents/Guardian Basic Information</div>
+                <div class="row students_parents_row">
+                    <div class="col-lg-4">
+                        <label>Firstname</label>
+                        <input type="text" class="form-control" name="p_first_name" id="p_first_name" required placeholder="firstname">
+                    </div>
+                    <div class="col-lg-4">
+                        <label>Middlename</label>
+                        <input type="text" class="form-control" name="p_middle_name" id="p_middle_name" placeholder="middlename">
+                    </div>
+                    <div class="col-lg-4">
+                        <label>Lastname</label>
+                        <input type="text" class="form-control" name="p_last_name" id="p_last_name" required placeholder="lastname">
+                    </div>
+                    <div class="col-lg-6">
+                        <label>Contact Number</label>
+                        <input type="number" class="form-control" name="contact_number" id="contact_number" placeholder="Ex.09123456789">
+                    </div>
+                    <div class="col-lg-6">
+                        <label>Email Address <span class="optional">(optional)</span></label>
+                        <input type="text" class="form-control" name="email_add" id="email_add" placeholder="email address">
                     </div>
                 </div>
             </div>
@@ -352,10 +389,10 @@
                     </div>
                 </div>
                 <!-- ParentsInformationArea -->
-                <!-- <div class="students_parents_info mt-3">Students Parents/Guardian Basic Information</div>
+                <div class="students_parents_info mt-3">Students Parents/Guardian Basic Information</div>
                 <div class="row students_parents_row">
                     <div class="col-lg-4">
-                        <label for="u_p_first_name">Firstname</label>
+                        <label>Firstname</label>
                         <input type="text" class="form-control" name="p_first_name" id="u_p_first_name" required placeholder="firstname">
                     </div>
                     <div class="col-lg-4">
@@ -371,10 +408,10 @@
                         <input type="number" class="form-control" name="contact_number" id="u_contact_number" placeholder="Ex.09123456789">
                     </div>
                     <div class="col-lg-6">
-                        <label for="emailadd">Email Address <span class="optional">(optional)</span></label>
+                        <label>Email Address <span class="optional">(optional)</span></label>
                         <input type="text" class="form-control" name="email_add" id="u_email_add" placeholder="email address">
                     </div>
-                </div> -->
+                </div>
             </div>
             <div class="modal-footer">
                 <button type="submit" class="btn btn-outline-primary btn-md">

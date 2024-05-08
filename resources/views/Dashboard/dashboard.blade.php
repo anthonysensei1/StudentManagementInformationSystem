@@ -7,7 +7,7 @@
                 @if (auth()->user()->type == 1)
                     <div class="row pt-4">
                         <!-- Student -->
-                        <div class="col-lg-2 col-6">
+                        <div class="col-lg-3 col-md-4 col-6">
                             <!-- small box -->
                             <a href="{{ route('student') }}" class="small-box">
                                 <div class="inner">
@@ -17,45 +17,13 @@
                                     <div class="text"> Students </div>
                                 </div>
                                 <div class="total_count">
-                                    Total students is ( {{$getStudents}} )
-                                </div>
-                            </a>
-                        </div>
-
-                        <!-- Grade -->
-                        <div class="col-lg-2 col-6">
-                            <!-- small box -->
-                            <a href="{{ route('grade') }}" class="small-box">
-                                <div class="inner">
-                                    <div class="icons">
-                                        <i class="fas fa-book"></i>
-                                    </div>
-                                    <div class="text"> Grade </div>
-                                </div>
-                                <div class="total_count">
-                                    Total grade is ( {{$getGrades}} )
-                                </div>
-                            </a>
-                        </div>
-
-                        <!-- Section -->
-                        <div class="col-lg-2 col-6">
-                            <!-- small box -->
-                            <a href="{{ route('section') }}" class="small-box">
-                                <div class="inner">
-                                    <div class="icons">
-                                        <i class="ion ion-clipboard"></i>
-                                    </div>
-                                    <div class="text"> Section </div>
-                                </div>
-                                <div class="total_count">
-                                    Total section is ( {{$getSections}} )
+                                    Total enrolled students is ( {{$getStudents}} )
                                 </div>
                             </a>
                         </div>
 
                         <!-- Subject -->
-                        <div class="col-lg-2 col-6">
+                        <div class="col-lg-3 col-md-4 col-6">
                             <!-- small box -->
                             <a href="{{ route('subject') }}" class="small-box">
                                 <div class="inner">
@@ -71,7 +39,7 @@
                         </div>
 
                         <!-- Teacher -->
-                        <div class="col-lg-2 col-6">
+                        <div class="col-lg-3 col-md-4 col-6">
                             <!-- small box -->
                             <a href="{{ route('teacher') }}" class="small-box">
                                 <div class="inner">
@@ -87,7 +55,7 @@
                         </div>
 
                         <!-- Classes -->
-                        <div class="col-lg-2 col-6">
+                        <div class="col-lg-3 col-md-4 col-6">
                             <!-- small box -->
                             <a href="{{ route('class') }}" class="small-box">
                                 <div class="inner">
@@ -98,75 +66,6 @@
                                 </div>
                                 <div class="total_count">
                                     Total class is ( {{$getClasses}} )
-                                </div>
-                            </a>
-                        </div>
-
-
-                        <!-- Classes -->
-                        <div class="col-lg-2 col-6">
-                            <!-- small box -->
-                            <a href="{{ route('enrollmentprocess') }}" class="small-box">
-                                <div class="inner">
-                                    <div class="icons">
-                                        <i class="fas fa-user-graduate"></i>
-                                    </div>
-                                    <div class="text"> Enrollment Process </div>
-                                </div>
-                            </a>
-                        </div>
-
-                        <!-- Payments -->
-                        <div class="col-lg-2 col-6">
-                            <!-- small box -->
-                            <a href="{{ route('payments') }}" class="small-box">
-                                <div class="inner">
-                                    <div class="icons">
-                                        <i class="fas fa-inbox"></i>
-                                    </div>
-                                    <div class="text"> Payments </div>
-                                </div>
-                            </a>
-                        </div>
-
-                        <!-- Settings -->
-                        <div class="col-lg-2 col-6">
-                            <!-- small box -->
-                            <a href="{{ route('rolesandpermissions') }}" class="small-box">
-                                <div class="inner">
-                                    <div class="icons">
-                                        <i class="fas fa-cog"></i>
-                                    </div>
-                                    <div class="text"> Roles and Permissions </div>
-                                </div>
-                            </a>
-                        </div>
-
-                        <!-- Message Management -->
-                        <div class="col-lg-2 col-6">
-                            <!-- small box -->
-                            <a href="{{ route('sms') }}" class="small-box">
-                                <div class="inner">
-                                    <div class="icons">
-                                        <i class="far fa-envelope"></i>
-                                    </div>
-                                    <div class="text"> Message Management </div>
-                                </div>
-                                <div class="total_count">
-                                    Total messages is ( {{$getMessages}} )
-                                </div>
-                            </a>
-                        </div>
-
-                        <!-- Message Management -->
-                        <div class="col-lg-2 col-6">
-                            <!-- small box -->
-                            <a href="{{ route('annualstudentroster') }}" class="small-box">
-                                <div class="inner">
-                                    <div class="icons">
-                                        <i class="far fa-chart-bar"></i>
-                                    </div>
-                                    <div class="text"> Annual Student Roster </div>
                                 </div>
                             </a>
                         </div>

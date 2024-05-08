@@ -30,7 +30,9 @@
                 <thead>
                     <tr class="text-center">
                         <th>#</th>
-                        <th>Class</th>
+                        <th>Grade</th>
+                        <th>Section</th>
+                        <th>Status</th>
                         <th>Action</th>
                     </tr>
                 </thead>
@@ -38,20 +40,28 @@
                     @php
                     $counter = 1;
                     @endphp
-                    @if (count($classes) > 0)
-                    @foreach ($classes as $class)
+                    @foreach ($sectionsByGrade as $grade => $sections)
                     <tr class="text-center">
                         <td>{{ $counter }}</td>
-                        <td> Grade {{ $class['grade'] }} - {{ $class['section_name'] }}</td>
+                        <td>{{ $grade }}</td>
+                        <td>
+                            <select name="sections" id="sections_{{ $grade }}" class="form-control">
+                                @foreach ($sections as $section)
+                                <option value="{{ $section }}">{{ $section }}</option>
+                                @endforeach
+                            </select>
+                        </td>
+                        <td> </td>
                         <td class="text-center">
+                            <!-- Assuming you don't need $class here, you can remove it -->
                             <button class="btn btn-outline-primary btn-md" data-toggle="modal"
                                 data-target="#updateClass"
-                                onclick="edit('{{ $class['id'] }}', { u_c_grade: '{{ $class['grade_level'] }}', u_c_section: '{{ $class['section'] }}', section_id: '{{ $class['id'] }}' })">
+                                onclick="edit('', { u_c_grade: '{{ $grade }}', u_c_section: '', section_id: '' })">
                                 <i class="fas fa-pen"></i>
                                 update
                             </button>
                             <button class="btn btn-outline-danger btn-md" data-toggle="modal"
-                                data-target="#deleteSection" onclick="edit('{{ $class['id'] }}')">
+                                data-target="#deleteSection" onclick="edit('')">
                                 <i class="fas fa-trash"></i>
                                 delete
                             </button>
@@ -61,9 +71,9 @@
                     $counter++;
                     @endphp
                     @endforeach
-                    @endif
                 </tbody>
             </table>
+
             <!-- EndTable -->
             @elseif (auth()->user()->type == 2)
             <!-- This table will be shown only if the status of the user logged in is TEACHER -->
@@ -267,27 +277,15 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form action="{{ route('class_store') }}" class="formPost">
+            <form action="{{ route('class_store') }}" method="POST" class="formPost">
                 <div class="modal-body">
                     <div class="col-lg-12">
-                        <label for="c_grade">Grade</label>
-                        <select class="form-control c_grade" name="c_grade" id="c_grade" required>
-                            <option value="" disabled selected>Select Grade</option>
-                            @foreach ($grades as $grade)
-                            <option value="{{ $grade['id'] }}">Grade {{ $grade['grade'] }}</option>
-                            @endforeach
-                        </select>
-                    </div>
-                    <div class="col-lg-12 c_section_div" hidden>
-                        <label for="c_section">Section</label>
-                        <select class="form-control c_section" name="c_section" id="c_section" required>
-                            <option value="" disabled selected>Select Section</option>
-                            @foreach ($sections as $section)
-                            <option value="{{ $section['id'] }}" data-grade-level="{{ $section['grade_level_id'] }}">
-                                {{ $section['section'] }}
-                            </option>
-                            @endforeach
-                        </select>
+                        <div>Grade</div>
+                        <input type="text" class="form-control c_grade" name="c_grade" id="c_grade"
+                            placeholder="enter grade level" required>
+                        <div>Section</div>
+                        <input type="text" class="form-control c_section" name="c_section" id="c_section"
+                            placeholder="enter section" required>
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -317,23 +315,16 @@
                 <div class="modal-body">
                     <input type="text" class="form-control id" name="id" id="id" readonly hidden>
                     <div class="col-lg-12">
-                        <label for="u_c_grade">Grade</label>
-                        <select class="form-control c_grade" name="c_grade" id="u_c_grade" required>
-                            <option value="" disabled selected>Select Grade</option>
-                            @foreach ($grades as $grade)
-                            <option value="{{ $grade['id'] }}">Grade {{ $grade['grade'] }}</option>
-                            @endforeach
-                        </select>
+                        <div>Grade</div>
+                        <input type="text" class="form-control c_grade" name="c_grade" id="u_c_grade"
+                            placeholder="enter grade level" required>
                     </div>
-                    <div class="col-lg-12 u_c_section_div" hidden>
-                        <label for="u_c_section">Section</label>
-                        <select class="form-control c_section" name="c_section" id="u_c_section" required>
-                            <option value="" disabled selected>Select Section</option>
-                            @foreach ($sections as $section)
-                            <option value="{{ $section['id'] }}" data-grade-level="{{ $section['grade_level_id'] }}">
-                                {{ $section['section'] }}
-                            </option>
-                            @endforeach
+                    <div class="col-lg-12 u_c_section_div">
+                        <div>Section</div>
+                        <select name="sections" id="sections_{{ $grade }}" class="form-control">
+                                @foreach ($sections as $section)
+                                <option value="{{ $section }}">{{ $section }}</option>
+                                @endforeach
                         </select>
                     </div>
                 </div>

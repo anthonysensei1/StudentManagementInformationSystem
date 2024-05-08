@@ -35,6 +35,19 @@
 
 <style>
 
+  .school_year{
+    display: flex;
+    margin: 0 0 5px 0;
+    justify-content: flex-end;
+  }
+
+  .sy_data{
+    font-size: 30px;
+    font-weight: 900;
+    letter-spacing: 2px;
+    font-family: serif;
+  }
+
   .selected {
       background-color: #6c757d;
       border-top: .1px solid #fff;

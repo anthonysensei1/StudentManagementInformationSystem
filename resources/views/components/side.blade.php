@@ -21,14 +21,30 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="{{ route('student') }}" class="nav-link stu">
-                            <i class="nav-icon fas fa-user"></i>
+                        <a href="{{ route('class') }}" class="nav-link cla">
+                            <i class="nav-icon fas fa-users"></i>
                             <p>
-                                Students
+                                Classes
                             </p>
                         </a>
                     </li>
                     <li class="nav-item">
+                        <a href="{{ route('subject') }}" class="nav-link sub">
+                            <i class="nav-icon fas fa-file-alt"></i>
+                            <p>
+                                Subject & Schedule
+                            </p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ route('student') }}" class="nav-link stu">
+                            <i class="nav-icon fas fa-user"></i>
+                            <p>
+                                Student Management
+                            </p>
+                        </a>
+                    </li>
+                    <!-- <li class="nav-item">
                         <a href="{{ route('grade') }}" class="nav-link gra">
                             <i class="nav-icon fas fa-book"></i>
                             <p>
@@ -43,28 +59,12 @@
                                 Section
                             </p>
                         </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="{{ route('subject') }}" class="nav-link sub">
-                            <i class="nav-icon fas fa-file-alt"></i>
-                            <p>
-                                Subject
-                            </p>
-                        </a>
-                    </li>
+                    </li> -->
                     <li class="nav-item">
                         <a href="{{ route('teacher') }}" class="nav-link tea">
                             <i class="nav-icon ion ion-ios-people-outline"></i>
                             <p>
                                 Teachers
-                            </p>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="{{ route('class') }}" class="nav-link cla">
-                            <i class="nav-icon fas fa-users"></i>
-                            <p>
-                                Classes
                             </p>
                         </a>
                     </li>

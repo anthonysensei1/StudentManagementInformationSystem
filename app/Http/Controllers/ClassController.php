@@ -22,21 +22,20 @@ class ClassController extends Controller
      */
     public function index()
     {
-
-        if (!in_array('Class',session('permission')) && auth()->user()->type != 1) {
+        if (!in_array('Class', session('permission')) && auth()->user()->type != 1) {
             abort(404);
         }
 
         $teachers_subject_classes = [];
         if (session('teachers_id')) {
             $teacher = Teacher::where('id', session('teachers_id'))->firstOrFail();
-    
+
             $subject_ids = explode(', ', $teacher->subjects);
             $subjects = Subject::whereIn('id', $subject_ids)->get();
-    
+
             foreach ($subjects as $subject) {
                 $current_grade = GradeLevel::where('id', $subject->grade_level_id)->first();
-    
+
                 $teachers_subject_classes[] = [
                     'subject_name_id' => $subject['id'],
                     'subject_name' => $subject['subject_name'],
@@ -48,19 +47,22 @@ class ClassController extends Controller
             }
         }
 
+        $classes = Classes::all();
+
+        $sectionsByGrade = Classes::all()->groupBy('grade_level')->map(function ($item, $key) {
+            return $item->pluck('section')->toArray();
+        });
+
         $render_data = [
-            'sections' => Section::where('status', 1)->get(),
-            'grades' => GradeLevel::where('status', 1)->get(),
-            'classes' => Classes::join('grade_levels', 'classes.grade_level', 'grade_levels.id')
-                ->join('sections', 'classes.section', 'sections.id')
-                ->select('classes.*', 'grade_levels.grade', 'sections.section AS section_name')
-                ->orderBy('classes.grade_level', 'asc')
-                ->get(),
+            'classes' => $classes,
             'teachers_subject_classes' => $teachers_subject_classes,
+            'sectionsByGrade' => $sectionsByGrade,
+            'status' => $status = '0',
         ];
 
         return view('Class/class', $render_data);
     }
+
 
 
     /**
@@ -81,33 +83,52 @@ class ClassController extends Controller
      */
     public function store(Request $request)
     {
-        $class = Classes::where('section', $request->c_section)->where('grade_level', $request->c_grade)->first();
 
-        if ($class) {
-            $render_message = [
-                'response' => 0,
-                'message' => 'Classes is invalid! Already exist!',
+        $request->validate([
+            'c_grade' => 'required',
+            'c_section' => 'required',
+        ]);
+
+        $existingGrade = Classes::where('grade_level', $request->c_grade)->exists();
+
+        if (!$existingGrade) {
+
+            Classes::create([
+                'grade_level' => $request->c_grade,
+                'section' => $request->c_section,
+            ]);
+
+            return response()->json([
+                'response' => 1,
+                'message' => 'Class added successfully',
                 'path' => '/Class/class'
-            ];
-
-            return response()->json($render_message);
+            ]);
         }
 
-        $form_data = [
+        $existingSection = Classes::where('grade_level', $request->c_grade)
+                                ->where('section', $request->c_section)
+                                ->exists();
+
+        if ($existingSection) {
+            return response()->json([
+                'response' => 0,
+                'message' => 'Section already exists for this grade!',
+                'path' => '/Class/class'
+            ]);
+        }
+
+        Classes::create([
             'grade_level' => $request->c_grade,
             'section' => $request->c_section,
-        ];
+        ]);
 
-        Classes::create($form_data);
-
-        $render_message = [
+        return response()->json([
             'response' => 1,
-            'message' => 'Adding class success',
+            'message' => "New Section is added in {$request->c_grade}",
             'path' => '/Class/class'
-        ];
-
-        return response()->json($render_message);
+        ]);
     }
+
 
     /**
      * Display the specified resource.
