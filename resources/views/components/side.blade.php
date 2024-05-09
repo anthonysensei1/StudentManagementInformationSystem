@@ -8,7 +8,7 @@
     <div class="sidebar">
         <!-- Sidebar Menu -->
 
-        @if (auth()->user()->type == 1)
+        {{-- @if (auth()->user()->type == 1) --}}
             <nav class="mt-2">
                 <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
                     data-accordion="false">
@@ -61,6 +61,12 @@
                         </a>
                     </li> -->
                     <li class="nav-item">
+                        <a href="{{ route('payments') }}" class="nav-link pay">
+                            <i class="fas fa-money-bill-wave"></i>
+                            <p>Payments</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
                         <a href="{{ route('teacher') }}" class="nav-link tea">
                             <i class="nav-icon ion ion-ios-people-outline"></i>
                             <p>
@@ -68,7 +74,7 @@
                             </p>
                         </a>
                     </li>
-                    <li class="nav-item">
+                    {{-- <li class="nav-item">
                         <a href="#" class="nav-link" id="ass">
                             <i class="nav-icon fas fa-inbox"></i>
                             <p>
@@ -91,6 +97,14 @@
                             </li>
                             <hr class="hr">
                         </ul>
+                    </li> --}}
+                    <li class="nav-item">
+                        <a href="{{ route('annualstudentroster') }}" class="nav-link annualstudentroster">
+                            <i class="nav-icon far fa-chart-bar"></i>
+                            <p>
+                                Annual Student Roster
+                            </p>
+                        </a>
                     </li>
                     <li class="nav-item">
                         <a href="{{ route('rolesandpermissions') }}" class="nav-link rap">
@@ -108,17 +122,9 @@
                             </p>
                         </a>
                     </li>
-                    <li class="nav-item">
-                        <a href="{{ route('annualstudentroster') }}" class="nav-link annualstudentroster">
-                            <i class="nav-icon far fa-chart-bar"></i>
-                            <p>
-                                Annual Student Roster
-                            </p>
-                        </a>
-                    </li>
                 </ul>
             </nav>
-        @else
+        {{-- @else
             <nav class="mt-2">
                 <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
                     data-accordion="false">
@@ -255,7 +261,7 @@
                     @endforeach
                 </ul>
             </nav>
-        @endif
+        @endif --}}
         <!-- /.sidebar-menu -->
     </div>
     <!-- /.sidebar -->
