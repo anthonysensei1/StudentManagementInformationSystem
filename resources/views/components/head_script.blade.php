@@ -59,6 +59,38 @@
     align-items: flex-end;
   }
 
+  .esy{
+    display: flex;
+    align-items: center;
+    gap:20px;
+    font-size: 15px;
+    font-weight: 900;
+    letter-spacing: 2px;
+  }
+
+  .s_year{
+    display: flex;
+    align-items: center;
+    gap: 15px;
+  }
+
+  .gs_selectors{
+    display: flex;
+    justify-content: space-around;
+    margin: 15px 0 15px 0;
+  }
+
+  .custom-select{
+    width: 200px!important;
+  }
+
+  .grd , .sc{
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+  }
+
   .selected {
       background-color: #6c757d;
       border-top: .1px solid #fff;

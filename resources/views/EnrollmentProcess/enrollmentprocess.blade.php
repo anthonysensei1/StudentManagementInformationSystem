@@ -182,20 +182,6 @@
                                 readonly placeholder="email address">
                         </div>
                     </div>
-
-                    <div class="students_parents_info mt-3">Requirements</div>
-                    <div class="students_parents_row mb-2">
-                        <div class="checkboxes">
-                            <div class="icheck-primary">
-                                <input type="checkbox" value="1" class="nso" name="check1" id="check1" disabled>
-                                <label for="check1">NSO</label>
-                            </div>
-                            <div class="icheck-primary">
-                                <input type="checkbox" value="1" class="enroll" name="check2" id="check2" disabled>
-                                <label for="check2">Enrollment Form</label>
-                            </div>
-                        </div>
-                    </div>
                 </div>
             </div><!-- /.modal-content -->
         </div> <!-- /.modal-dialog -->

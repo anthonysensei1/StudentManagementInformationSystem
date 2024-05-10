@@ -17,17 +17,18 @@ class StudentController extends Controller
     public function index()
     {
         
-        if (!in_array('Students',session('permission')) && auth()->user()->type != 1) {
-            abort(404);
-        }
+        // if (!in_array('Students',session('permission')) && auth()->user()->type != 1) {
+        //     abort(404);
+        // }
 
-        $render_data = [
-            'sections' => Section::where('status', 1)->get(),
-            'grades' => GradeLevel::where('status', 1)->get(),
-            'students' => Student::join('grade_levels', 'students.grade_level', 'grade_levels.id')->join('sections', 'students.section', 'sections.id')->select('students.*', 'grade_levels.grade', 'sections.section AS section_name')->orderBy('students.id_no', 'asc')->get(),
-        ];
+        // $render_data = [
+        //     'sections' => Section::where('status', 1)->get(),
+        //     'grades' => GradeLevel::where('status', 1)->get(),
+        //     'students' => Student::join('grade_levels', 'students.grade_level', 'grade_levels.id')->join('sections', 'students.section', 'sections.id')->select('students.*', 'grade_levels.grade', 'sections.section AS section_name')->orderBy('students.id_no', 'asc')->get(),
+        // ];
 
-        return view('Students/students', $render_data);
+        // return view('Students/students', $render_data);
+        return view('Students/students');
     }
 
     /**
