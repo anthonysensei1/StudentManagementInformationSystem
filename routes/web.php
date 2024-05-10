@@ -113,6 +113,8 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/Class/clas/view_student_grade/{id}/{subject_id}', [App\Http\Controllers\ClassController::class,'viewStudentGrade'])->name('view_student_grade');
     // Class Store
     Route::post('/Class/clas/class_store_grade', [App\Http\Controllers\ClassController::class,'storeGrade'])->name('class_store_grade');
+    // Class Get Grade and Section
+    Route::post('/Class/clas/class_grade_section', [App\Http\Controllers\ClassController::class,'gradeSection'])->name('class_grade_section');
 
 
     // Payments

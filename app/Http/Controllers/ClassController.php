@@ -57,7 +57,6 @@ class ClassController extends Controller
             'classes' => $classes,
             'teachers_subject_classes' => $teachers_subject_classes,
             'sectionsByGrade' => $sectionsByGrade,
-            'status' => $status = '0',
         ];
 
         return view('Class/class', $render_data);
@@ -83,28 +82,6 @@ class ClassController extends Controller
      */
     public function store(Request $request)
     {
-
-        $request->validate([
-            'c_grade' => 'required',
-            'c_section' => 'required',
-        ]);
-
-        $existingGrade = Classes::where('grade_level', $request->c_grade)->exists();
-
-        if (!$existingGrade) {
-
-            Classes::create([
-                'grade_level' => $request->c_grade,
-                'section' => $request->c_section,
-            ]);
-
-            return response()->json([
-                'response' => 1,
-                'message' => 'Class added successfully',
-                'path' => '/Class/class'
-            ]);
-        }
-
         $existingSection = Classes::where('grade_level', $request->c_grade)
                                 ->where('section', $request->c_section)
                                 ->exists();
@@ -117,6 +94,13 @@ class ClassController extends Controller
             ]);
         }
 
+        $message = "New Section is added in {$request->c_grade}";
+
+        $existingGrade = Classes::where('grade_level', $request->c_grade)->exists();
+        if (!$existingGrade) {
+            $message = 'Class added successfully';
+        }
+
         Classes::create([
             'grade_level' => $request->c_grade,
             'section' => $request->c_section,
@@ -124,7 +108,7 @@ class ClassController extends Controller
 
         return response()->json([
             'response' => 1,
-            'message' => "New Section is added in {$request->c_grade}",
+            'message' => $message,
             'path' => '/Class/class'
         ]);
     }
@@ -197,7 +181,7 @@ class ClassController extends Controller
      */
     public function destroy(Request $request)
     {
-        Classes::where('id', '=', $request->id)->delete();
+        Classes::where('grade_level', '=', $request->id)->delete();
 
         $render_message = [
             'response' => 1,
@@ -293,5 +277,17 @@ class ClassController extends Controller
         ];
 
         return response()->json($render_message);
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function gradeSection(Request $request)
+    {
+        $class =  Classes::where('grade_level', '=', $request->grade)->where('section', '=', $request->sections_grade)->first();
+        return response()->json($class);
     }
 }

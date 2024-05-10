@@ -17,7 +17,7 @@ class CreateClassesTable extends Migration
             $table->id();
             $table->string('grade_level');
             $table->string('section');
-            $table->int('status');
+            $table->integer('status')->default(1);
             $table->timestamps();
         });
     }
