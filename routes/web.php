@@ -83,6 +83,8 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/Subject/subject/subject_update', [App\Http\Controllers\SubjectController::class,'update'])->name('subject_update');
     // Subject Destroy
     Route::post('/Subject/subject/subject_destroy', [App\Http\Controllers\SubjectController::class,'destroy'])->name('subject_destroy');
+    // Subject Get Grade, Section and Subjects
+    Route::post('/Subject/subject/subject_grade_section', [App\Http\Controllers\SubjectController::class,'gradeSectionSubjects'])->name('subject_grade_section');
 
 
     // Teacher
