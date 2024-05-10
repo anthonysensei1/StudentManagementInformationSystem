@@ -91,6 +91,31 @@
     align-items: center;
   }
 
+  .gsyr{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+  }
+
+  .gs{
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 20px;
+  }
+
+  .s_y{
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  .print_btn{
+    display: flex;
+    justify-content: flex-end;
+  }
+
   .selected {
       background-color: #6c757d;
       border-top: .1px solid #fff;
@@ -781,6 +806,24 @@
       "info": true,
       "autoWidth": false,
       "responsive": true,
+    });
+    $('#example3').DataTable({
+      "responsive": true, 
+      "lengthChange": false, 
+      "autoWidth": false,
+      "searching": false,
+      "ordering":false,
+      "paging": true,
+      "info": true,
+    });
+    $('#example4').DataTable({
+      "responsive": true, 
+      "lengthChange": false, 
+      "autoWidth": false,
+      "searching": false,
+      "ordering":false,
+      "paging": true,
+      "info": true,
     });
   });
 

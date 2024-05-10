@@ -34,7 +34,7 @@
                         <th>Action</th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody class="text-center">
                     <tr>
                         <td>1</td>
                         <td>123456</td>
@@ -59,6 +59,33 @@
                 </tbody>
             </table>
             <!-- EndTable -->
+
+            <!-- TableArea -->
+            <div> THIS TABLE WILL APPEAR WHEN ENROLLED STUDENTS BUTTON IS CLICKED</div>
+            <table id="example3" class="table table-bordered table-striped mt-2">
+                    <thead>
+                        <tr class="text-center">
+                            <th>Grade Level</th>
+                            <th>Section</th>
+                        </tr>
+                    </thead>
+                    <tbody class="text-center">
+                        <tr>
+                            <td>
+                                <a href="#" data-toggle="modal" data-target="#showData">
+                                    Grade 1
+                                </a>
+                            </td>
+                            <td width="300">
+                                <select name="" id="" class="form-control">
+                                    <option value="">Ruby</option>
+                                    <option value="">Rose</option>
+                                </select>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <!-- EndTable -->
         </div>
     </section>
 </div>
@@ -638,6 +665,308 @@
     </div> <!-- /.modal-dialog -->
 </div><!-- /.modal -->
 <!-- End of Delete Dialog -->
+
+
+
+
+<!-- ShowList Dialog -->
+<div class="modal fade" id="showData" data-backdrop="static">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header bg-gradient-secondary">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form action="" class="formPost">
+                <div class="modal-body">
+                    <div class="gsyr">
+                        <div class="gs">
+                            <div class="gs_lbl">
+                                Grade 1
+                            </div>
+                            <div class="gs_lbl">
+                                Section A
+                            </div>
+                        </div>
+                        <div class="s_y">
+                            S.Y 2023 - 2024
+                        </div>
+                    </div>
+                    <table id="example4" class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Students</th>
+                                <th>Student Status</th>
+                                <th>Enrolled Status</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody class="text-center">
+                            <tr>
+                                <td>juan dela cruz</td>
+                                <td>new</td>
+                                <td>enrolled</td>
+                                <td>
+                                    <button class="btn btn-outline-warning btn-md text-dark" data-toggle="modal" data-target="#viewInfo">
+                                        View Info
+                                    </button>
+                                    <button class="btn btn-outline-danger btn-md">
+                                        <i class="fas fa-trash"></i>
+                                        Delete
+                                    </button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </form>
+        </div><!-- /.modal-content -->
+    </div> <!-- /.modal-dialog -->
+</div><!-- /.modal -->
+<!-- End of ShowList Dialog -->
+
+
+
+<!-- View Info Dialog -->
+<div class="modal fade" id="viewInfo" data-backdrop="static">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+            <div class="modal-header bg-gradient-secondary">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form action="{{ route('students_update') }}" class="formPost">
+                <div class="modal-body row">
+                    <div class="col-lg-6">
+                        <div class="students_info">Students Basic Information</div>
+                        <div class="row students_row">
+                            <div class="col-lg-12">
+                                <div class="form-group">
+                                    <div class="students_img">
+                                        <img class="image" id="e_image" src="{{asset ('dist/img/nopp.png')}}">
+                                    </div>
+                                    <div class="custom-file">
+                                        <input type="file" class="custom-file-input uploadImage" name="upload_img"
+                                            id="customFile">
+                                        <label class="custom-file-label uploadImageLabel" for="e_customFile">Upload
+                                            Image</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <input type="text" class="form-control upload_image_name" name="upload_image_name"
+                                id="e_upload_image_name" readonly hidden>
+                            <input type="text" class="form-control id" name="id" id="id" readonly hidden>
+                            <div class="col-lg-6">
+                                <label for="e_id_no">ID no</label>
+                                <input type="number" class="form-control" name="id_no" id="e_id_no" disabled
+                                    placeholder="000000000000">
+                            </div>
+                            <div class="col-lg-6">
+                                <label for="e_lrn">LRN</label>
+                                <input type="number" class="form-control" name="lrn" id="e_lrn" disabled
+                                    placeholder="000000000000">
+                            </div>
+                            <div class="col-lg-4">
+                                <label for="e_first_name">Firstname</label>
+                                <input type="text" class="form-control" name="first_name" id="e_first_name" disabled
+                                    placeholder="firstname">
+                            </div>
+                            <div class="col-lg-4">
+                                <label for="e_middle_name">Middlename</label>
+                                <input type="text" class="form-control" name="middle_name" id="e_middle_name"
+                                    placeholder="middlename" disabled>
+                            </div>
+                            <div class="col-lg-4">
+                                <label for="e_last_name">Lastname</label>
+                                <input type="text" class="form-control" name="last_name" id="e_last_name" disabled
+                                    placeholder="lastname">
+                            </div>
+                            <div class="col-lg-12">
+                                <label for="e_address">Address</label>
+                                <input type="text" class="form-control" name="address" id="e_address" disabled
+                                    placeholder="address">
+                            </div>
+                            <div class="col-lg-6">
+                                <label for="e_b_date">Date of Birth</label>
+                                <input type="date" class="form-control e_b_date" name="b_date" id="e_b_date" disabled
+                                    placeholder="date">
+                            </div>
+                            <div class="col-lg-3">
+                                <label for="e_age">Age</label>
+                                <input type="number" class="form-control age" name="age" id="e_age" disabled>
+                            </div>
+                            <div class="col-lg-3">
+                                <span class="g_label">Gender</span>
+                                <div class="radio-wrapper">
+                                    <div class="radios">
+                                        <input type="radio" class="form-control" name="e_gender[]" id="e_gender"
+                                            value="1" disabled>
+                                        <label for="g_male">Male</label>
+                                    </div>
+                                    <div class="radios">
+                                        <input type="radio" class="form-control" name="e_gender[]" id="e_gender"
+                                            value="2" disabled>
+                                        <label for="g_female">Female</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3">
+                                <label for="age">Student Status</label>
+                                <select name="student_status" id="student_status" class="form-control" disabled>
+                                    <option value="0">Old</option>
+                                    <option value="1">New</option>
+                                    <option value="2">Transferee</option>
+                                    <option value="3">Continuing</option>
+                                </select>
+                            </div>
+                        </div>
+                        <!-- ParentsInformationArea -->
+                        <div class="students_parents_info mt-3">Students Parents/Guardian Basic Information</div>
+                        <div class="row students_parents_row">
+                            <div class="col-lg-4">
+                                <label>Firstname</label>
+                                <input type="text" class="form-control" name="p_first_name" id="e_p_first_name" disabled
+                                    placeholder="firstname">
+                            </div>
+                            <div class="col-lg-4">
+                                <label for="e_p_middle_name">Middlename</label>
+                                <input type="text" class="form-control" name="p_middle_name" id="e_p_middle_name"
+                                    placeholder="middlename" disabled>
+                            </div>
+                            <div class="col-lg-4">
+                                <label for="e_p_last_name">Lastname</label>
+                                <input type="text" class="form-control" name="p_last_name" id="e_p_last_name" disabled
+                                    placeholder="lastname">
+                            </div>
+                            <div class="col-lg-6">
+                                <label for="e_contact_number">Contact Number</label>
+                                <input type="number" class="form-control" name="contact_number" id="e_contact_number"
+                                    placeholder="Ex.09123456789" disabled>
+                            </div>
+                            <div class="col-lg-6">
+                                <label>Email Address <span class="optional">(optional)</span></label>
+                                <input type="text" class="form-control" name="email_add" id="e_email_add"
+                                    placeholder="email address" disabled>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="print_btn">
+                            <button class="btn btn-secondary btn-md">Print</button>
+                        </div>
+                        <div class="students_parents_row mt-2">
+                            <div class="gsyr">
+                                <div class="gs">
+                                    <div class="gs_lbl">
+                                        Grade 1
+                                    </div>
+                                    <div class="gs_lbl">
+                                        Section A
+                                    </div>
+                                </div>
+                                <div class="s_y">
+                                    S.Y 2023 - 2024
+                                </div>
+                            </div>
+                            <div class="gsyr">
+                                <div class="gs">
+                                    <div class="gs_lbl">
+                                        Enrolled Status:
+                                    </div>
+                                    <div class="gs_lbl">
+                                        Enrolled
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="students_parents_info mt-3">Assessments</div>
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>Month</th>
+                                    <th>Tuition</th>
+                                    <th>Guard</th>
+                                    <th>Total</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>June</td>
+                                    <td>700</td>
+                                    <td>60</td>
+                                    <td>760</td>
+                                </tr>
+                                <tr>
+                                    <td>July</td>
+                                    <td>700</td>
+                                    <td>60</td>
+                                    <td>760</td>
+                                </tr>
+                                <tr>
+                                    <td>August</td>
+                                    <td>700</td>
+                                    <td>60</td>
+                                    <td>760</td>
+                                </tr>
+                                <tr>
+                                    <td>September</td>
+                                    <td>700</td>
+                                    <td>60</td>
+                                    <td>760</td>
+                                </tr>
+                                <tr>
+                                    <td>October</td>
+                                    <td>700</td>
+                                    <td>60</td>
+                                    <td>760</td>
+                                </tr>
+                                <tr>
+                                    <td>November</td>
+                                    <td>700</td>
+                                    <td>60</td>
+                                    <td>760</td>
+                                </tr>
+                                <tr>
+                                    <td>December</td>
+                                    <td>700</td>
+                                    <td>60</td>
+                                    <td>760</td>
+                                </tr>
+                                <tr>
+                                    <td>January</td>
+                                    <td>700</td>
+                                    <td>60</td>
+                                    <td>760</td>
+                                </tr>
+                                <tr>
+                                    <td>February</td>
+                                    <td>700</td>
+                                    <td>60</td>
+                                    <td>760</td>
+                                </tr>
+                                <tr>
+                                    <td>March</td>
+                                    <td>700</td>
+                                    <td>60</td>
+                                    <td>760</td>
+                                </tr>
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td>Total</td>
+                                    <td>7600</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </form>
+        </div><!-- /.modal-content -->
+    </div> <!-- /.modal-dialog -->
+</div><!-- /.modal -->
+<!-- End of View Info Dialog -->
 
 
 <script>
