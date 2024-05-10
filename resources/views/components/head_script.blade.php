@@ -116,6 +116,18 @@
     justify-content: flex-end;
   }
 
+  .stud_out{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .remarks_save{
+    display:flex;
+    justify-content: space-between;
+    width: 100%;
+  }
+
   .selected {
       background-color: #6c757d;
       border-top: .1px solid #fff;

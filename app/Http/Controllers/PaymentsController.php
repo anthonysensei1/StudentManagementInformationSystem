@@ -22,24 +22,25 @@ class PaymentsController extends Controller
     public function index()
     {
         
-        if (!in_array('Assessments',session('permission')) && auth()->user()->type != 1) {
-            abort(404);
-        }
+        // if (!in_array('Assessments',session('permission')) && auth()->user()->type != 1) {
+        //     abort(404);
+        // }
 
-        $render_data = [
-            'sections' => Section::join('grade_levels', 'sections.grade_level_id', '=', 'grade_levels.id')->select('sections.*', 'grade_levels.grade')->orderBy('grade_levels.grade', 'asc')->get(),
-            'grades' => GradeLevel::all(),
-            'grade_level_fees' => GradeFee::join('grade_levels', 'grade_fees.grade_level_id', '=', 'grade_levels.id')->select('grade_fees.*', 'grade_levels.grade')->orderBy('grade_fees.grade_level_id', 'asc')->get()
-                ->map(function ($item) {
-                    $item->fee_details = json_decode($item->fee_details);
-                    return $item;
-                }),
-            'payments' => Payments::join('students', 'payments.student_id', 'students.id')->join('grade_levels', 'students.grade_level', 'grade_levels.id')->join('sections', 'students.section', 'sections.id')->select('payments.id AS payments_id','payments.*','students.*', 'grade_levels.grade', 'sections.section AS section_name')->orderBy('students.id_no', 'asc')->get(),
-            'payments_reports' => PaymentReport::join('students', 'payment_reports.student_id', 'students.id')->join('grade_levels', 'students.grade_level', 'grade_levels.id')->join('sections', 'students.section', 'sections.id')->select('payment_reports.id AS payments_id','payment_reports.*','students.*', 'grade_levels.grade', 'sections.section AS section_name')->orderBy('students.id_no', 'asc')->get(),
-            'payments_reports_total' => PaymentReport::sum('amount'),
-        ];
+        // $render_data = [
+        //     'sections' => Section::join('grade_levels', 'sections.grade_level_id', '=', 'grade_levels.id')->select('sections.*', 'grade_levels.grade')->orderBy('grade_levels.grade', 'asc')->get(),
+        //     'grades' => GradeLevel::all(),
+        //     'grade_level_fees' => GradeFee::join('grade_levels', 'grade_fees.grade_level_id', '=', 'grade_levels.id')->select('grade_fees.*', 'grade_levels.grade')->orderBy('grade_fees.grade_level_id', 'asc')->get()
+        //         ->map(function ($item) {
+        //             $item->fee_details = json_decode($item->fee_details);
+        //             return $item;
+        //         }),
+        //     'payments' => Payments::join('students', 'payments.student_id', 'students.id')->join('grade_levels', 'students.grade_level', 'grade_levels.id')->join('sections', 'students.section', 'sections.id')->select('payments.id AS payments_id','payments.*','students.*', 'grade_levels.grade', 'sections.section AS section_name')->orderBy('students.id_no', 'asc')->get(),
+        //     'payments_reports' => PaymentReport::join('students', 'payment_reports.student_id', 'students.id')->join('grade_levels', 'students.grade_level', 'grade_levels.id')->join('sections', 'students.section', 'sections.id')->select('payment_reports.id AS payments_id','payment_reports.*','students.*', 'grade_levels.grade', 'sections.section AS section_name')->orderBy('students.id_no', 'asc')->get(),
+        //     'payments_reports_total' => PaymentReport::sum('amount'),
+        // ];
 
-        return view('Payments/payments', $render_data);
+        // return view('Payments/payments', $render_data);
+        return view('Payments/payments');
     }
 
     /**

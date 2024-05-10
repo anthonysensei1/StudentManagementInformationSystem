@@ -63,29 +63,29 @@
             <!-- TableArea -->
             <div> THIS TABLE WILL APPEAR WHEN ENROLLED STUDENTS BUTTON IS CLICKED</div>
             <table id="example3" class="table table-bordered table-striped mt-2">
-                    <thead>
-                        <tr class="text-center">
-                            <th>Grade Level</th>
-                            <th>Section</th>
-                        </tr>
-                    </thead>
-                    <tbody class="text-center">
-                        <tr>
-                            <td>
-                                <a href="#" data-toggle="modal" data-target="#showData">
-                                    Grade 1
-                                </a>
-                            </td>
-                            <td width="300">
-                                <select name="" id="" class="form-control">
-                                    <option value="">Ruby</option>
-                                    <option value="">Rose</option>
-                                </select>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-                <!-- EndTable -->
+                <thead>
+                    <tr class="text-center">
+                        <th>Grade Level</th>
+                        <th>Section</th>
+                    </tr>
+                </thead>
+                <tbody class="text-center">
+                    <tr>
+                        <td>
+                            <a href="#" data-toggle="modal" data-target="#showData">
+                                Grade 1
+                            </a>
+                        </td>
+                        <td width="300">
+                            <select name="" id="" class="form-control">
+                                <option value="">Ruby</option>
+                                <option value="">Rose</option>
+                            </select>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <!-- EndTable -->
         </div>
     </section>
 </div>
