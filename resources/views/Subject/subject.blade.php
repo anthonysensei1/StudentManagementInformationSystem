@@ -4,62 +4,39 @@
 <div class="content-wrapper">
     <section class="content">
         <div class="container-fluid">
-            <button class="btn btn-outline-success btn-md mt-2 mb-2" data-toggle="modal" data-target="#addSubject">Add New Subject</button>
-            <!-- SearchArea -->
-            <form action="#">
-                <div class="input-group">
-                    <input type="search" class="form-control form-control-md" name="searcharea" id="searcharea" placeholder="Search . . .">
-                    <div class="input-group-append">
-                        <button type="submit" class="btn btn-md btn-default">
-                            <i class="fa fa-search"></i>
-                        </button>
-                    </div>
+            <div class="school_year">
+                <div class="sy_data">
+                    School Year 2023 - 2024
                 </div>
-            </form>
-            <!-- EndSearch -->
-            <!-- TableArea -->
-            <table id="example1" class="table table-bordered table-striped mt-2">
+            </div>
+            <table id="example1" class="table table-bordered">
                 <thead>
-                    <tr class="text-center">
-                        <th>#</th>
-                        <th>Subject</th>
-                        <th>Subject Code</th>
-                        <th>Grade Level</th>
-                        <th>Schedule</th>
+                    <tr>
+                        <th>Grade level</th>
+                        <th>Section</th>
                         <th>Action</th>
                     </tr>
                 </thead>
-                <tbody>
-                  @php
-                      $counter = 1;
-                  @endphp
-                  @if (count($subjects) > 0)
-                     @foreach ($subjects as $subject)
-                        <tr class="text-center">
-                              <td>{{ $counter }}</td>
-                              <td>{{ $subject['subject_name'] }}</td>
-                              <td>{{ $subject['subject_code'] }}</td>
-                              <td>{{ $subject['grade'] }}</td>
-                              <td>{{ $subject['schedule_time'] }} - {{ $subject['schedule_time_end'] }}</td>
-                              <td class="text-center">
-                              <button class="btn btn-outline-primary btn-md" data-toggle="modal" data-target="#updateGrade" onclick="edit('{{ $subject['id'] }}', { u_subject_name: '{{ $subject['subject_name'] }}', u_subject_code: '{{ $subject['subject_code'] }}', u_grade: '{{ $subject['grade_level_id'] }}', u_schedule_time: '{{ $subject['schedule_time'] }}', u_schedule_time_end: '{{ $subject['schedule_time_end'] }}' })">
-                                    <i class="fas fa-pen"></i>
-                                    update
-                              </button>
-                                 <button class="btn btn-outline-danger btn-md" data-toggle="modal" data-target="#deleteGrade" onclick="edit('{{ $subject['id'] }}')">
-                                       <i class="fas fa-trash"></i>
-                                       delete
-                                 </button>
-                              </td>
-                           </tr>
-                           @php
-                                 $counter++;
-                           @endphp
-                        @endforeach
-                     @endif
+                <tbody class="text-center">
+                    <tr>
+                        <td>Grade 1</td>
+                        <td>
+                            <select name="sel_sec" id="sel_sec" class="form-control">
+                                <option value="">Ruby</option>
+                                <option value="">Rose</option>
+                            </select>
+                        </td>
+                        <td>
+                            <button class="btn btn-warning btn-md" data-toggle="modal" data-target="#viewSubject">
+                                View Subject
+                            </button>
+                            <button class="btn btn-success btn-md" data-toggle="modal" data-target="#assignSubject">
+                                Assign Subject
+                            </button>
+                        </td>
+                    </tr>
                 </tbody>
             </table>
-            <!-- EndTable -->
         </div>
     </section>
 </div>
@@ -69,150 +46,141 @@
 
 
 <!-- Add Dialog -->
-<div class="modal fade" id="addSubject" data-backdrop="static">
-   <div class="modal-dialog">
-      <div class="modal-content">
-         <div class="modal-header bg-gradient-secondary">
-            <h4 class="modal-title">Add New Subject</h4>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
-         </div>
-         <form action="{{ route('subject_store') }}" class="formPost">
-            <div class="modal-body">
-               <div class="col-lg-12">
-                  <label for="subject_name">Subject Name</label>
-                  <input type="text" class="form-control" name="subject_name" id="subject_name" required placeholder="subject">
-               </div>
-               <div class="col-lg-12">
-                  <label for="subject_code">Subject Code</label>
-                  <input type="text" class="form-control" name="subject_code" id="subject_code" required placeholder="subject code">
-               </div>
-               <div class="col-lg-12">
-                  <label for="grade">Grade</label>
-                  <select class="form-control" name="grade" id="grade" required>
-                     <option value="" disabled selected>Select Grade</option>
-                     @foreach ($grades as $grade)
-                        <option value="{{ $grade['id'] }}">Grade {{ $grade['grade'] }}</option>
-                     @endforeach
-                  </select>
-               </div>
-               <div class="col-lg-12">
-                  <label>Schedule</label>
-                  <div class="row">
-                     <div class="col-lg-6">
-                        <input type="time" class="form-control" name="schedule_time" id="schedule_time" required>
-                     </div>
-                     <div class="col-lg-6">
-                        <input type="time" class="form-control" name="schedule_time_end" id="schedule_time_end" required>
-                     </div>
-                  </div>
-               </div>
+<div class="modal fade" id="assignSubject" data-backdrop="static">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header bg-gradient-secondary">
+                <h4 class="modal-title">Assign Subject</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
             </div>
-            <div class="modal-footer">
-                  <button type="submit" class="btn btn-outline-success btn-md">
-                     <i class="fas fa-plus"></i>
-                     Create
-                  </button>
-            </div>
-         </form>
-      </div><!-- /.modal-content -->
-   </div> <!-- /.modal-dialog -->
+            <form action="">
+                <div class="modal-body">
+                    <div>Subject</div>
+                    <input type="text" class="form-control" name="subject" id="subject">
+                    <div>Subject Code</div>
+                    <input type="text" class="form-control" name="subject_code" id="subject_code">
+                    <div>Description</div>
+                    <input type="text" class="form-control" name="description" id="description">
+                    <div>Schedule</div>
+                    <input type="text" class="form-control" name="schedule" id="schedule">
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-outline-success btn-md">
+                        <i class="fas fa-plus"></i>
+                        Create
+                    </button>
+                </div>
+            </form>
+        </div><!-- /.modal-content -->
+    </div> <!-- /.modal-dialog -->
 </div><!-- /.modal -->
 <!-- End of Add Dialog -->
 
-<!-- Update Dialog -->
-<div class="modal fade" id="updateGrade" data-backdrop="static">
-   <div class="modal-dialog">
-      <div class="modal-content">
-         <div class="modal-header bg-gradient-secondary">
-            <h4 class="modal-title">Update Grade</h4>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
-         </div>
-         <form action="{{ route('subject_update') }}" class="formPost">
+<!-- View Dialog -->
+<div class="modal fade" id="viewSubject" data-backdrop="static">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header bg-gradient-secondary">
+                <h4 class="modal-title">View Subject</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
             <div class="modal-body">
-               <input type="text" class="form-control id" name="id" id="id" readonly hidden>
-               <div class="col-lg-12">
-                  <label>Subject Name</label>
-                  <input type="text" class="form-control" name="subject_name" id="u_subject_name" required placeholder="subject">
-               </div>
-               <div class="col-lg-12">
-                  <label>Subject Code</label>
-                  <input type="text" class="form-control" name="subject_code" id="u_subject_code" required placeholder="subject code">
-               </div>
-               <div class="col-lg-12">
-                  <label>Grade</label>
-                  <select class="form-control" name="grade" id="u_grade" required>
-                     <option value="" disabled selected>Select Grade</option>
-                     @foreach ($grades as $grade)
-                        <option value="{{ $grade['id'] }}">Grade {{ $grade['grade'] }}</option>
-                     @endforeach
-                     <!-- Add more options as needed -->
-                  </select>
-               </div>
-               <div class="col-lg-12">
-                  <label>Schedule</label>
-                  <div class="row">
-                     <div class="col-lg-6">
-                        <input type="time" class="form-control" name="schedule_time" id="u_schedule_time" required>
-                     </div>
-                     <div class="col-lg-6">
-                        <input type="time" class="form-control" name="schedule_time_end" id="u_schedule_time_end" required>
-                     </div>
-                  </div>
-               </div>
+                <div class="div_gsbtn">
+                    <div class="grade_sec_label">
+                        <div class="grade_label">
+                            Grade: 1
+                        </div>
+                        <div class="sec_label">
+                            Section: Ruby
+                        </div>
+                    </div>
+                    <div class="up_btn">
+                        <!-- Save changes button will shown only when you try to update some data. -->
+                        <button type="submit" class="btn btn-success btn-md">
+                            Save Changes
+                        </button>
+                        <button class="btn btn-primary btn-md">
+                            Update
+                        </button>
+                    </div>
+                </div>
+                <table id="example2" class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Subject</th>
+                            <th>Subject Code</th>
+                            <th>Description</th>
+                            <th>Schedule</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td width="150">
+                                <input type="text" class="form-control" name="sub_data" id="sub_data" readonly
+                                    placeholder="English">
+                            </td>
+                            <td width="150">
+                                <input type="text" class="form-control" name="subcode_data" id="subcode_data" readonly
+                                    placeholder="123456">
+                            </td>
+                            <td>
+                                <input type="text" class="form-control" name="subcode_data" id="subcode_data" readonly
+                                    placeholder="Understanding the self">
+                            </td>
+                            <td width="150">
+                                <input type="text" class="form-control" name="subcode_data" id="subcode_data" readonly
+                                    placeholder="10:00am - 11:00am">
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
-            <div class="modal-footer">
-                  <button type="submit" class="btn btn-outline-primary btn-md">
-                     <i class="fas fa-check"></i>
-                     update
-                  </button>
-            </div>
-         </form>
-      </div><!-- /.modal-content -->
-   </div> <!-- /.modal-dialog -->
+        </div><!-- /.modal-content -->
+    </div> <!-- /.modal-dialog -->
 </div><!-- /.modal -->
-<!-- End of Update Dialog -->
+<!-- End of View Dialog -->
 
 
 <!-- Delete Dialog -->
 <div class="modal fade" id="deleteGrade" data-backdrop="static">
-   <div class="modal-dialog">
-      <div class="modal-content">
-         <div class="modal-header bg-gradient-secondary">
-            <h4 class="modal-title">Confirmation</h4>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
-         </div>
-         <form action="{{ route('subject_destroy') }}" class="formPost">
-            <div class="modal-body">
-               <input type="text" class="form-control id" name="id" id="id" readonly hidden>
-               <h4>Are you certain you wish to proceed with the deletion?</h4>
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header bg-gradient-secondary">
+                <h4 class="modal-title">Confirmation</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
             </div>
-            <div class="modal-footer">
-               <button type="submit" class="btn btn-outline-success btn-md">
-                  <i class="fas fa-check"></i>
-                  yes
-               </button>
-               <button type="button" class="btn btn-outline-danger btn-md" data-dismiss="modal">
-               <i class="fas fa-times"></i>
-                  cancel
-               </button>
-            </div>
-         </form>
-      </div><!-- /.modal-content -->
-   </div> <!-- /.modal-dialog -->
+            <form action="{{ route('subject_destroy') }}" class="formPost">
+                <div class="modal-body">
+                    <input type="text" class="form-control id" name="id" id="id" readonly hidden>
+                    <h4>Are you certain you wish to proceed with the deletion?</h4>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-outline-success btn-md">
+                        <i class="fas fa-check"></i>
+                        yes
+                    </button>
+                    <button type="button" class="btn btn-outline-danger btn-md" data-dismiss="modal">
+                        <i class="fas fa-times"></i>
+                        cancel
+                    </button>
+                </div>
+            </form>
+        </div><!-- /.modal-content -->
+    </div> <!-- /.modal-dialog -->
 </div><!-- /.modal -->
 <!-- End of Delete Dialog -->
 
 <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        document.querySelectorAll('.sub').forEach(function(element) {
-            element.classList.add('activated');
-        });
+document.addEventListener('DOMContentLoaded', function() {
+    document.querySelectorAll('.sub').forEach(function(element) {
+        element.classList.add('activated');
     });
+});
 </script>
 @endsection

@@ -48,6 +48,17 @@
     font-family: serif;
   }
 
+  .grade_sec_label{
+    display:flex;
+    gap:20px;
+  }
+
+  .div_gsbtn{
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+  }
+
   .selected {
       background-color: #6c757d;
       border-top: .1px solid #fff;

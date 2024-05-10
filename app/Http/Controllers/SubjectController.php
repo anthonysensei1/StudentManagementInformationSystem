@@ -15,16 +15,17 @@ class SubjectController extends Controller
     public function index()
     {
         
-        if (!in_array('Subject',session('permission')) && auth()->user()->type != 1) {
-            abort(404);
-        }
+        // if (!in_array('Subject',session('permission')) && auth()->user()->type != 1) {
+        //     abort(404);
+        // }
 
-        $render_data = [
-            'grades' => GradeLevel::where('status', 1)->get(),
-            'subjects' => Subject::join('grade_levels', 'subjects.grade_level_id', '=', 'grade_levels.id')->select('subjects.*', 'grade_levels.grade')->orderBy('subjects.grade_level_id', 'asc')->get(),
-        ];
+        // $render_data = [
+        //     'grades' => GradeLevel::where('status', 1)->get(),
+        //     'subjects' => Subject::join('grade_levels', 'subjects.grade_level_id', '=', 'grade_levels.id')->select('subjects.*', 'grade_levels.grade')->orderBy('subjects.grade_level_id', 'asc')->get(),
+        // ];
 
-        return view('Subject/subject', $render_data);
+        // return view('Subject/subject', $render_data);
+        return view('Subject/subject');
     }
 
     /**
