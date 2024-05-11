@@ -50,8 +50,16 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/Students/students/students_update', [App\Http\Controllers\StudentController::class,'update'])->name('students_update');
     // Student Destroy
     Route::post('/Students/students/students_destroy', [App\Http\Controllers\StudentController::class,'destroy'])->name('students_destroy');
+    // Student Destroy
+    Route::post('/Students/students/student_destroy', [App\Http\Controllers\StudentController::class,'studentDestroy'])->name('student_destroy');
     // Student Image Upload
     Route::post('/Students/students/students_upload', [App\Http\Controllers\StudentController::class,'upload'])->name('students_upload');
+    // Student Store
+    Route::post('/Students/students/get_subjects', [App\Http\Controllers\StudentController::class,'getSubjects'])->name('get_subjects');
+    // Student Enroll
+    Route::post('/Students/students/student_enroll',[App\Http\Controllers\StudentController::class,'studentEnroll'])->name('student_enroll');
+    // Student Get All By Classes
+    Route::post('/Students/students/student_all',[App\Http\Controllers\StudentController::class,'studentAll'])->name('student_all');
 
 
 
@@ -83,6 +91,8 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/Subject/subject/subject_update', [App\Http\Controllers\SubjectController::class,'update'])->name('subject_update');
     // Subject Destroy
     Route::post('/Subject/subject/subject_destroy', [App\Http\Controllers\SubjectController::class,'destroy'])->name('subject_destroy');
+    // Subject Get Grade, Section and Subjects
+    Route::post('/Subject/subject/subject_grade_section', [App\Http\Controllers\SubjectController::class,'gradeSectionSubjects'])->name('subject_grade_section');
 
 
     // Teacher
@@ -113,6 +123,8 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/Class/clas/view_student_grade/{id}/{subject_id}', [App\Http\Controllers\ClassController::class,'viewStudentGrade'])->name('view_student_grade');
     // Class Store
     Route::post('/Class/clas/class_store_grade', [App\Http\Controllers\ClassController::class,'storeGrade'])->name('class_store_grade');
+    // Class Get Grade and Section
+    Route::post('/Class/clas/class_grade_section', [App\Http\Controllers\ClassController::class,'gradeSection'])->name('class_grade_section');
 
 
     // Payments

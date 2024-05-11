@@ -44,28 +44,30 @@
                     <tr class="text-center">
                         <td>{{ $counter }}</td>
                         <td>{{ $grade }}</td>
-                        <td>
-                            <select name="sections" id="sections_{{ $grade }}" class="form-control">
-                                @foreach ($sections as $section)
-                                <option value="{{ $section }}">{{ $section }}</option>
-                                @endforeach
-                            </select>
-                        </td>
-                        <td> </td>
-                        <td class="text-center">
-                            <!-- Assuming you don't need $class here, you can remove it -->
-                            <button class="btn btn-outline-primary btn-md" data-toggle="modal"
-                                data-target="#updateClass"
-                                onclick="edit('', { u_c_grade: '{{ $grade }}', u_c_section: '', section_id: '' })">
-                                <i class="fas fa-pen"></i>
-                                update
-                            </button>
-                            <button class="btn btn-outline-danger btn-md" data-toggle="modal"
-                                data-target="#deleteSection" onclick="edit('')">
-                                <i class="fas fa-trash"></i>
-                                delete
-                            </button>
-                        </td>
+                        <form action="{{ route('class_grade_section') }}" class="update">
+                            <td>
+                                <select name="sections_grade" class="form-control">
+                                    @foreach ($sections as $section)
+                                    <option value="{{ $section }}">{{ $section }}</option>
+                                    @endforeach
+                                </select>
+                            </td>
+                            <td> Active </td>
+                            <td class="text-center">
+                                <input type="text" class="form-control" name="grade" value="{{ $grade }}" readonly hidden>
+                                <!-- Assuming you don't need $class here, you can remove it -->
+                                <button type="submit" class="btn btn-outline-primary btn-md" data-toggle="modal"
+                                    data-target="#updateClass">
+                                    <i class="fas fa-pen"></i>
+                                    update
+                                </button>
+                                <button type="submit" class="btn btn-outline-danger btn-md" data-toggle="modal"
+                                    data-target="#deleteSection">
+                                    <i class="fas fa-trash"></i>
+                                    delete
+                                </button>
+                            </td>
+                        </form>
                     </tr>
                     @php
                     $counter++;
@@ -321,11 +323,8 @@
                     </div>
                     <div class="col-lg-12 u_c_section_div">
                         <div>Section</div>
-                        <select name="sections" id="sections_{{ $grade }}" class="form-control">
-                                @foreach ($sections as $section)
-                                <option value="{{ $section }}">{{ $section }}</option>
-                                @endforeach
-                        </select>
+                        <input type="text" class="form-control c_section" name="c_section" id="c_section"
+                        placeholder="enter section" required>
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -357,7 +356,7 @@
             </div>
             <form action="{{ route('class_destroy') }}" class="formPost">
                 <div class="modal-body">
-                    <input type="text" class="form-control id" name="id" id="id" readonly hidden>
+                    <input type="text" class="form-control c_grade" name="id" id="id" readonly hidden>
                     <h4>Are you certain you wish to proceed with the deletion?</h4>
                 </div>
                 <div class="modal-footer">
@@ -423,12 +422,31 @@ document.addEventListener('DOMContentLoaded', function() {
 
 });
 
+$(".update").on("submit", function(e) {
+    e.preventDefault();
+
+    $.ajax({
+        type: "POST",
+        cache: false,
+        url: $(this).attr("action"),
+        data: $(this).serialize(),
+        headers: {
+            "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+        },
+        success: function (data) {
+            $('.id').val(data['id']);
+            $('.c_grade').val(data['grade_level']);
+            $('.c_section').val(data['section']);
+        },
+    });
+});
+
 let subject_name = '';
 let subject_name_id = '';
 
 $(".view").on("click", function(e) {
     e.preventDefault();
-    const id = $(this).data("id");
+    const grade = $(this).data("grade");
     let routeTemplate = $(this).data("route-template");
     const url = routeTemplate.replace(":id", id);
     $('#student_list').empty();

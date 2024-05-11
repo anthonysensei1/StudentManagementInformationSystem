@@ -25,17 +25,21 @@ class CreateStudentsTable extends Migration
             $table->date('b_date');
             $table->integer('age');
             $table->integer('gender');
-            $table->foreignId('grade_level');
-            $table->foreignId('section');
+            $table->integer('student_status');
+            $table->foreignId('class_id')->nullable();
+            $table->foreignId('grade_level')->nullable();
+            $table->foreignId('section')->nullable();
             $table->string('p_first_name')->nullable();
             $table->string('p_middle_name')->nullable();
             $table->string('p_last_name')->nullable();
             $table->text('contact_number')->nullable();
             $table->string('email_add')->nullable();
-            $table->integer('status')->default(1);
+            $table->integer('enroll_status')->default(0);
+            $table->integer('status')->default(0);
             $table->integer('balance')->default(0);
             $table->integer('nso')->default(0);
             $table->integer('e_form')->default(0);
+            $table->integer('form_137')->default(0);
             $table->timestamps();
         });
     }
