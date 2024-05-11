@@ -27,46 +27,27 @@
                             <th>ID</th>
                             <th>Fullname</th>
                             <th>Username</th>
-                            <th>Subject</th>
-                            <th>Class</th>
                             <th>Action</th>
                         </tr>
                     </thead>
-                    <tbody>
-                        @php
-                            $counter = 1;
-                        @endphp
-                        @if (count($users) > 0)
-                            @foreach ($users as $user)
-                                <tr class="text-center">
-                                    <td>{{ $counter }}</td>
-                                    <td>{{ $user['employee_id'] }}</td>
-                                    <td><a href="" class="view_teacher_class" data-toggle="modal"
-                                            data-id="{{ $user['id'] }}" data-target="#popStudentsInfo"
-                                            onclick="view('{{ $user['id'] }}', { t_upload_image_name: '{{ $user['upload_image_name'] }}', name: '{{ $user['name'] }}', employee_id: '{{ $user['employee_id'] }}', username: '{{ $user['username'] }}', address: '{{ $user['address'] }}', date: '{{ $user['b_date'] }}', gender: '{{ $user['gender'] == 1 ? 'Male' : 'Female' }}', grade: '{{ $user['grade'] }}', classes: '{{ $user['classes'] }}', contact_number: '{{ $user['contact_number'] }}', email_add: '{{ $user['email_add'] }}', created_at: '{{ $user['created_at'] }}' })">{{ $user['name'] }}</a>
-                                    </td>
-                                    <td>{{ $user['username'] }}</td>
-                                    <td>{{ $user['subject_names'] }}</td>
-                                    <td>{{ $user['class_names'] }}</td>
-                                    <td class="text-center">
-                                        <button class="btn btn-outline-primary btn-md" data-toggle="modal"
-                                            data-target="#updateTeacher"
-                                            onclick="edit('{{ $user['id'] }}', { u_t_upload_image_name: '{{ $user['upload_image_name'] }}', u_first_name: '{{ $user['first_name'] }}', u_middle_name: '{{ $user['middle_name'] }}', u_last_name: '{{ $user['last_name'] }}', u_employee_id: '{{ $user['employee_id'] }}', u_username: '{{ $user['username'] }}', u_address: '{{ $user['address'] }}', u_b_date: '{{ $user['b_date'] }}', u_gender: '{{ $user['gender'] }}', u_age: '{{ $user['age'] }}', u_contact_number: '{{ $user['contact_number'] }}', u_email_add: '{{ $user['email_add'] }}', u_password: '{{ $user['password'] }}', u_classes_checkbox: '{{ $user['classes'] }}', u_subjects: '{{ $user['subjects'] }}' })">
-                                            <i class="fas fa-pen"></i>
-                                            update
-                                        </button>
-                                        <button class="btn btn-outline-danger btn-md" data-toggle="modal"
-                                            data-target="#deleteTeacher" onclick="edit('{{ $user['id'] }}')">
-                                            <i class="fas fa-trash"></i>
-                                            delete
-                                        </button>
-                                    </td>
-                                </tr>
-                                @php
-                                    $counter++;
-                                @endphp
-                            @endforeach
-                        @endif
+                    <tbody class="text-center">
+                        <tr>
+                            <td>1</td>
+                            <td>2134567</td>
+                            <td>juan dela cruz</td>
+                            <td>juandelacruz@gmail.com</td>
+                            <td>
+                                <button class="btn btn-outline-success btn-md" data-toggle="modal" data-target="#viewSchedule">View Schedule</button>
+                                <button class="btn btn-outline-primary btn-md" data-toggle="modal" data-target="#updateTeacher">
+                                    <i class="fas fa-pen"></i>
+                                    Update
+                                </button>
+                                <button class="btn btn-outline-danger btn-md" data-toggle="modal" data-target="#deleteTeacher">
+                                    <i class="fas fa-trash"></i>
+                                    Delete
+                                </button>
+                            </td>
+                        </tr>
                     </tbody>
                 </table>
                 <!-- EndTable -->
@@ -306,7 +287,19 @@
                                 <div class="col-lg-12">
                                     <span class="classes">Classes</span>
                                     <div class="radio-wrapper-classes mt-3">
-                                        @foreach ($classes as $class)
+                                        <div class="radios_classes">
+                                            <input type="checkbox" class="classes_checkbox"
+                                                name="check2" data-classes-value=""
+                                                value="check2" id="check2">
+                                            <label class="class_check_lbl" for="check2">Grade 1</label>
+                                        </div>
+                                        <div class="drop_sel" width="200">
+                                            <select name="secs" id="secs" class="form-control custom_select">
+                                                <option value="">A</option>
+                                                <option value="">B</option>
+                                            </select>
+                                        </div>
+                                        <!-- @foreach ($classes as $class)
                                             <div class="radios_classes">
                                                 <input type="checkbox" class="classes_checkbox"
                                                     name="classes[]" data-classes-value="{{ $class['grade_level'] }}"
@@ -314,7 +307,7 @@
                                                 <label class="class_check_lbl" for="classes_{{ $class['id'] }}">Grade {{ $class['grade'] }} -
                                                     {{ $class['section_name'] }}</label>
                                             </div>
-                                        @endforeach
+                                        @endforeach -->
                                     </div>
                                 </div>
                             </div>
@@ -331,6 +324,53 @@
         </div> <!-- /.modal-dialog -->
     </div><!-- /.modal -->
     <!-- End of Add Dialog -->
+
+
+    <div class="modal fade" id="viewSchedule" backdrop="static">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header bg-gradient-secondary">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <h5 class="tny">
+                        <div class="tname">
+                            Name: Teacher Sample
+                        </div>
+                        <div class="year">
+                            School Year: 2023 - 2024
+                        </div>
+                    </h5>
+                    <table class="table table-bordered text-center">
+                        <thead>
+                            <tr>
+                                <th>Grade Level and Section</th>
+                                <th>Subject</th>
+                                <th>Schedule</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Grade 1 - A</td>
+                                <td>English</td>
+                                <td>8:00 AM - 9:00 AM</td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td>Math</td>
+                                <td>9:00 AM - 10:00 AM</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <button class="btn btn-outline-secondary btn-md float-right">
+                        print
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
 
 
     <!-- Update Dialog -->
@@ -475,7 +515,19 @@
                                 <div class="col-lg-12">
                                     <span class="classes">Classes</span>
                                     <div class="radio-wrapper-classes mt-3">
-                                        @foreach ($classes as $class)
+                                        <div class="radios_classes">
+                                            <input type="checkbox" class="classes_checkbox"
+                                                name="check3" data-classes-value=""
+                                                value="check3" id="check3">
+                                            <label class="class_check_lbl" for="check3">Grade 1</label>
+                                        </div>
+                                        <div class="drop_sel" width="200">
+                                            <select name="secs" id="secs" class="form-control custom_select">
+                                                <option value="">A</option>
+                                                <option value="">B</option>
+                                            </select>
+                                        </div>
+                                        <!-- @foreach ($classes as $class)
                                             <div class="radios_classes">
                                                 <input type="checkbox" class="form-control classes_checkbox"
                                                     name="u_classes[]" data-classes-value="{{ $class['grade_level'] }}"
@@ -483,7 +535,7 @@
                                                 <label class="class_check_lbl" for="u_classes_{{ $class['id'] }}">Grade {{ $class['grade'] }} -
                                                     {{ $class['section_name'] }}</label>
                                             </div>
-                                        @endforeach
+                                        @endforeach -->
                                     </div>
                                 </div>
                             </div>
@@ -514,7 +566,7 @@
                 </div>
                 <form action="{{ route('teacher_destroy') }}" class="formPost">
                     <div class="modal-body">
-                        <input type="text" class="form-control id" name="id" id="id" readonly hidden>
+                        <input type="text" class="form-control id" name="d_id" id="d_id" readonly hidden>
                         <h4>Are you certain you wish to proceed with the deletion?</h4>
                     </div>
                     <div class="modal-footer">

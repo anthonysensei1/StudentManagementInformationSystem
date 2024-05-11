@@ -35,6 +35,12 @@
 
 <style>
 
+  .tny{
+    display: flex;
+    justify-content: space-around;
+    /* margin: 10px 0 10px 0; */
+  }
+
   .school_year{
     display: flex;
     margin: 0 0 5px 0;
@@ -198,6 +204,12 @@
   .g_label{
     color: #212529;
     font-weight: 900;
+  }
+
+  .radio-wrapper-classes{
+    display:flex;
+    width: 100%;
+    gap: 20px;
   }
 
   .radio-wrapper {
