@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Classes;
 use App\Models\Section;
-use App\Models\GradeLevel;
 use App\Models\Student;
+use App\Models\GradeLevel;
 use Illuminate\Http\Request;
 
 class StudentController extends Controller
@@ -28,7 +29,22 @@ class StudentController extends Controller
         // ];
 
         // return view('Students/students', $render_data);
-        return view('Students/students');
+
+        $classes = Classes::all();
+
+        $sectionsByGrade = Classes::all()->groupBy('grade_level')->map(function ($item, $key) {
+            return $item->pluck('section')->toArray();
+        });
+
+        $render_data = [
+            'classes' => $classes,
+            'students' => Student::all(),
+            'sectionsByGrade' => $sectionsByGrade,
+        ];
+
+        // dd($render_data);
+
+        return view('Students/students', $render_data);
     }
 
     /**
@@ -50,11 +66,19 @@ class StudentController extends Controller
     public function store(Request $request)
     {
 
-        if ($request->grade_level == null || $request->section == null) {
+        // if ($request->grade_level == null || $request->section == null) {
+        //     return response()->json([
+        //         'response' => 0,
+        //         'message' => 'Student is invalid! Please select grade level and section!',
+        //         'path' => '/Students/students'
+        //     ]);
+        // }
+
+        if ($request->contact_number[0] != '0' || $request->contact_number[1] != '9' || strlen($request->contact_number) != 11) {
             return response()->json([
                 'response' => 0,
-                'message' => 'Student is invalid! Please select grade level and section!',
-                'path' => '/Students/students'
+                'message' => 'Student parent is invalid! Invalid phone number!',
+                'path' => '/EnrollmentProcess/enrollmentprocess'
             ]);
         }
 
@@ -86,8 +110,14 @@ class StudentController extends Controller
             'b_date' => $request->b_date,
             'age' => $request->age,
             'gender' => $request->gender[0],
-            'grade_level' => $request->grade_level[0],
-            'section' => $request->section[0],
+            // 'grade_level' => $request->grade_level[0],
+            // 'section' => $request->section[0],
+            'student_status' => $request->student_status,
+            'p_first_name' => ucfirst($request->p_first_name),
+            'p_middle_name' => ucfirst($request->p_middle_name),
+            'p_last_name' => ucfirst($request->p_last_name),
+            'contact_number' => $request->contact_number,
+            'email_add' => ucfirst($request->email_add),
         ];
 
         Student::create($form_data);
@@ -133,11 +163,19 @@ class StudentController extends Controller
     public function update(Request $request)
     {
 
-        if ($request->u_grade_level_ == null || $request->u_section_ == null) {
+        // if ($request->u_grade_level_ == null || $request->u_section_ == null) {
+        //     return response()->json([
+        //         'response' => 0,
+        //         'message' => 'Student is invalid! Please select grade level and section!',
+        //         'path' => '/Students/students'
+        //     ]);
+        // }
+
+        if ($request->contact_number[0] != '0' || $request->contact_number[1] != '9' || strlen($request->contact_number) != 11) {
             return response()->json([
                 'response' => 0,
-                'message' => 'Student is invalid! Please select grade level and section!',
-                'path' => '/Students/students'
+                'message' => 'Student parent is invalid! Invalid phone number!',
+                'path' => '/EnrollmentProcess/enrollmentprocess'
             ]);
         }
 
@@ -172,8 +210,14 @@ class StudentController extends Controller
             'b_date' => $request->b_date,
             'age' => $request->age,
             'gender' => $request->u_gender[0],
-            'grade_level' => $request->u_grade_level_[0],
-            'section' => $request->u_section_[0],
+            // 'grade_level' => $request->u_grade_level_[0],
+            // 'section' => $request->u_section_[0],
+            'student_status' => $request->student_status,
+            'p_first_name' => ucfirst($request->p_first_name),
+            'p_middle_name' => ucfirst($request->p_middle_name),
+            'p_last_name' => ucfirst($request->p_last_name),
+            'contact_number' => $request->contact_number,
+            'email_add' => ucfirst($request->email_add),
         ];
 
         Student::where('id', '=', $request->id)->update($form_data);
@@ -237,5 +281,81 @@ class StudentController extends Controller
             return response()->json($render_message);
 
         }
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function getSubjects(Request $request)
+    {
+        $class =  Classes::where('grade_level', '=', $request->grade_id)->get();
+        return response()->json($class);
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function studentEnroll(Request $request)
+    {
+        
+        $form_data = [
+            'class_id' => $request->sc_sel,
+            'enroll_status' => 1,
+            'nso' => $request->nso == null ? 0 : 1,
+            'e_form' => $request->e_form == null ? 0 : 1,
+            'form_137' => $request->form_137 == null ? 0 : 1,
+        ];
+
+        Student::where('id', '=', $request->id)->update($form_data);
+
+        $render_data = [
+            'response' => 1,
+            'message' => 'Student enrollment success',
+            'path' => '/Students/students'
+        ];
+        return response()->json($render_data);
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function studentAll(Request $request)
+    {
+        $class = Classes::where('grade_level', '=', $request->grade)->where('section', '=', $request->sections_grade)->first();
+
+        if (!$class) {
+            $render_data = [
+                'response' => 0,
+                'message' => 'Selected section is not valid please try again.',
+                'path' => '/Students/students'
+            ];
+            return response()->json($render_data);
+        }
+
+        $students = Student::join('classes', 'students.class_id', '=', 'classes.id')->where('class_id', '=', $class['id'])->select('students.*', 'classes.grade_level', 'classes.section')->get();
+
+        return response()->json($students);
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function studentDestroy(Request $request)
+    {
+        Student::where('id', '=', $request->id)->delete();
+
+        return redirect('/Students/students');
     }
 }

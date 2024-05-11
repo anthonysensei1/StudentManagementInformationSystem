@@ -50,8 +50,16 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/Students/students/students_update', [App\Http\Controllers\StudentController::class,'update'])->name('students_update');
     // Student Destroy
     Route::post('/Students/students/students_destroy', [App\Http\Controllers\StudentController::class,'destroy'])->name('students_destroy');
+    // Student Destroy
+    Route::post('/Students/students/student_destroy', [App\Http\Controllers\StudentController::class,'studentDestroy'])->name('student_destroy');
     // Student Image Upload
     Route::post('/Students/students/students_upload', [App\Http\Controllers\StudentController::class,'upload'])->name('students_upload');
+    // Student Store
+    Route::post('/Students/students/get_subjects', [App\Http\Controllers\StudentController::class,'getSubjects'])->name('get_subjects');
+    // Student Enroll
+    Route::post('/Students/students/student_enroll',[App\Http\Controllers\StudentController::class,'studentEnroll'])->name('student_enroll');
+    // Student Get All By Classes
+    Route::post('/Students/students/student_all',[App\Http\Controllers\StudentController::class,'studentAll'])->name('student_all');
 
 
 

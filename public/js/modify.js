@@ -52,6 +52,54 @@ function edit(id, data) {
                 "checked",
                 true
             );
+        } else if (key.startsWith("e_gender")) {
+            let genderId = value;
+            $(`input[name='e_gender[]'][value='${genderId}']`).prop(
+                "checked",
+                true
+            );
+        } else if (key.startsWith("vi_gender")) {
+            let genderId = value;
+            $(`input[name='vi_gender[]'][value='${genderId}']`).prop(
+                "checked",
+                true
+            );
+        } else if (key.startsWith("nso")) {
+            if (value == 1) {
+                $(`input[name='nso']`).prop(
+                    "checked",
+                    true
+                );
+            } else {
+                $(`input[name='nso']`).prop(
+                    "checked",
+                    false
+                );
+            }
+        } else if (key.startsWith("e_form")) {
+            if (value == 1) {
+                $(`input[name='e_form']`).prop(
+                    "checked",
+                    true
+                );
+            } else {
+                $(`input[name='e_form']`).prop(
+                    "checked",
+                    false
+                );
+            }
+        } else if (key.startsWith("form_137")) {
+            if (value == 1) {
+                $(`input[name='form_137']`).prop(
+                    "checked",
+                    true
+                );
+            } else {
+                $(`input[name='form_137']`).prop(
+                    "checked",
+                    false
+                );
+            }
         } else if (key.startsWith("u_c_section")) {
             var selectedGrade = data["u_c_grade"];
             if (selectedGrade) {
@@ -72,6 +120,14 @@ function edit(id, data) {
         } else if (key === "u_upload_image_name") {
             $(`#${key}`).val(value);
             $("#u_image").attr("src", getBaseUrl() + "images/" + value);
+            $(".uploadImageLabel").text(value);
+        } else if (key === "e_upload_image_name") {
+            $(`#${key}`).val(value);
+            $("#e_image").attr("src", getBaseUrl() + "images/" + value);
+            $(".uploadImageLabel").text(value);
+        } else if (key === "vi_upload_image_name") {
+            $(`#${key}`).val(value);
+            $("#vi_image").attr("src", getBaseUrl() + "images/" + value);
             $(".uploadImageLabel").text(value);
         } else if (key === "u_t_upload_image_name") {
             $(`#${key}`).val(value);
@@ -120,6 +176,9 @@ function edit(id, data) {
                     $(this).addClass('selected');
                 }
             });
+        } else if (key === "enroll_status") {
+            const status = value == 1? "Enrolled" : "Not enrolled";
+            $(`#${key}`).text(status);
         } else {
             $(`#${key}`).val(value);
         }
@@ -170,6 +229,12 @@ $(".close").on("click", function () {
     $(".modal input:checkbox#u_check1").prop("checked", false);
     $(".modal input:checkbox.classes_checkbox").prop("checked", false);
     $(".modal input:checkbox.u_classes_checkbox").prop("checked", false);
+    
+    $('.update_subject').prop('hidden', false);
+    $('.sub_code').prop('hidden', true);
+    $('.desc').prop('hidden', true);
+    $('.sched').prop('hidden', true);
+    $('.save_subject').prop('hidden', true);
 });
 
 $("#searcharea").on("input", function () {
